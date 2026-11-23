@@ -1,0 +1,23 @@
+# Registro de capacidades (doc 7.2) — tudo o que o motor sabe fazer.
+# Escrita só com ordem explícita de Pedro, mostrando o diff, commit identificado (6.3).
+# Um gerador só entra aqui depois de uma amostra aprovada por Pedro (F09).
+#
+# Campos por entrada:
+#   tipo      — o que o roteiro pede. Tipos usados pela validação:
+#               narracao | clipe_catalogo (visual.fonte=catalogo) | midia_web (visual.fonte=web)
+#               | texto_tela | sfx | <nome do tipo gerado> (visual.fonte=gerado; vem em visual.busca)
+#   gerador   — módulo do motor que produz o tipo
+#   formatos  — lista: longo | short_roteiro_novo | short_recorte
+#   teto      — limite conhecido de qualidade (vazio = nenhum); vira aviso antes do P2 (7.3)
+#   status    — em_teste | aprovado (só "aprovado" conta na validação)
+#
+# Exemplo:
+#   - tipo: contador
+#     gerador: geradores/contador
+#     formatos: [longo, short_roteiro_novo]
+#     teto: ""
+#     status: aprovado
+#
+# Nasce vazio na C2; cresce a cada etapa da construção (C3–C6) com amostra aprovada.
+
+geradores: []

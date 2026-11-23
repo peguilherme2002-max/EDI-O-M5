@@ -1,0 +1,58 @@
+# Roteiro de amostra da etapa C2 (9.1) — não é vídeo de canal
+titulo: Amostra C2 — o detalhe escondido no trailer
+versao: 1
+segmentos:
+  - id: s01
+    intencao: gancho
+    narracao: 'Você reparou no detalhe escondido no segundo trailer de GTA seis? <break time="0.4s" /> Quase ninguém viu.'
+    visual:
+      fonte: catalogo
+      busca: trailer 2 GTA VI praia ao pôr do sol
+      etiquetas: [trailer, praia, vice city]
+    texto_tela: O DETALHE ESCONDIDO
+    sfx: [whoosh]
+    duracao_alvo_s: 8
+
+  - id: s02
+    intencao: contexto
+    narracao: 'O mapa de Vice City já foi montado pelos fãs, quadro a quadro, a partir dos trailers.'
+    visual:
+      fonte: web
+      busca: mapa Vice City GTA VI feito por fãs
+      etiquetas: [mapa, fãs]
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 10
+
+  - id: s03
+    intencao: desenvolvimento
+    narracao: 'E a contagem para o lançamento já está correndo. Cada dia, um novo detalhe aparece.'
+    visual:
+      fonte: gerado
+      busca: contador
+      etiquetas: [dias até o lançamento]
+    texto_tela: DIAS ATÉ O LANÇAMENTO
+    sfx: [tique-taque]
+    duracao_alvo_s: 12
+
+  - id: s04
+    intencao: revelacao
+    narracao: 'O detalhe é este: a ponte do trailer não existe no mapa dos fãs. <break time="0.5s" /> Ela é nova.'
+    visual:
+      fonte: gerado
+      busca: mapa_animado
+      etiquetas: [ponte, zoom no mapa]
+    texto_tela: UMA PONTE NOVA
+    sfx: [impacto]
+    duracao_alvo_s: 10
+
+  - id: s05
+    intencao: cta
+    narracao: 'Quer a análise completa? Fica comigo.'
+    visual:
+      fonte: catalogo
+      busca: logo GTA VI
+      etiquetas: [logo]
+    texto_tela: INSCREVA-SE
+    sfx: []
+    duracao_alvo_s: 5
