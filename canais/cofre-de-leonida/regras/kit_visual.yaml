@@ -119,6 +119,7 @@ templates:
       cor_cheio: texto
       cor_vazio: apoio
       estrela_final: {cor_apagada: apoio, cor_acesa: destaque}
+      contorno: {cor: contorno_texto, px: 2.5}   # leitura em cena clara (decisão de Pedro, 23/11/2026: opção B)
     animacao:
       entrada: "o segmento acende quando o lista_item entra"
     referencia: "../assets/referencias/listas-vice-city-dispatch/template-de-lista.md §3"

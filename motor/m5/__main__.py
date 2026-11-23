@@ -7,6 +7,8 @@
   m5 previa  --canal <c> --formato <f> --roteiro <arquivo>          → EDL + previa.mp4 (480p) para o P3
   m5 render  --canal <c> --formato <f> --roteiro <arquivo> --p3     → final.mp4, só depois do P3 (F02)
   m5 recorte --canal <c> --formato short_recorte --roteiro <roteiro do longo> --segmentos s01,s03
+  m5 template --canal <c> --formato <f> --template <nome> --campo k=v [--campo k=v] [--fundo <video> --inicio s] [--duracao s]
+                                                                     → amostra de template do kit (F0.4/F0.5)
   m5 checar                                                          → checagem de saúde (7.8, F24)
   m5 backup  --canal <c> --formato <f|-> [--teste]                   → copia entregas e narrações (6.6, F21)
   m5 custo   --canal <c|-> --formato <f|-> --item tempo_pedro --quantidade 30 --unidade minutos [--video v] [--obs ...]
@@ -24,6 +26,7 @@ from pathlib import Path
 from .canal import FORMATOS, REGISTRO_PADRAO, ErroM5, pasta_canal, resolver_roteiro
 from .backup import fazer_backup
 from .catalogo import captar
+from .templates.amostra import gerar_amostra
 from .saude import checar
 from .custos import etapa_do_canal, registrar
 from .edl import escrever_edl, gerar_edl
@@ -103,8 +106,21 @@ def main(argv=None) -> int:
     p.add_argument("--detalhes", action="store_true", help="mostra também o que passou")
     p = _args(sub, "backup", "copia entregas e narrações do canal para o backup externo (6.6, F21)", roteiro=False)
     p.add_argument("--teste", action="store_true", help="inclui um arquivo de teste")
+    p = _args(sub, "template", "amostra de um template do kit do canal (F0.4/F0.5)", roteiro=False)
+    p.add_argument("--template", required=True)
+    p.add_argument("--campo", action="append", default=[], help="nome=valor (repita para cada campo)")
+    p.add_argument("--fundo", help="vídeo de fundo (padrão: cor de fundo do kit)")
+    p.add_argument("--inicio", type=float, default=0.0, help="segundo do vídeo de fundo onde começa")
+    p.add_argument("--duracao", type=float, default=5.0)
+    p.add_argument("--saida", help="arquivo de saída (padrão: canais/<c>/templates/amostras/<template>.mp4)")
     a = ap.parse_args(argv)
     try:
+        if a.comando == "template":
+            destino = Path(a.saida) if a.saida else pasta_canal(a.canal) / "templates" / "amostras" / f"{a.template}.mp4"
+            arq = gerar_amostra(a.canal, a.formato, a.template, a.campo, destino,
+                                Path(a.fundo) if a.fundo else None, a.inicio, a.duracao)
+            print(f"amostra: {arq}")
+            return 0
         if a.comando == "checar":
             itens = checar()
             falhas = [i for i in itens if not i.ok]

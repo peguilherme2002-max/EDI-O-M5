@@ -52,3 +52,11 @@ geradores:
     formatos: [short_roteiro_novo, short_recorte]
     teto: ""
     status: aprovado
+
+  # F0.4/F0.5 do cofre-de-leonida: amostra aprovada por Pedro em 2026-11-23
+  # (gameplay da orla, item 3 de 15). Medidas e cores vêm do kit de cada canal.
+  - tipo: barra_progresso_lista
+    gerador: m5.templates.barra_progresso_lista
+    formatos: [longo]
+    teto: ""      # contraste em cena clara resolvido com contorno opcional no kit (cofre: opção B)
+    status: aprovado
