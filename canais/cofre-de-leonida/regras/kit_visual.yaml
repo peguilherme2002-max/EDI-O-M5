@@ -77,11 +77,12 @@ templates:
       titulo:    {tipo: texto, obrigatorio: true, maximo_caracteres: 24, nota: "testar o mais longo no F0.5; Archivo é larga"}
       subtitulo: {tipo: texto, obrigatorio: true, maximo_caracteres: 48}
     layout_1080p:
-      escudo:      {x: [62, 250], y: [772, 985], fundo: fundo, contorno: texto, contorno_px: 8, numero_fonte: impacto, numero_cor: texto}
-      aba_selo:    {x_inicio: 270, y: [783, 818], fundo: fundo, estrelas: {quantidade: 6, cor: destaque}, texto_fonte: apoio, texto_cor: texto, caixa_alta: true, espacamento: 0.2}
-      caixa:       {x_inicio: 250, folga_direita_px: 60, y: [818, 955], fundo: fundo, cantos: retos, largura: "acompanha o título"}
-      titulo:      {fonte: impacto, cor: texto, caixa_alta: true}
-      subtitulo:   {fonte: apoio, cor: principal, caixa_alta: true, espacamento: 0.2}
+      # mais fino que a referência (decisão de Pedro, 23/11/2026): comprido pode, grosso não
+      escudo:      {x: [66, 230], y: [806, 982], fundo: fundo, contorno: texto, contorno_px: 7, numero_fonte: impacto, numero_cor: texto, altura_maiuscula_px: 78}
+      aba_selo:    {x_inicio: 250, y: [812, 842], fundo: fundo, estrelas: {quantidade: 6, cor: destaque}, texto_fonte: apoio, texto_cor: texto, caixa_alta: true, espacamento: 0.2, altura_maiuscula_px: 12}
+      caixa:       {x_inicio: 230, folga_direita_px: 60, y: [842, 955], fundo: fundo, cantos: retos, largura: "acompanha o título"}
+      titulo:      {fonte: impacto, cor: texto, caixa_alta: true, altura_maiuscula_px: 46, nota: "título longo diminui só o necessário para caber (até 80%)"}
+      subtitulo:   {fonte: apoio, cor: principal, caixa_alta: true, espacamento: 0.2, altura_maiuscula_px: 19}
       linha_base:  {y: 953, espessura_px: 4, cor: texto}
     animacao:
       entrada: "desliza da esquerda em ~0.2 s; o texto chega antes do escudo; começa 0.25–0.33 s após o corte do número falado"

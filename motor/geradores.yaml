@@ -60,3 +60,10 @@ geradores:
     formatos: [longo]
     teto: ""      # contraste em cena clara resolvido com contorno opcional no kit (cofre: opção B)
     status: aprovado
+
+  # F0.5 do cofre-de-leonida: amostra aprovada por Pedro em 2026-11-23 (versão fina, título de 24 caracteres)
+  - tipo: lista_item
+    gerador: m5.templates.lista_item
+    formatos: [longo]
+    teto: ""
+    status: aprovado
