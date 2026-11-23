@@ -7,6 +7,8 @@
   m5 previa  --canal <c> --formato <f> --roteiro <arquivo>          → EDL + previa.mp4 (480p) para o P3
   m5 render  --canal <c> --formato <f> --roteiro <arquivo> --p3     → final.mp4, só depois do P3 (F02)
   m5 recorte --canal <c> --formato short_recorte --roteiro <roteiro do longo> --segmentos s01,s03
+  m5 checar                                                          → checagem de saúde (7.8, F24)
+  m5 backup  --canal <c> --formato <f|-> [--teste]                   → copia entregas e narrações (6.6, F21)
   m5 custo   --canal <c|-> --formato <f|-> --item tempo_pedro --quantidade 30 --unidade minutos [--video v] [--obs ...]
                                                                      → acrescenta uma linha em logs/custos.csv (10.2)
                                                                      → recorte 9:16 + prévia para o P3
@@ -20,7 +22,9 @@ import sys
 from pathlib import Path
 
 from .canal import FORMATOS, REGISTRO_PADRAO, ErroM5, pasta_canal, resolver_roteiro
+from .backup import fazer_backup
 from .catalogo import captar
+from .saude import checar
 from .custos import etapa_do_canal, registrar
 from .edl import escrever_edl, gerar_edl
 from .montagem import montar
@@ -95,8 +99,26 @@ def main(argv=None) -> int:
     p.add_argument("--etapa", choices=["producao", "construcao"])
     p.add_argument("--refacao", action="store_true")
     p.add_argument("--obs", default="")
+    p = sub.add_parser("checar", help="checagem de saúde da máquina e do motor (7.8, F24)")
+    p.add_argument("--detalhes", action="store_true", help="mostra também o que passou")
+    p = _args(sub, "backup", "copia entregas e narrações do canal para o backup externo (6.6, F21)", roteiro=False)
+    p.add_argument("--teste", action="store_true", help="inclui um arquivo de teste")
     a = ap.parse_args(argv)
     try:
+        if a.comando == "checar":
+            itens = checar()
+            falhas = [i for i in itens if not i.ok]
+            for i in (itens if a.detalhes else falhas):
+                print(f"  {'ok   ' if i.ok else 'FALHA'} [{i.grupo}] {i.nome}" + (f" — {i.detalhe}" if i.detalhe else ""))
+            print("ok" if not falhas else f"{len(falhas)} falha(s): resolva antes de rodar qualquer coisa (F24)")
+            return 0 if not falhas else 1
+        if a.comando == "backup":
+            if a.formato != "-" and a.formato not in FORMATOS:
+                raise ErroM5(f"formato desconhecido: '{a.formato}' (use - para todos)")
+            r = fazer_backup(a.canal, a.teste)
+            print(f"backup: {r['destino']}")
+            print(f"  copiados: {r['copiados']} ({r['mb_copiados']} MB) · já iguais: {r['ja_iguais']} · versões antigas guardadas: {r['versoes_guardadas']}")
+            return 0
         if a.comando == "custo":
             if a.canal != "-":
                 pasta_canal(a.canal)
