@@ -5,7 +5,7 @@
 - roteiro: canais/_amostras/roteiros/amostra_c2/roteiro_mestre.yaml (versão 1)
 - sha1 do roteiro: 7bbe4c7b97e465e3848cdcf2fd16854f015d5a02
 - registro: motor/geradores.yaml
-- gerado em: 2026-11-23 05:53
+- gerado em: 2026-11-23 06:13
 - segmentos: 5 · duração-alvo total: 45 s
 
 ## Resumo
@@ -33,32 +33,32 @@
 
 ### s01 — sem gerador → pendência
 
-- [sem gerador → pendência] narração, 106 caracteres, fornecedor elevenlabs — nenhum gerador aprovado para 'narracao' no formato longo
+- [ok] narração, 106 caracteres, fornecedor elevenlabs — m5.narracao
 - [sem gerador → pendência] visual catalogo: "trailer 2 GTA VI praia ao pôr do sol" — nenhum gerador aprovado para 'clipe_catalogo' no formato longo
 - [sem gerador → pendência] texto na tela: "O DETALHE ESCONDIDO" — nenhum gerador aprovado para 'texto_tela' no formato longo
 - [sem gerador → pendência] sfx: whoosh — nenhum gerador aprovado para 'sfx' no formato longo
 
 ### s02 — sem gerador → pendência
 
-- [sem gerador → pendência] narração, 85 caracteres, fornecedor elevenlabs — nenhum gerador aprovado para 'narracao' no formato longo
+- [ok] narração, 85 caracteres, fornecedor elevenlabs — m5.narracao
 - [sem gerador → pendência] visual web: "mapa Vice City GTA VI feito por fãs" — nenhum gerador aprovado para 'midia_web' no formato longo
 
 ### s03 — sem gerador → pendência
 
-- [sem gerador → pendência] narração, 83 caracteres, fornecedor elevenlabs — nenhum gerador aprovado para 'narracao' no formato longo
+- [ok] narração, 83 caracteres, fornecedor elevenlabs — m5.narracao
 - [sem gerador → pendência] visual gerado: contador — nenhum gerador aprovado para 'contador' no formato longo
 - [sem gerador → pendência] texto na tela: "DIAS ATÉ O LANÇAMENTO" — nenhum gerador aprovado para 'texto_tela' no formato longo
 - [sem gerador → pendência] sfx: tique-taque — nenhum gerador aprovado para 'sfx' no formato longo
 
 ### s04 — sem gerador → pendência
 
-- [sem gerador → pendência] narração, 98 caracteres, fornecedor elevenlabs — nenhum gerador aprovado para 'narracao' no formato longo
+- [ok] narração, 98 caracteres, fornecedor elevenlabs — m5.narracao
 - [sem gerador → pendência] visual gerado: mapa_animado — nenhum gerador aprovado para 'mapa_animado' no formato longo
 - [sem gerador → pendência] texto na tela: "UMA PONTE NOVA" — nenhum gerador aprovado para 'texto_tela' no formato longo
 - [sem gerador → pendência] sfx: impacto — nenhum gerador aprovado para 'sfx' no formato longo
 
 ### s05 — sem gerador → pendência
 
-- [sem gerador → pendência] narração, 37 caracteres, fornecedor elevenlabs — nenhum gerador aprovado para 'narracao' no formato longo
+- [ok] narração, 37 caracteres, fornecedor elevenlabs — m5.narracao
 - [sem gerador → pendência] visual catalogo: "logo GTA VI" — nenhum gerador aprovado para 'clipe_catalogo' no formato longo
 - [sem gerador → pendência] texto na tela: "INSCREVA-SE" — nenhum gerador aprovado para 'texto_tela' no formato longo

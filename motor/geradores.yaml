@@ -20,4 +20,11 @@
 #
 # Nasce vazio na C2; cresce a cada etapa da construção (C3–C6) com amostra aprovada.
 
-geradores: []
+geradores:
+  # C3, amostra aprovada por Pedro em 2026-11-23 (3 segmentos, ElevenLabs, com timestamps)
+  # modo arquivo (dark_planner): interface pronta; detalhes no 1º uso real (doc 12)
+  - tipo: narracao
+    gerador: m5.narracao
+    formatos: [longo, short_roteiro_novo]
+    teto: ""
+    status: aprovado

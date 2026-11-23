@@ -1,0 +1,28 @@
+{
+  "canal": "_amostras",
+  "formato": "longo",
+  "roteiro_sha1": "7bbe4c7b97e465e3848cdcf2fd16854f015d5a02",
+  "segmentos": [
+    {
+      "id": "s01",
+      "chave": "f2ecd1380dfe854e",
+      "audio": "canais/_amostras/assets/narracao/f2ecd1380dfe854e.mp3",
+      "duracao_s": 4.551,
+      "palavras": 14
+    },
+    {
+      "id": "s02",
+      "chave": "0180154af41fe845",
+      "audio": "canais/_amostras/assets/narracao/0180154af41fe845.mp3",
+      "duracao_s": 4.412,
+      "palavras": 17
+    },
+    {
+      "id": "s03",
+      "chave": "a7eefc2e93378225",
+      "audio": "canais/_amostras/assets/narracao/a7eefc2e93378225.mp3",
+      "duracao_s": 4.598,
+      "palavras": 15
+    }
+  ]
+}
