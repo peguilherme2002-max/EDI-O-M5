@@ -76,8 +76,11 @@ def _necessidades(seg: Segmento, fornecedor: str | None) -> list[tuple[str, str,
     return nec
 
 
-def _avaliar(tipo: str, exige_material: bool, ger: Gerador | None, em_teste: bool,
-             formato: str, disponivel: bool) -> tuple[int, str]:
+def _avaliar(tipo: str, exige_material: bool, ger: Gerador | None, em_teste: Gerador | None,
+             formato: str, disponivel: bool, aceitar_em_teste: bool) -> tuple[int, str]:
+    if ger is None and em_teste and aceitar_em_teste:
+        baixar = "; material será baixado" if exige_material and not disponivel else ""
+        return AVISO, f"{em_teste.gerador}: em teste — aceito só nas amostras da construção (9.1){baixar}"
     if ger is None:
         extra = " (existe só em teste, sem amostra aprovada — F09)" if em_teste else ""
         return PENDENCIA, f"nenhum gerador aprovado para '{tipo}' no formato {formato}{extra}"
@@ -106,7 +109,8 @@ def validar(canal: str, formato: str, roteiro: Roteiro, registro_path: Path) -> 
                 continue
             ger, em_teste = buscar(registro, tipo, formato)
             marca, nota = _avaliar(tipo, exige, ger, em_teste, formato,
-                                   _material_disponivel(canal, tipo, seg) if exige else True)
+                                   _material_disponivel(canal, tipo, seg) if exige else True,
+                                   aceitar_em_teste=(canal == "_amostras"))
             rs.itens.append(Item(tipo, desc, marca, nota))
         resultados.append(rs)
     return Resultado(canal, formato, roteiro, registro_path, resultados,

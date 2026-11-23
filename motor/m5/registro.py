@@ -39,9 +39,9 @@ def ler_registro(caminho: Path) -> list[Gerador]:
     return saida
 
 
-def buscar(registro: list[Gerador], tipo: str, formato: str) -> tuple[Gerador | None, bool]:
-    """Devolve (gerador aprovado para tipo+formato, existe_em_teste)."""
+def buscar(registro: list[Gerador], tipo: str, formato: str) -> tuple[Gerador | None, Gerador | None]:
+    """Devolve (gerador aprovado para tipo+formato, gerador em teste para tipo+formato)."""
     candidatos = [g for g in registro if g.tipo == tipo and formato in g.formatos]
     aprovado = next((g for g in candidatos if g.status == "aprovado"), None)
-    em_teste = any(g.status == "em_teste" for g in candidatos)
+    em_teste = next((g for g in candidatos if g.status == "em_teste"), None)
     return aprovado, em_teste

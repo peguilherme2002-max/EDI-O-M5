@@ -1,0 +1,135 @@
+"""Montagem do vídeo a partir do EDL: prévia 480p (P3) e render final (doc 9.3, passos 6 e 8).
+
+Como funciona (tudo ffmpeg, determinístico):
+1. cada corte vira um pedaço de vídeo com o número exato de quadros e um pedaço de áudio
+   com o número exato de amostras (48000/30 = 1600 por quadro) → nada desalinha
+2. os pedaços são concatenados sem nova codificação
+3. passe final: texto na tela (template texto_tela do kit) + narração sobre o áudio do clipe,
+   loudnorm (-14 LUFS)
+"""
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
+
+from .canal import RAIZ, ErroM5, ler_yaml, pasta_canal
+
+AMOSTRAS_POR_QUADRO = 1600          # 48000 Hz / 30 fps
+VOLUME_CLIPE = 0.18                 # áudio original do clipe por baixo da narração
+PERFIS = {
+    "previa": {"altura": 480, "x264": ["-preset", "veryfast", "-crf", "28"], "audio": "128k"},
+    "final": {"altura": None, "x264": ["-preset", "medium", "-crf", "18"], "audio": "192k"},
+}
+
+
+def _ff(args: list[str], cwd: Path | None = None) -> None:
+    r = subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *args], cwd=cwd,
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if r.returncode != 0:
+        raise ErroM5(f"ffmpeg falhou: {r.stderr.strip()[-400:]}")
+
+
+def _tem_audio(video: Path) -> bool:
+    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries", "stream=index",
+                        "-of", "csv=p=0", str(video)], capture_output=True, text=True)
+    return bool(r.stdout.strip())
+
+
+def _resolucao(edl: dict, perfil: str) -> tuple[int, int]:
+    w, h = edl["resolucao"]
+    alvo = PERFIS[perfil]["altura"]
+    if alvo is None:
+        return w, h
+    if w >= h:                                  # 16:9 → 854x480
+        return int(round(w * alvo / h / 2) * 2), alvo
+    return alvo, int(round(h * alvo / w / 2) * 2)   # 9:16 → 480x854
+
+
+def _kit(canal: str) -> dict:
+    kit = ler_yaml(pasta_canal(canal) / "regras" / "kit_visual.yaml") or {}
+    try:
+        fonte = kit["fontes"]["titulo"]
+        cores = kit["paleta"]
+    except (KeyError, TypeError):
+        raise ErroM5(f"kit_visual.yaml do canal '{canal}' sem fontes.titulo ou paleta")
+    arq = pasta_canal(canal) / "assets" / "fontes" / f"{fonte.replace(' ', '-')}.ttf"
+    if not arq.is_file():
+        raise ErroM5(f"fonte do kit '{fonte}' não encontrada em {arq} (F07)")
+    return {"fonte": arq, "texto": cores.get("texto", "#FFFFFF"), "fundo": cores.get("fundo", "#000000")}
+
+
+def montar(edl: dict, perfil: str, destino: Path) -> Path:
+    if perfil not in PERFIS:
+        raise ErroM5(f"perfil desconhecido: {perfil}")
+    W, H = _resolucao(edl, perfil)
+    fps = edl["fps"]
+    p = PERFIS[perfil]
+    kit = _kit(edl["canal"])
+    escala = (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+              f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=black,fps={fps},setsar=1")
+
+    with tempfile.TemporaryDirectory(prefix="m5_") as tmp:
+        tmp = Path(tmp)
+        lista_v, lista_a = [], []
+        cortes = [c for s in edl["segmentos"] for c in s["cortes"]]
+        for i, c in enumerate(cortes):
+            src = RAIZ / c["arquivo"]
+            ini = c["origem_inicio_q"] / fps
+            v, a = tmp / f"v{i:05d}.mp4", tmp / f"a{i:05d}.wav"
+            _ff(["-ss", f"{ini:.4f}", "-i", str(src), "-frames:v", str(c["quadros"]), "-an",
+                 "-vf", escala, "-c:v", "libx264", *p["x264"], "-pix_fmt", "yuv420p", str(v)])
+            amostras = c["quadros"] * AMOSTRAS_POR_QUADRO
+            if _tem_audio(src):
+                _ff(["-ss", f"{ini:.4f}", "-i", str(src), "-vn",
+                     "-af", f"aresample=48000,aformat=channel_layouts=stereo,volume={VOLUME_CLIPE},"
+                            f"apad,atrim=end_sample={amostras}", "-c:a", "pcm_s16le", str(a)])
+            else:
+                _ff(["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
+                     "-af", f"atrim=end_sample={amostras}", "-c:a", "pcm_s16le", str(a)])
+            lista_v.append(f"file '{v.name}'")
+            lista_a.append(f"file '{a.name}'")
+        (tmp / "v.txt").write_text("\n".join(lista_v) + "\n", encoding="utf-8")
+        (tmp / "a.txt").write_text("\n".join(lista_a) + "\n", encoding="utf-8")
+        _ff(["-f", "concat", "-safe", "0", "-i", "v.txt", "-c", "copy", "base_v.mp4"], cwd=tmp)
+        _ff(["-f", "concat", "-safe", "0", "-i", "a.txt", "-c", "copy", "base_a.wav"], cwd=tmp)
+
+        # faixa de narração: um trecho por segmento, cortado/completado no tamanho exato do segmento
+        shutil.copyfile(kit["fonte"], tmp / "fonte.ttf")
+        entradas = ["-i", "base_v.mp4", "-i", "base_a.wav"]
+        filtros, rotulos = [], []
+        k = 2
+        for j, s in enumerate(edl["segmentos"]):
+            amostras = (s["fim_q"] - s["inicio_q"]) * AMOSTRAS_POR_QUADRO
+            if s["narracao"]:
+                entradas += ["-i", str(RAIZ / s["narracao"]["arquivo"])]
+                filtros.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=stereo,apad,"
+                               f"atrim=end_sample={amostras},asetpts=N/SR/TB[n{j}]")
+                k += 1
+            else:
+                filtros.append(f"anullsrc=r=48000:cl=stereo,atrim=end_sample={amostras}[n{j}]")
+            rotulos.append(f"[n{j}]")
+        filtros.append(f"{''.join(rotulos)}concat=n={len(rotulos)}:v=0:a=1[narr]")
+        filtros.append("[1:a][narr]amix=inputs=2:normalize=0:duration=first,"
+                       "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]")
+
+        # texto na tela (template texto_tela do kit)
+        vchain = "[0:v]"
+        fs, borda = int(H * 0.065), int(H * 0.025)
+        for j, s in enumerate(edl["segmentos"]):
+            t = s["texto_tela"]
+            if not t:
+                continue
+            (tmp / f"t{j}.txt").write_text(t["texto"], encoding="utf-8")
+            a, b = t["entrada_q"] / fps, t["saida_q"] / fps
+            vchain += (f"drawtext=fontfile=fonte.ttf:textfile=t{j}.txt:fontsize={fs}:"
+                       f"fontcolor={kit['texto']}:box=1:boxcolor={kit['fundo']}@0.7:boxborderw={borda}:"
+                       f"x=(w-text_w)/2:y=h*0.80-text_h/2:enable='between(t,{a:.3f},{b:.3f})',")
+        filtros.append((vchain.rstrip(",") if vchain != "[0:v]" else "[0:v]null") + "[vout]")
+
+        saida = tmp / "saida.mp4"
+        _ff([*entradas, "-filter_complex", ";".join(filtros), "-map", "[vout]", "-map", "[aout]",
+             "-c:v", "libx264", *p["x264"], "-pix_fmt", "yuv420p", "-r", str(fps),
+             "-c:a", "aac", "-b:a", p["audio"], "-movflags", "+faststart", str(saida)], cwd=tmp)
+        destino.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(saida), destino)
+    return destino

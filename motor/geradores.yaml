@@ -36,3 +36,11 @@ geradores:
     formatos: [longo, short_roteiro_novo]
     teto: ""
     status: aprovado
+
+  # C5, amostra aprovada por Pedro em 2026-11-23 (1 min 16:9, prévia 480p + render 1080p)
+  # entra quando a narração fala as palavras do texto (edl.py)
+  - tipo: texto_tela
+    gerador: m5.montagem (template texto_tela do kit)
+    formatos: [longo]
+    teto: ""
+    status: aprovado

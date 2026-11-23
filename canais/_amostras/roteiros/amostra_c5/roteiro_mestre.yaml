@@ -1,0 +1,70 @@
+# Roteiro de amostra da etapa C5 (9.1) — 1 min em 16:9; não é vídeo de canal
+# Visual: só o clipe do catálogo aprovado na C4 (Trailer 1, 0:30–1:00)
+titulo: Amostra C5 — Vice City em um minuto
+versao: 2
+segmentos:
+  - id: s01
+    intencao: gancho
+    narracao: 'Vice City voltou. E, desta vez, ela está maior, mais viva e muito mais perigosa do que qualquer coisa que a Rockstar já fez. Neste vídeo, a gente vai olhar com calma para o que o primeiro trailer mostrou.'
+    visual:
+      fonte: catalogo
+      busca: trailer 1 GTA VI Vice City
+      etiquetas: [trailer, vice city]
+    texto_tela: VICE CITY VOLTOU
+    sfx: []
+    duracao_alvo_s: 9
+
+  - id: s02
+    intencao: contexto
+    narracao: 'O primeiro trailer mostrou uma cidade inspirada em Miami, com praias lotadas, prédios de neon e um trânsito que não para nunca. De dia ou de noite, a cidade parece estar sempre acontecendo alguma coisa.'
+    visual:
+      fonte: catalogo
+      busca: trailer 1 GTA VI cidade
+      etiquetas: [trailer, gta vi]
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 10
+
+  - id: s03
+    intencao: desenvolvimento
+    narracao: 'Repare nas pessoas. Cada morador parece ter uma rotina própria: festas na piscina, passeios de barco, vídeos para as redes sociais. Ninguém está ali só para encher a tela.'
+    visual:
+      fonte: catalogo
+      busca: trailer 1 moradores
+      etiquetas: [trailer]
+    texto_tela: CADA MORADOR TEM ROTINA
+    sfx: []
+    duracao_alvo_s: 10
+
+  - id: s04
+    intencao: desenvolvimento
+    narracao: 'E essas redes sociais viram parte do jogo. Os vídeos dos moradores aparecem na tela como se fossem posts de verdade, com comentários, curtidas e tudo o que a internet tem de mais estranho.'
+    visual:
+      fonte: catalogo
+      busca: trailer 1 redes sociais
+      etiquetas: [trailer, vice city]
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 10
+
+  - id: s05
+    intencao: revelacao
+    narracao: 'O detalhe que pouca gente notou: quase nenhuma cena se repete. A Rockstar mostrou dezenas de lugares diferentes em poucos segundos, da ponte sobre o mar até os pântanos fora da cidade.'
+    visual:
+      fonte: catalogo
+      busca: trailer 1 montagem rápida
+      etiquetas: [gta vi]
+    texto_tela: DEZENAS DE LUGARES
+    sfx: []
+    duracao_alvo_s: 10
+
+  - id: s06
+    intencao: cta
+    narracao: 'Se você quer a análise completa, cena por cena, fica comigo nos próximos vídeos. Tem muita coisa escondida nesse trailer.'
+    visual:
+      fonte: catalogo
+      busca: trailer 1 encerramento
+      etiquetas: [trailer]
+    texto_tela: ANÁLISE COMPLETA EM BREVE
+    sfx: []
+    duracao_alvo_s: 7
