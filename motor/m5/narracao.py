@@ -10,10 +10,8 @@ O resto do motor não sabe qual fornecedor gerou.
 import base64
 import hashlib
 import json
-import os
 import shutil
 import subprocess
-import tempfile
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -23,21 +21,12 @@ from dotenv import dotenv_values
 
 from .canal import RAIZ, ErroM5, conferir_formato, fornecedor_voz, ler_ficha, pasta_canal
 from .roteiro import Roteiro
+from .transcricao import Palavra, transcrever_palavras
 
 MODO_POR_FORNECEDOR = {"elevenlabs": "api", "dark_planner": "arquivo"}
 MODELO_ELEVENLABS_PADRAO = "eleven_multilingual_v2"
 FORMATO_AUDIO_API = "mp3_44100_128"
 EXTENSOES_AUDIO = (".mp3", ".wav", ".m4a", ".flac", ".ogg")
-WHISPER_DIR = Path(os.environ.get("M5_WHISPER_CPP", r"A:\ferramentas\whisper.cpp"))
-WHISPER_CLI = WHISPER_DIR / "build" / "bin" / "Release" / "whisper-cli.exe"
-WHISPER_MODELO = WHISPER_DIR / "models" / "ggml-large-v3-turbo.bin"
-
-
-@dataclass
-class Palavra:
-    palavra: str
-    inicio_s: float
-    fim_s: float
 
 
 @dataclass
@@ -123,31 +112,6 @@ def _elevenlabs(texto: str, voz: str, modelo: str, chave_api: str) -> tuple[byte
                                        al.get("character_start_times_seconds", []),
                                        al.get("character_end_times_seconds", []))
     return base64.b64decode(dados["audio_base64"]), palavras
-
-
-def transcrever_palavras(audio: Path, idioma: str = "pt") -> list[Palavra]:
-    """Timestamps por palavra com whisper.cpp (Vulkan/GPU)."""
-    if not WHISPER_CLI.is_file() or not WHISPER_MODELO.is_file():
-        raise ErroM5(f"whisper.cpp ou modelo não encontrado em {WHISPER_DIR}")
-    with tempfile.TemporaryDirectory() as tmp:
-        wav = Path(tmp) / "audio16k.wav"
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(audio),
-                        "-ar", "16000", "-ac", "1", "-c:a", "pcm_s16le", str(wav)], check=True)
-        base = Path(tmp) / "saida"
-        r = subprocess.run([str(WHISPER_CLI), "-m", str(WHISPER_MODELO), "-f", str(wav), "-l", idioma,
-                            "-ml", "1", "-sow", "-oj", "-np", "-of", str(base)],
-                           capture_output=True, text=True, encoding="utf-8", errors="replace")
-        saida = base.with_suffix(".json")
-        if r.returncode != 0 or not saida.is_file():
-            raise ErroM5(f"whisper.cpp falhou (código {r.returncode}): {r.stderr[-300:]}")
-        dados = json.loads(saida.read_text(encoding="utf-8", errors="replace"))
-    palavras = []
-    for t in dados.get("transcription", []):
-        txt = t.get("text", "").strip()
-        if txt:
-            o = t["offsets"]
-            palavras.append(Palavra(txt, o["from"] / 1000, o["to"] / 1000))
-    return palavras
 
 
 # ---------- comando ----------

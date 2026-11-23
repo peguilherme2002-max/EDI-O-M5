@@ -28,3 +28,11 @@ geradores:
     formatos: [longo, short_roteiro_novo]
     teto: ""
     status: aprovado
+
+  # C4, amostra aprovada por Pedro em 2026-11-23 (Trailer 1, 0:30–1:00, 21 cenas, indexação 10,8 s)
+  # limite do índice: a transcrição não é confiável em trechos só de música
+  - tipo: clipe_catalogo
+    gerador: m5.catalogo
+    formatos: [longo, short_roteiro_novo]
+    teto: ""
+    status: aprovado

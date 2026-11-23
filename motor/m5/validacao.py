@@ -4,6 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 from .canal import RAIZ, ErroM5, conferir_formato, fornecedor_voz, ler_ficha
+from .catalogo import clipes_com_etiquetas
 from .registro import Gerador, buscar, ler_registro
 from .roteiro import Roteiro, Segmento
 
@@ -50,9 +51,11 @@ class Resultado:
         return sum(1 for s in self.segmentos if s.marca == PENDENCIA)
 
 
-def _material_disponivel(canal: str, segmento: Segmento) -> bool:
-    """Material já presente no catálogo/assets do canal.
-    O índice do catálogo e o manifest de assets nascem na C4; até lá, nada está disponível."""
+def _material_disponivel(canal: str, tipo: str, segmento: Segmento) -> bool:
+    """Material já presente no canal. Catálogo: algum clipe com todas as etiquetas do visual (C4).
+    Mídia web e sfx: ainda sem índice local; sempre "baixar material"."""
+    if tipo == "clipe_catalogo":
+        return bool(clipes_com_etiquetas(canal, segmento.visual.etiquetas))
     return False
 
 
@@ -103,7 +106,7 @@ def validar(canal: str, formato: str, roteiro: Roteiro, registro_path: Path) -> 
                 continue
             ger, em_teste = buscar(registro, tipo, formato)
             marca, nota = _avaliar(tipo, exige, ger, em_teste, formato,
-                                   _material_disponivel(canal, seg) if exige else True)
+                                   _material_disponivel(canal, tipo, seg) if exige else True)
             rs.itens.append(Item(tipo, desc, marca, nota))
         resultados.append(rs)
     return Resultado(canal, formato, roteiro, registro_path, resultados,

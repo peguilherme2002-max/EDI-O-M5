@@ -5,7 +5,7 @@
 - roteiro: canais/_amostras/roteiros/amostra_c2/roteiro_mestre.yaml (versão 1)
 - sha1 do roteiro: 7bbe4c7b97e465e3848cdcf2fd16854f015d5a02
 - registro: motor/geradores.yaml
-- gerado em: 2026-11-23 06:13
+- gerado em: 2026-11-23 06:23
 - segmentos: 5 · duração-alvo total: 45 s
 
 ## Resumo
@@ -34,7 +34,7 @@
 ### s01 — sem gerador → pendência
 
 - [ok] narração, 106 caracteres, fornecedor elevenlabs — m5.narracao
-- [sem gerador → pendência] visual catalogo: "trailer 2 GTA VI praia ao pôr do sol" — nenhum gerador aprovado para 'clipe_catalogo' no formato longo
+- [baixar material] visual catalogo: "trailer 2 GTA VI praia ao pôr do sol" — m5.catalogo: material não está no canal; será baixado
 - [sem gerador → pendência] texto na tela: "O DETALHE ESCONDIDO" — nenhum gerador aprovado para 'texto_tela' no formato longo
 - [sem gerador → pendência] sfx: whoosh — nenhum gerador aprovado para 'sfx' no formato longo
 
@@ -60,5 +60,5 @@
 ### s05 — sem gerador → pendência
 
 - [ok] narração, 37 caracteres, fornecedor elevenlabs — m5.narracao
-- [sem gerador → pendência] visual catalogo: "logo GTA VI" — nenhum gerador aprovado para 'clipe_catalogo' no formato longo
+- [baixar material] visual catalogo: "logo GTA VI" — m5.catalogo: material não está no canal; será baixado
 - [sem gerador → pendência] texto na tela: "INSCREVA-SE" — nenhum gerador aprovado para 'texto_tela' no formato longo

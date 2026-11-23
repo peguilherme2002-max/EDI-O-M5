@@ -3,6 +3,7 @@
   m5 validar --canal <c> --formato <f> --roteiro <arquivo>
   m5 edl     --canal <c> --formato <f> --roteiro <arquivo>
   m5 narrar  --canal <c> --formato <f> --roteiro <arquivo> [--segmentos s01,s02] [--arquivos <pasta>]
+  m5 captar  --canal <c> --formato <f> --url <link> [--inicio 0:30 --fim 1:00] [--etiquetas a,b] [--idioma pt]
 
 Saída: 0 = ok · 1 = pendências na validação · 2 = erro (nada foi gerado)
 """
@@ -11,17 +12,19 @@ import sys
 from pathlib import Path
 
 from .canal import REGISTRO_PADRAO, ErroM5, resolver_roteiro
+from .catalogo import captar
 from .edl import escrever_edl, gerar_edl
 from .narracao import narrar
 from .roteiro import ler_roteiro
 from .validacao import ROTULO, escrever_relatorio, validar
 
 
-def _args(sub, nome, ajuda):
+def _args(sub, nome, ajuda, roteiro=True):
     p = sub.add_parser(nome, help=ajuda)
     p.add_argument("--canal", required=True)
     p.add_argument("--formato", required=True)
-    p.add_argument("--roteiro", required=True, help="caminho do roteiro_mestre.yaml")
+    if roteiro:
+        p.add_argument("--roteiro", required=True, help="caminho do roteiro_mestre.yaml")
     return p
 
 
@@ -35,8 +38,21 @@ def main(argv=None) -> int:
     p = _args(sub, "narrar", "narra os segmentos (7.4): modo API ou modo arquivo, conforme a ficha")
     p.add_argument("--segmentos", help="ids separados por vírgula (padrão: todos com narração)")
     p.add_argument("--arquivos", help="modo arquivo: pasta com <id>.mp3/.wav…")
+    p = _args(sub, "captar", "baixa um vídeo (ou trecho) para o catálogo do canal e indexa (7.5)", roteiro=False)
+    p.add_argument("--url", required=True)
+    p.add_argument("--inicio", help="início do trecho (s, mm:ss ou hh:mm:ss)")
+    p.add_argument("--fim", help="fim do trecho")
+    p.add_argument("--etiquetas", help="etiquetas separadas por vírgula, usadas para casar com o roteiro")
+    p.add_argument("--idioma", default="auto", help="idioma da fala para a transcrição (padrão: auto)")
     a = ap.parse_args(argv)
     try:
+        if a.comando == "captar":
+            etq = [e for e in (a.etiquetas or "").split(",") if e.strip()]
+            c = captar(a.canal, a.formato, a.url, a.inicio, a.fim, etq, a.idioma)
+            print(f"clipe: {c.id}{'  (já estava no catálogo; nada baixado)' if c.reaproveitado else ''}")
+            print(f"  {c.origem['titulo']} — {c.origem['canal_origem']}")
+            print(f"  {c.duracao_s:.1f} s · {c.resolucao[0]}x{c.resolucao[1]} · {len(c.cenas)} cenas · etiquetas: {', '.join(c.etiquetas) or '-'}")
+            return 0
         caminho = resolver_roteiro(a.canal, a.roteiro)
         if a.comando == "narrar":
             ids = [i.strip() for i in a.segmentos.split(",")] if a.segmentos else None
