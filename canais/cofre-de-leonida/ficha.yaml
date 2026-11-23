@@ -1,0 +1,31 @@
+# ficha.yaml — Cofre de Leonida
+# Campos do M5-finalboss (v3.1), seção 6.4. Pedro altera quando quiser (M5 6.3).
+
+canal: cofre-de-leonida
+nicho: "GTA VI: listas e curiosidades atemporais, contadas com gameplay real (sem notícias)"
+status: aguardando            # vira "ativo" após o piloto aprovado (A4)
+
+formatos_ativos:
+  - longo                     # 16:9, 15–20 min
+  # - short                   # só depois de F18: kit aprovado + ≥1 longo aprovado no P4
+
+fornecedor_voz:               # nome do campo que o motor lê
+  longo: {fornecedor: elevenlabs, modo: api, voz: "voz clonada de Pedro", creditos_mes: 130000}
+  short_roteiro_novo: {fornecedor: elevenlabs, modo: api, voz: "voz clonada de Pedro"}
+
+cadencia:
+  longo: "1 por semana (4 por mês)"
+  short_roteiro_novo: "a definir quando o formato for ativado"
+
+estrategia_shorts: roteiro_novo
+estrategia_shorts_detalhe:
+  agora: "sem recorte direto do longo. Quando reaproveitar um longo, é edição nova: os principais momentos com roteiro e narração novos"
+  depois: "shorts chamativos com roteiros totalmente independentes, para atrair público"
+  pre_condicao: "F18 (kit aprovado + ≥1 longo aprovado no P4)"
+
+compartilhamento_catalogo: nao          # padrão: catálogo só deste canal (M5 F17)
+compartilhamento_catalogo_regra: "compartilha só por ordem explícita de Pedro, na criação de outro canal ('pode compartilhar esse catálogo'), para aperfeiçoar o catálogo ou usar a mesma base"
+
+pendencias_operacionais:
+  - "escolher o repositório Git privado e fazer o login (antes da C1)"
+  - "escolher o destino do backup de mídia (antes da C1)"

@@ -1,8 +1,9 @@
 """Backup externo da mídia (doc 6.6, F21).
 
 - texto (docs, regras, roteiros, código, logs): vai pelo Git, commit + push a cada aprovação
-- mídia: entregas (mp4 finais, alta importância) e narrações (média, custaram créditos)
-  são copiadas para M5_BACKUP_DESTINO (HD externo ou pasta sincronizada na nuvem), definido no .env
+- mídia: entregas (mp4 finais, alta importância) e assets/ inteiro (narrações, que custaram créditos,
+  e o material do kit: fontes, identidade, mapa, referências — fora do Git pelo .gitignore)
+  são copiados para M5_BACKUP_DESTINO (HD externo ou pasta sincronizada na nuvem), definido no .env
 - catálogo: sem backup obrigatório (baixa de novo)
 
 Regras: copia só o que é novo ou mudou (tamanho ou data); nunca apaga nem sobrescreve uma versão
@@ -19,7 +20,7 @@ from dotenv import dotenv_values
 
 from .canal import RAIZ, ErroM5, pasta_canal
 
-PASTAS = {"entrega": "entrega", "narracao": "assets/narracao"}
+PASTAS = {"entrega": "entrega", "assets": "assets"}   # assets/ inteiro: fontes, identidade, mapa, referências, narrações
 
 
 def destino_backup() -> Path:

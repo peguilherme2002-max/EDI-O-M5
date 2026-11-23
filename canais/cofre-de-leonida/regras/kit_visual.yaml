@@ -1,0 +1,252 @@
+# kit_visual.yaml — Cofre de Leonida
+# Saída da F0.3 do M5-finalboss (v3.1). Só muda com aprovação de Pedro (M5 6.3).
+# Documentação humana: ../assets/referencias/GUIA-DE-TEMPLATES.md · padrões medidos: ../padroes_referencia.md
+
+versao: 1
+data: 2026-11-23
+status: rascunho            # vira "aprovado" depois da F0.5
+canal: cofre-de-leonida
+resolucao_base: [1920, 1080] # 16:9, 30 fps. O 9:16 dos shorts é adaptação de layout (M5 7.6), definida depois de F18
+
+divergencias_do_m5:
+  - "F0.3 prevê 2 fontes; o kit usa 3 (decisão de Pedro, 23/11/2026)."
+  - "F0.3 prevê 4–5 templates; o kit usa 10: um conjunto por vertente + logo e botões de identidade (decisão de Pedro, 23/11/2026)."
+  - "Pedro prefere não fixar regras de edição agora: os templates ficam posicionados e ele ajusta nos testes do motor."
+
+# ---------------------------------------------------------------- FONTES
+fontes:                       # arquivos em ../assets/fontes/ (licença OFL)
+  impacto:
+    arquivo: ArchivoExpanded-Black.ttf
+    uso: "títulos, números grandes, palavra de impacto, nome do bloco"
+  apoio:
+    arquivo: BarlowCondensed-ExtraBold.ttf
+    espacamento: 0.02        # +2% (um pouco mais aberto)
+    variante_pilula: BarlowSemiCondensed-Bold.ttf   # só em pílulas de texto pequeno
+    uso: "rótulos, selos, nomes, painéis, etiquetas"
+  texto:
+    arquivo_bold: Inter-Bold.ttf
+    arquivo_semibold: Inter-SemiBold.ttf
+    espacamento_legenda: -0.02
+    uso: "legenda, citação, texto de interface"
+  regra_hierarquia: "pesado e apertado para o que se lê; caixa alta pequena e espaçada (+15 a +25%) para contexto"
+
+# ---------------------------------------------------------------- PALETA
+paleta:
+  principal:        "#FA6000"   # laranja do cofre
+  secundaria:       "#C20D8A"   # magenta
+  apoio:            "#4B159B"   # roxo
+  fundo:            "#010219"   # azul-marinho bem escuro
+  fundo_alt:        "#001480"   # azul royal
+  texto:            "#FFFDEA"   # creme claro
+  contorno_texto:   "#24011B"   # vinho quase preto
+  destaque:         "#FDCE14"   # amarelo do sol
+papeis_de_cor:
+  assinatura_gradiente: ["#FA6000", "#C20D8A", "#4B159B"]   # transições e barras
+  positivo_gradiente:   ["#FA6000", "#FDCE14"]
+  negativo:             "#C20D8A"
+  proibido:             ["#FD3731"]                          # coral: perto demais do laranja e do magenta
+  regra: "1 cor de marca (laranja) + 1 de atenção (amarelo); magenta só para negativo e assinatura"
+
+# ---------------------------------------------------------------- REGRAS DE ANIMAÇÃO (todas as peças)
+animacao:
+  entrada_s: [0.2, 0.3]
+  entrada_curva: ease-out
+  saida_s: 0.15
+  saida_curva: ease-in
+  bounce: false
+  gatilho: "texto entra colado num corte de imagem ou na fala que o cita; nunca solto no meio de um plano"
+  sfx: "um som curto (pop, whoosh ou tique) por grafismo que entra; não por corte"
+  leitura: "garantida por caixa escura ou escurecimento do fundo, não pela escolha da imagem"
+audio:
+  loudness_lufs: -14
+  true_peak_dbfs: -1
+  musica: "contínua e baixa sob a voz"
+
+# ---------------------------------------------------------------- TEMPLATES (10)
+# Cada template recebe "campos" vindos do roteiro_mestre (campo texto_tela do segmento).
+# Exemplo no roteiro: texto_tela: {template: lista_item, numero: 7, selo: CARRO, titulo: "...", subtitulo: "..."}
+templates:
+
+  # ---------- LISTAS (referência R2, Vice City Dispatch)
+  lista_item:
+    vertente: listas
+    descricao: "caixa de texto do item (lower third) com escudo numerado; fica na tela o item inteiro"
+    campos:
+      numero:    {tipo: int, obrigatorio: true, formato: "zero à esquerda (07)"}
+      selo:      {tipo: texto, obrigatorio: true, valores_sugeridos: [DINHEIRO, CARRO, RAMPA, SEGREDO, MISSAO, LOCAL], nota: "lista pode crescer"}
+      titulo:    {tipo: texto, obrigatorio: true, maximo_caracteres: 24, nota: "testar o mais longo no F0.5; Archivo é larga"}
+      subtitulo: {tipo: texto, obrigatorio: true, maximo_caracteres: 48}
+    layout_1080p:
+      escudo:      {x: [62, 250], y: [772, 985], fundo: fundo, contorno: texto, contorno_px: 8, numero_fonte: impacto, numero_cor: texto}
+      aba_selo:    {x_inicio: 270, y: [783, 818], fundo: fundo, estrelas: {quantidade: 6, cor: destaque}, texto_fonte: apoio, texto_cor: texto, caixa_alta: true, espacamento: 0.2}
+      caixa:       {x_inicio: 250, folga_direita_px: 60, y: [818, 955], fundo: fundo, cantos: retos, largura: "acompanha o título"}
+      titulo:      {fonte: impacto, cor: texto, caixa_alta: true}
+      subtitulo:   {fonte: apoio, cor: principal, caixa_alta: true, espacamento: 0.2}
+      linha_base:  {y: 953, espessura_px: 4, cor: texto}
+    animacao:
+      entrada: "desliza da esquerda em ~0.2 s; o texto chega antes do escudo; começa 0.25–0.33 s após o corte do número falado"
+      saida: "desliza para a esquerda em ~0.15 s, seguida de ~0.5 s de imagem limpa antes do próximo item"
+    referencia: "../assets/referencias/listas-vice-city-dispatch/template-de-lista.md §2–3"
+
+  numero_gigante:
+    vertente: listas
+    descricao: "dado-chave no centro, por 2 a 4 s, convivendo com o lista_item"
+    campos:
+      valor:          {tipo: texto, obrigatorio: true, exemplo: "212 GB"}
+      rotulo_cima:    {tipo: texto, obrigatorio: false}
+      rotulo_baixo:   {tipo: texto, obrigatorio: false, nota: "entre dois traços: — X —"}
+      estrelas:       {tipo: bool, padrao: true}
+    layout_1080p:
+      valor:   {fonte: impacto, cor: texto, altura_px: 200, posicao: centro}
+      rotulos: {fonte: apoio, cor: texto, caixa_alta: true, espacamento: 0.25}
+      estrelas: {quantidade: 6, cor: destaque, posicao: "acima do rótulo de cima"}
+      escurecimento_fundo: {opacidade: 0.45, duracao_s: 0.3}
+    animacao:
+      entrada: "no corte: de translúcido e borrado a sólido em 2–3 quadros; estrelas +0.15–0.25 s depois"
+      saida: "some no corte seguinte"
+    referencia: "../assets/referencias/listas-vice-city-dispatch/template-de-lista.md §5"
+
+  barra_progresso_lista:
+    vertente: listas
+    descricao: "um segmento por item, enchendo da esquerda para a direita; ★ no fim"
+    campos:
+      total_itens: {tipo: int, obrigatorio: true, valores: [10, 15, 20, 30]}
+      item_atual:  {tipo: int, obrigatorio: true}
+    layout_1080p:
+      y: 1053
+      x: [60, 1825]
+      segmento: {cantos: arredondados, espaco_px: 6}
+      cor_cheio: texto
+      cor_vazio: apoio
+      estrela_final: {cor_apagada: apoio, cor_acesa: destaque}
+    animacao:
+      entrada: "o segmento acende quando o lista_item entra"
+    referencia: "../assets/referencias/listas-vice-city-dispatch/template-de-lista.md §3"
+
+  # ---------- CURIOSIDADES (referências R1 e R4, Grand Gabe)
+  legenda_karaoke:
+    vertente: curiosidades
+    descricao: "legenda palavra por palavra no rodapé, em trechos-chave e no gameplay"
+    campos:
+      texto:          {tipo: texto, obrigatorio: true, nota: "vem dos timestamps da narração (M5 7.4)"}
+      palavra_chave:  {tipo: lista_texto, obrigatorio: false}
+    layout_1080p:
+      posicao: "rodapé central, base em y ≈ 1000"
+      fonte: texto
+      peso: bold
+      caixa: minuscula
+      cor: texto
+      contorno: {cor: contorno_texto, espessura_px: 4}
+      cor_palavra_chave: destaque
+      sombra: suave
+      caixa_fundo: false
+    animacao:
+      entrada: "palavra por palavra, junto com a fala"
+      saida: "some com a frase; sai de cena quando entra um painel"
+    referencia: "../assets/referencias/curiosidades-grand-gabe/template-de-curiosidades.md §3.14"
+
+  contador_flip:
+    vertente: curiosidades
+    descricao: "número com dígitos em ladrilhos que giram até parar"
+    campos:
+      valor:     {tipo: texto, obrigatorio: true, exemplo: "19 MI"}
+      rotulo:    {tipo: texto, obrigatorio: true, exemplo: "DIAS PARA O LANÇAMENTO"}
+      fonte_dado: {tipo: texto, obrigatorio: false, nota: "vira pílula acima do número"}
+      cadeado:   {tipo: bool, padrao: false, nota: "variação cofre"}
+    layout_1080p:
+      posicao: "centro, sobre o fundo de painel"
+      ladrilho: {cantos_px: 16, cor_1: texto, cor_2: positivo_gradiente}
+      numero:   {fonte: impacto, cor: principal}
+      rotulo:   {fonte: apoio, cor: texto, caixa_alta: true}
+    animacao:
+      entrada: "dígitos giram 0.1–0.2 s cada, ~1.5 s no total; tique sonoro em cada parada"
+      saida: fade
+    referencia: "../assets/referencias/curiosidades-grand-gabe/template-de-curiosidades.md §3.3"
+
+  mapa:
+    vertente: curiosidades
+    descricao: "mapa de Leonida recolorido, com local marcado"
+    especificacao: "../assets/mapa/especificacao-mapa.md"
+    arquivo_base: "../assets/mapa/mapa-oficial-leonida-rgb.png"   # 5775 × 7900, sRGB
+    campos:
+      modo:     {tipo: escolha, valores: [ilha, regiao, ponto], obrigatorio: true}
+      local:    {tipo: texto, obrigatorio: true, exemplo: "Vice Beach"}
+      grade:    {tipo: texto, obrigatorio: false, exemplo: "G8", nota: "coordenada da grade A–M × 1–9 do mapa oficial"}
+      etiqueta: {tipo: texto, obrigatorio: false}
+    referencia: "R4 8:47 (card 3D inclinado)"
+
+  citacao:
+    vertente: curiosidades
+    descricao: "frase de alguém (imprensa, Rockstar, comunidade) com marca-texto que corre com a fala"
+    campos:
+      frase:          {tipo: texto, obrigatorio: true, maximo_caracteres: 180}
+      autor:          {tipo: texto, obrigatorio: true}
+      trecho_marcado: {tipo: texto, obrigatorio: false}
+    layout_1080p:
+      posicao: "esquerda, x ≈ 140–1000, centralizada na vertical"
+      barra: {lado: esquerda, cor: principal, largura_px: 8}
+      frase: {fonte: texto, peso: semibold, cor: texto}
+      autor: {fonte: apoio, cor: destaque, caixa_alta: true, espacamento: 0.2}
+      marca_texto: {cor: destaque, texto_marcado: contorno_texto}
+      fundo: "gameplay escurecido (sem caixa) ou fundo de painel"
+    animacao:
+      entrada: "fade de 0.2–0.3 s; o marca-texto corre palavra por palavra com a narração"
+      saida: "fade de ~0.15 s antes do corte"
+    referencia: "../assets/referencias/curiosidades-grand-gabe/template-de-curiosidades.md §3.10"
+
+  transicao_bloco:
+    vertente: curiosidades
+    descricao: "troca de capítulo: gradiente da assinatura lava a tela e mostra o número e o nome do bloco"
+    campos:
+      numero: {tipo: int, obrigatorio: true}
+      total:  {tipo: int, obrigatorio: true}
+      titulo: {tipo: texto, obrigatorio: true, maximo_caracteres: 28}
+    layout_1080p:
+      lavagem: {cores: assinatura_gradiente, duracao_s: 0.4}
+      rotulo: {texto: "CAPÍTULO N/X", fonte: apoio, cor: principal, caixa_alta: true, espacamento: 0.2}
+      titulo: {fonte: impacto, cor: texto}
+      numero: {fonte: impacto, cor: destaque, efeito: "gira do capítulo anterior para o novo"}
+      posicao_permanente: "card de vidro no canto inferior esquerdo (x 215–785 · y 790–938) durante o gameplay do capítulo"
+    animacao:
+      entrada: "lavagem de cor ~0.4 s → card vazio → título em fade ~0.25 s → número gira"
+      gatilho: "~3 s antes de a voz confirmar o capítulo"
+    referencia: "../assets/referencias/curiosidades-grand-gabe/template-de-curiosidades.md §3.2"
+
+  # ---------- IDENTIDADE (as duas vertentes). Só posicionados: Pedro ajusta o uso nos testes do motor.
+  logo_flutuante:
+    vertente: ambas
+    descricao: "logo do canal flutuando na tela: abertura, fecho e marca d'água opcional"
+    arquivos:
+      logo: "../assets/identidade/png/logo-cofre-de-leonida.png"         # 979 × 447, fundo transparente
+      icone: "../assets/identidade/png/icone-cofre.png"                   # cofre laranja sem fundo
+      icone_circulo: "../assets/identidade/png/icone-cofre-circulo.png"   # cofre com anel e brilho (igual à foto de perfil)
+    campos:
+      modo: {tipo: escolha, valores: [abertura, fecho, marca_dagua], obrigatorio: true}
+    posicao:
+      abertura: "centro, ~45% da largura da tela"
+      fecho: "centro, ~45% da largura, acima do cta_botao"
+      marca_dagua: "canto superior direito, ícone do cofre com ~90 px e 60% de opacidade"
+    nota: "resolução da logo é limitada (979 px de largura): não passar de ~50% da tela. Para usar maior, pedir a arte original da logo"
+
+  cta_botao:
+    vertente: ambas
+    descricao: "botões flutuantes de inscreva-se, curtir e comentar, quando o roteiro pedir"
+    campos:
+      tipo:  {tipo: escolha, valores: [inscreva_se, curtir, comente], obrigatorio: true}
+      texto: {tipo: texto, obrigatorio: false, nota: "padrão: INSCREVA-SE / CURTIR / COMENTE"}
+    estilo:
+      botao: {cor: principal, cantos: "totalmente arredondados", brilho: principal}
+      texto: {fonte: apoio, cor: texto, caixa_alta: true}
+      icone: {cor: texto}
+      clique: {cor: destaque, efeito: "cursor clica; o botão afunda e brilha em amarelo; inscreva-se vira INSCRITO"}
+      som: "clique curto"
+    posicao: "terço inferior, centralizado (ou ao lado da logo no fecho)"
+
+# ---------------------------------------------------------------- CRESCIMENTO
+repertorio:
+  regra_entrada: "F15: template novo só após aparecer em ≥2 vídeos aprovados no P4 + aprovação de Pedro"
+  regra_saida: "Pedro pode retirar qualquer template que não funcione (gera nova versão deste arquivo)"
+  candidatos:
+    listas: [etiqueta_palavra, a_ou_b_leve, caixa_contexto, painel_lista, cartao_ato, posicao_ranking]   # etiqueta_palavra e a_ou_b_leve vêm do R5
+    identidade: [repertorio_coqueiro_neon]   # ../assets/identidade/png/repertorio-coqueiro-neon.png: arte decorativa, sem relação com a marca
+    curiosidades: [painel_AxB, grade_cofre, rotulo_capitulo_fixo, barra_topo, notificacao_jogo, post_rede_social, card_pessoa, widgets_dados, tela_titulo, pilula_selo, cta_animado, selo_jogo_canto, infografico]

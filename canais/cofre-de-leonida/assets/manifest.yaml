@@ -1,0 +1,30 @@
+# manifest.yaml — assets do canal Cofre de Leonida (M5 6.1: assets/ + manifest {origem, data})
+# Montado na Fase 0 (F0.1–F0.3), em 23/11/2026.
+
+fontes:
+  - {arquivo: fontes/ArchivoExpanded-Black.ttf,      origem: "Google Fonts (Archivo, OFL); instância wdth=125 wght=900 gerada a partir da fonte variável", data: 2026-11-23}
+  - {arquivo: fontes/BarlowCondensed-ExtraBold.ttf,  origem: "Google Fonts (Barlow Condensed, OFL)", data: 2026-11-23}
+  - {arquivo: fontes/BarlowSemiCondensed-Bold.ttf,   origem: "Google Fonts (Barlow Semi Condensed, OFL)", data: 2026-11-23}
+  - {arquivo: fontes/Inter-Bold.ttf,                 origem: "Google Fonts (Inter, OFL); instância opsz=32 wght=700 (nome interno: Inter Display Bold)", data: 2026-11-23}
+  - {arquivo: fontes/Inter-SemiBold.ttf,             origem: "Google Fonts (Inter, OFL); instância opsz=32 wght=600 (nome interno: Inter Display SemiBold)", data: 2026-11-23}
+  - {arquivo: fontes/licencas/,                      origem: "licenças OFL das três famílias", data: 2026-11-23}
+
+identidade:
+  - {arquivo: identidade/originais/banner-16x9.webp,            origem: "banner do canal (Pedro)", data: 2026-11-23}
+  - {arquivo: identidade/originais/banner-logo.webp,            origem: "banner do canal com a logo (Pedro)", data: 2026-11-23}
+  - {arquivo: identidade/originais/perfil-cofre.webp,           origem: "foto de perfil do canal (Pedro)", data: 2026-11-23}
+  - {arquivo: identidade/originais/repertorio-coqueiro-neon.jpg, origem: "arte enviada por Pedro, só repertório", data: 2026-11-23}
+  - {arquivo: identidade/png/logo-cofre-de-leonida.png, origem: "recorte da logo a partir de banner-logo.webp (979 × 447). Não existe arte original; se precisar maior, refazer no Canva", data: 2026-11-23}
+  - {arquivo: identidade/png/icone-cofre.png,           origem: "recorte do cofre a partir de perfil-cofre.webp", data: 2026-11-23}
+  - {arquivo: identidade/png/icone-cofre-circulo.png,   origem: "recorte circular de perfil-cofre.webp (com anel e brilho)", data: 2026-11-23}
+  - {arquivo: identidade/png/repertorio-coqueiro-neon.png, origem: "recorte circular de repertorio-coqueiro-neon.jpg", data: 2026-11-23}
+
+mapa:
+  - {arquivo: mapa/mapa-oficial-leonida-rgb.png, origem: "Rockstar Games, 'Leonida Map Poster · Printable' (rockstargames.com/VI/media), convertido de CMYK para sRGB; 5775 × 7900", data: 2026-11-23}
+  - {arquivo: mapa/especificacao-mapa.md,        origem: "especificação do template de mapa (Fase 0)", data: 2026-11-23}
+
+referencias:
+  - {arquivo: referencias/GUIA-DE-TEMPLATES.md, origem: "guia de identidade e templates (Fase 0); explica o porquê do kit_visual.yaml", data: 2026-11-23}
+  - {arquivo: referencias/listas-vice-city-dispatch/, origem: "ficha + quadros do R2 (YouTube v8z3imeVPCk, Vice City Dispatch)", data: 2026-11-23}
+  - {arquivo: referencias/curiosidades-grand-gabe/,   origem: "ficha + quadros do R1 (YouTube DetBeN7COWQ, Grand Gabe)", data: 2026-11-23}
+  - {arquivo: referencias/ensaio-iambeanz/,           origem: "ficha + quadros do R3 (YouTube JslbBOm80hY, IAmBeanz)", data: 2026-11-23}
