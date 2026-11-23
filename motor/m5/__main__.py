@@ -7,6 +7,8 @@
   m5 previa  --canal <c> --formato <f> --roteiro <arquivo>          → EDL + previa.mp4 (480p) para o P3
   m5 render  --canal <c> --formato <f> --roteiro <arquivo> --p3     → final.mp4, só depois do P3 (F02)
   m5 recorte --canal <c> --formato short_recorte --roteiro <roteiro do longo> --segmentos s01,s03
+  m5 custo   --canal <c|-> --formato <f|-> --item tempo_pedro --quantidade 30 --unidade minutos [--video v] [--obs ...]
+                                                                     → acrescenta uma linha em logs/custos.csv (10.2)
                                                                      → recorte 9:16 + prévia para o P3
 
 Saída: 0 = ok · 1 = pendências na validação · 2 = erro (nada foi gerado)
@@ -17,8 +19,9 @@ import json
 import sys
 from pathlib import Path
 
-from .canal import REGISTRO_PADRAO, ErroM5, resolver_roteiro
+from .canal import FORMATOS, REGISTRO_PADRAO, ErroM5, pasta_canal, resolver_roteiro
 from .catalogo import captar
+from .custos import etapa_do_canal, registrar
 from .edl import escrever_edl, gerar_edl
 from .montagem import montar
 from .recorte import criar_recorte
@@ -83,8 +86,28 @@ def main(argv=None) -> int:
     p.add_argument("--segmentos", required=True, help="ids do longo, na ordem do short, separados por vírgula")
     p = _args(sub, "render", "render final a partir do EDL da prévia aprovada no P3 (F02)")
     p.add_argument("--p3", action="store_true", help="confirma que Pedro aprovou a prévia (P3)")
+    p = _args(sub, "custo", "registra um custo à mão em logs/custos.csv (tempo de Pedro, uso do Claude…)", roteiro=False)
+    p.add_argument("--item", required=True, choices=["narracao", "claude", "tempo_pedro", "outro"])
+    p.add_argument("--quantidade", required=True, type=float)
+    p.add_argument("--unidade", required=True, help="ex.: minutos, creditos, audios, %% do limite")
+    p.add_argument("--fornecedor", help="padrão: pedro (tempo_pedro), claude_pro (claude)")
+    p.add_argument("--video", default="-")
+    p.add_argument("--etapa", choices=["producao", "construcao"])
+    p.add_argument("--refacao", action="store_true")
+    p.add_argument("--obs", default="")
     a = ap.parse_args(argv)
     try:
+        if a.comando == "custo":
+            if a.canal != "-":
+                pasta_canal(a.canal)
+            if a.formato != "-" and a.formato not in FORMATOS:
+                raise ErroM5(f"formato desconhecido: '{a.formato}'")
+            forn = a.fornecedor or {"tempo_pedro": "pedro", "claude": "claude_pro"}.get(a.item, "-")
+            etapa = a.etapa or (etapa_do_canal(a.canal) if a.canal != "-" else "construcao")
+            linha = registrar(a.canal, a.video, a.formato, etapa, a.item, forn, a.quantidade, a.unidade,
+                              a.refacao, a.obs)
+            print("custo registrado: " + " | ".join(f"{k}={v}" for k, v in linha.items()))
+            return 0
         if a.comando == "captar":
             etq = [e for e in (a.etiquetas or "").split(",") if e.strip()]
             c = captar(a.canal, a.formato, a.url, a.inicio, a.fim, etq, a.idioma)

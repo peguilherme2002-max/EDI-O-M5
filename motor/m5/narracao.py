@@ -20,6 +20,7 @@ import requests
 from dotenv import dotenv_values
 
 from .canal import RAIZ, ErroM5, conferir_formato, fornecedor_voz, ler_ficha, pasta_canal
+from .custos import etapa_do_canal, registrar
 from .roteiro import Roteiro
 from .transcricao import Palavra, transcrever_palavras
 
@@ -89,7 +90,7 @@ def _palavras_de_caracteres(chars, inicios, fins) -> list[Palavra]:
 
 # ---------- fornecedores ----------
 
-def _elevenlabs(texto: str, voz: str, modelo: str, chave_api: str) -> tuple[bytes, list[Palavra]]:
+def _elevenlabs(texto: str, voz: str, modelo: str, chave_api: str) -> tuple[bytes, list[Palavra], float | None]:
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{voz}/with-timestamps"
     try:
         r = requests.post(url, params={"output_format": FORMATO_AUDIO_API},
@@ -111,7 +112,11 @@ def _elevenlabs(texto: str, voz: str, modelo: str, chave_api: str) -> tuple[byte
     palavras = _palavras_de_caracteres(al.get("characters", []),
                                        al.get("character_start_times_seconds", []),
                                        al.get("character_end_times_seconds", []))
-    return base64.b64decode(dados["audio_base64"]), palavras
+    try:
+        custo = float(r.headers.get("character-cost", ""))
+    except ValueError:
+        custo = None
+    return base64.b64decode(dados["audio_base64"]), palavras, custo
 
 
 # ---------- comando ----------
@@ -162,6 +167,16 @@ def narrar(canal: str, formato: str, roteiro: Roteiro, ids: list[str] | None = N
     pasta = pasta_assets / "narracao"
     pasta.mkdir(parents=True, exist_ok=True)
     saida: list[Narracao] = []
+    destino = roteiro.caminho.with_name("narracao.json")
+    anteriores = {}
+    if destino.is_file():
+        anteriores = {d["id"]: d for d in json.loads(destino.read_text(encoding="utf-8"))["segmentos"]}
+    video = roteiro.caminho.parent.name
+
+    def _custo(seg_id: str, chave: str, qtd: float, unidade: str, obs: str) -> None:
+        refacao = seg_id in anteriores and anteriores[seg_id]["chave"] != chave
+        registrar(canal, video, formato, etapa_do_canal(canal), "narracao", fornecedor,
+                  qtd, unidade, refacao, f"{seg_id}; {obs}")
 
     if modo == "api":
         env = dotenv_values(RAIZ / ".env")
@@ -173,13 +188,18 @@ def narrar(canal: str, formato: str, roteiro: Roteiro, ids: list[str] | None = N
             chave = hashlib.sha1(f"{fornecedor}|{voz}|{modelo}|{s.narracao}".encode()).hexdigest()[:16]
             n = _do_cache(pasta, chave)
             if n is None:
-                audio_bytes, palavras = _elevenlabs(s.narracao, voz, modelo, chave_api)
+                audio_bytes, palavras, custo = _elevenlabs(s.narracao, voz, modelo, chave_api)
                 audio = pasta / f"{chave}.mp3"
                 audio.write_bytes(audio_bytes)
                 n = Narracao(s.id, s.narracao, fornecedor, modo, chave, _rel(audio), _duracao(audio),
                              len(s.narracao), palavras)
                 _guardar(pasta, chave, n)
                 _registrar_manifest(pasta_assets, audio, f"elevenlabs api, modelo {modelo}")
+                if custo is not None:
+                    _custo(s.id, chave, custo, "creditos", "informado pela API")
+                else:
+                    _custo(s.id, chave, len(s.narracao), "creditos",
+                           f"estimado: {len(s.narracao)} caracteres x 1 crédito (10.1; confirmar no painel)")
             n.segmento = s.id
             saida.append(n)
     else:
@@ -200,14 +220,11 @@ def narrar(canal: str, formato: str, roteiro: Roteiro, ids: list[str] | None = N
                              len(s.narracao), transcrever_palavras(audio))
                 _guardar(pasta, chave, n)
                 _registrar_manifest(pasta_assets, audio, f"{fornecedor}, arquivo importado {origem.name}")
+                _custo(s.id, chave, 1, "audios", f"arquivo importado {origem.name}")
             n.segmento = s.id
             saida.append(n)
 
     # narracao.json do vídeo: acumula os segmentos já narrados (narrar só alguns não apaga os outros)
-    destino = roteiro.caminho.with_name("narracao.json")
-    anteriores = {}
-    if destino.is_file():
-        anteriores = {d["id"]: d for d in json.loads(destino.read_text(encoding="utf-8"))["segmentos"]}
     for n in saida:
         anteriores[n.segmento] = {"id": n.segmento, "chave": n.chave, "audio": n.audio,
                                   "duracao_s": n.duracao_s, "palavras": len(n.palavras)}
