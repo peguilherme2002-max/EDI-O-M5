@@ -1,0 +1,32 @@
+# segredos (F19)
+.env
+
+# catálogo: fora do Git (6.6) — mantém só o CLAUDE.md
+canais/*/catalogo/*
+!canais/*/catalogo/CLAUDE.md
+
+# assets de mídia — mantém o CLAUDE.md e o manifest
+canais/*/assets/*
+!canais/*/assets/CLAUDE.md
+!canais/*/assets/manifest.*
+
+# entrega: mp4 finais vão para o backup externo (6.6)
+canais/*/entrega/*
+!canais/*/entrega/CLAUDE.md
+
+# mídia em qualquer outra pasta (prévias, narrações, áudios de teste)
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.ogg
+
+# Python e Node
+__pycache__/
+*.pyc
+.venv/
+node_modules/

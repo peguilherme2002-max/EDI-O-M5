@@ -1,0 +1,15 @@
+# ficha do canal (6.4) — _amostras: amostras da construção (9.1), não é canal real
+nicho: amostras da construção do motor (sem publicação)
+status: ativo
+fornecedor_voz:
+  longo:
+    fornecedor: elevenlabs
+    voz: voz clonada de Pedro
+  short_roteiro_novo:
+    fornecedor: elevenlabs
+    voz: voz clonada de Pedro
+formatos_ativos: [longo, short_roteiro_novo, short_recorte]
+cadencia: sob demanda das etapas C1–C8
+estrategia_shorts: ambos
+compartilhamento_catalogo: nenhum
+pendencias_operacionais: []

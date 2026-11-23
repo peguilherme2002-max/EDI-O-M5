@@ -1,0 +1,22 @@
+# M5 — versões travadas das ferramentas fora do pip/npm (F23)
+# Atualizar só por ordem de Pedro, com amostra aprovada.
+# Registrado em 2026-11-23.
+
+sistema           Windows 11 Home 10.0.26300 (64 bits)
+python            3.12.10
+node              26.13.1 (LTS, winget OpenJS.NodeJS.LTS)
+npm               11.20.0
+git               2.56.0.windows.4
+gh                2.105.0 (winget GitHub.cli)
+ffmpeg            9.0.2-full_build (gyan.dev, winget Gyan.FFmpeg)
+cmake             4.4.4 (winget Kitware.CMake)
+vs build tools    Visual Studio 2022 Build Tools 17.14.37906.3
+vulkan sdk        1.4.363.0 (C:\VulkanSDK\1.4.363.0)
+driver gpu        AMD Radeon RX 7600, driver 32.0.32029.2010, Vulkan 1.4.359
+
+# transcrição na GPU (decisão de Pedro: Whisper via Vulkan na RX 7600)
+whisper.cpp       v1.9.5, commit d1be6fd, compilado com -DGGML_VULKAN=ON
+                  binário: A:\ferramentas\whisper.cpp\build\bin\Release\whisper-cli.exe
+modelo whisper    ggml-large-v3-turbo.bin
+                  sha1 4af2b29d7ec73d781377bfd1758ca957a807e941
+                  A:\ferramentas\whisper.cpp\models\ggml-large-v3-turbo.bin

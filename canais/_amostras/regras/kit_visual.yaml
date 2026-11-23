@@ -1,0 +1,19 @@
+# kit visual — NEUTRO PROVISÓRIO, só para as amostras da construção (9.1)
+# Não é identidade de canal; não vale como kit aprovado para F18.
+status: provisorio
+fontes:
+  titulo: Inter Bold          # Google Fonts
+  texto: Inter Regular        # Google Fonts
+paleta:
+  fundo: "#111111"
+  texto: "#F2F2F2"
+  secundaria: "#8A8A8A"
+  destaque: "#3B82F6"
+  alerta: "#E5484D"
+templates:
+  - legenda
+  - titulo
+  - contador
+  - citacao
+  - transicao
+# os templates são construídos nas etapas que os usarem (C5/C6)
