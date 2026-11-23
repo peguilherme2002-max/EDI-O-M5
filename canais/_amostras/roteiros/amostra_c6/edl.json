@@ -1,0 +1,345 @@
+{
+  "versao_edl": 2,
+  "canal": "_amostras",
+  "formato": "short_roteiro_novo",
+  "resolucao": [
+    1080,
+    1920
+  ],
+  "fps": 30,
+  "roteiro": "canais/_amostras/roteiros/amostra_c6/roteiro_mestre.yaml",
+  "roteiro_sha1": "bd874b9ee805de17fd854a3bbb61e39cc3551e0f",
+  "gerado_em": "2026-11-23 06:58",
+  "duracao_total_s": 40.1,
+  "quadros": 1203,
+  "segmentos": [
+    {
+      "id": "s01",
+      "intencao": "gancho",
+      "inicio_q": 0,
+      "fim_q": 382,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 1,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 0,
+          "quadros": 31,
+          "entrada_q": 0,
+          "saida_q": 31
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 2,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 31,
+          "quadros": 46,
+          "entrada_q": 31,
+          "saida_q": 77
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 3,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 77,
+          "quadros": 47,
+          "entrada_q": 77,
+          "saida_q": 124
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 4,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 124,
+          "quadros": 46,
+          "entrada_q": 124,
+          "saida_q": 170
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 5,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 170,
+          "quadros": 53,
+          "entrada_q": 170,
+          "saida_q": 223
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 6,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 223,
+          "quadros": 71,
+          "entrada_q": 223,
+          "saida_q": 294
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 7,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 294,
+          "quadros": 46,
+          "entrada_q": 294,
+          "saida_q": 340
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 8,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 340,
+          "quadros": 42,
+          "entrada_q": 340,
+          "saida_q": 382
+        }
+      ],
+      "narracao": {
+        "arquivo": "canais/_amostras/assets/narracao/f95529502af71dd1.mp3",
+        "entrada_q": 0,
+        "duracao_s": 12.399
+      },
+      "texto_tela": {
+        "texto": "VICE CITY VOLTOU",
+        "entrada_q": 0,
+        "saida_q": 105,
+        "alinhado_a_fala": true
+      }
+    },
+    {
+      "id": "s02",
+      "intencao": "desenvolvimento",
+      "inicio_q": 382,
+      "fim_q": 674,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 9,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 372,
+          "quadros": 45,
+          "entrada_q": 382,
+          "saida_q": 427
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 10,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 417,
+          "quadros": 47,
+          "entrada_q": 427,
+          "saida_q": 474
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 11,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 464,
+          "quadros": 32,
+          "entrada_q": 474,
+          "saida_q": 506
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 12,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 496,
+          "quadros": 30,
+          "entrada_q": 506,
+          "saida_q": 536
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 13,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 526,
+          "quadros": 32,
+          "entrada_q": 536,
+          "saida_q": 568
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 14,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 558,
+          "quadros": 39,
+          "entrada_q": 568,
+          "saida_q": 607
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 15,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 597,
+          "quadros": 37,
+          "entrada_q": 607,
+          "saida_q": 644
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 16,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 634,
+          "quadros": 30,
+          "entrada_q": 644,
+          "saida_q": 674
+        }
+      ],
+      "narracao": {
+        "arquivo": "canais/_amostras/assets/narracao/51ce99cb9699e45d.mp3",
+        "entrada_q": 382,
+        "duracao_s": 9.381
+      },
+      "texto_tela": {
+        "texto": "CADA MORADOR TEM ROTINA",
+        "entrada_q": 418,
+        "saida_q": 523,
+        "alinhado_a_fala": true
+      }
+    },
+    {
+      "id": "s03",
+      "intencao": "revelacao",
+      "inicio_q": 674,
+      "fim_q": 1011,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 17,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 665,
+          "quadros": 22,
+          "entrada_q": 674,
+          "saida_q": 696
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 18,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 687,
+          "quadros": 63,
+          "entrada_q": 696,
+          "saida_q": 759
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 19,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 750,
+          "quadros": 70,
+          "entrada_q": 759,
+          "saida_q": 829
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 20,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 820,
+          "quadros": 66,
+          "entrada_q": 829,
+          "saida_q": 895
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 21,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 886,
+          "quadros": 14,
+          "entrada_q": 895,
+          "saida_q": 909
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 1,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 0,
+          "quadros": 31,
+          "entrada_q": 909,
+          "saida_q": 940
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 2,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 31,
+          "quadros": 46,
+          "entrada_q": 940,
+          "saida_q": 986
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 3,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 77,
+          "quadros": 25,
+          "entrada_q": 986,
+          "saida_q": 1011
+        }
+      ],
+      "narracao": {
+        "arquivo": "canais/_amostras/assets/narracao/d72ef6d0cfa612e7.mp3",
+        "entrada_q": 674,
+        "duracao_s": 10.867
+      },
+      "texto_tela": {
+        "texto": "DEZENAS DE LUGARES",
+        "entrada_q": 812,
+        "saida_q": 917,
+        "alinhado_a_fala": true
+      }
+    },
+    {
+      "id": "s04",
+      "intencao": "cta",
+      "inicio_q": 1011,
+      "fim_q": 1203,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 4,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 124,
+          "quadros": 46,
+          "entrada_q": 1011,
+          "saida_q": 1057
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 5,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 170,
+          "quadros": 53,
+          "entrada_q": 1057,
+          "saida_q": 1110
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 6,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 223,
+          "quadros": 71,
+          "entrada_q": 1110,
+          "saida_q": 1181
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 7,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 294,
+          "quadros": 22,
+          "entrada_q": 1181,
+          "saida_q": 1203
+        }
+      ],
+      "narracao": {
+        "arquivo": "canais/_amostras/assets/narracao/94eb10e9693e183b.mp3",
+        "entrada_q": 1011,
+        "duracao_s": 6.037
+      },
+      "texto_tela": {
+        "texto": "ANÁLISE COMPLETA EM BREVE",
+        "entrada_q": 1029,
+        "saida_q": 1134,
+        "alinhado_a_fala": true
+      }
+    }
+  ]
+}

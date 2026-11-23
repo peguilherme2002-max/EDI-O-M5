@@ -46,6 +46,17 @@ def conferir_formato(ficha: dict, canal: str, formato: str) -> None:
         raise ErroM5(f"formato desconhecido: '{formato}'. Conhecidos: {', '.join(FORMATOS)}")
     if formato not in (ficha.get("formatos_ativos") or []):
         raise ErroM5(f"formato '{formato}' não está ativo na ficha do canal '{canal}' (F05)")
+    conferir_f18(canal, formato)
+
+
+def conferir_f18(canal: str, formato: str) -> None:
+    """F18: short só existe em canal com kit visual aprovado + ≥1 longo aprovado no P4.
+    _amostras não é canal (9.1): a regra não se aplica. Nos canais, o motor ainda não tem
+    registro do P4; até ter, recusa e avisa (decisão de Pedro antes do primeiro short)."""
+    if not formato.startswith("short") or canal == "_amostras":
+        return
+    raise ErroM5(f"short recusado no canal '{canal}' (F18): o motor ainda não tem registro de kit "
+                 "aprovado e de longo aprovado no P4 para conferir a pré-condição")
 
 
 def fornecedor_voz(ficha: dict, formato: str) -> str | None:

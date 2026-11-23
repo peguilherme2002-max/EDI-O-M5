@@ -6,6 +6,8 @@
   m5 captar  --canal <c> --formato <f> --url <link> [--inicio 0:30 --fim 1:00] [--etiquetas a,b] [--idioma pt]
   m5 previa  --canal <c> --formato <f> --roteiro <arquivo>          → EDL + previa.mp4 (480p) para o P3
   m5 render  --canal <c> --formato <f> --roteiro <arquivo> --p3     → final.mp4, só depois do P3 (F02)
+  m5 recorte --canal <c> --formato short_recorte --roteiro <roteiro do longo> --segmentos s01,s03
+                                                                     → recorte 9:16 + prévia para o P3
 
 Saída: 0 = ok · 1 = pendências na validação · 2 = erro (nada foi gerado)
 """
@@ -19,6 +21,7 @@ from .canal import REGISTRO_PADRAO, ErroM5, resolver_roteiro
 from .catalogo import captar
 from .edl import escrever_edl, gerar_edl
 from .montagem import montar
+from .recorte import criar_recorte
 from .narracao import narrar
 from .roteiro import ler_roteiro
 from .validacao import ROTULO, escrever_relatorio, validar
@@ -76,6 +79,8 @@ def main(argv=None) -> int:
     p.add_argument("--etiquetas", help="etiquetas separadas por vírgula, usadas para casar com o roteiro")
     p.add_argument("--idioma", default="auto", help="idioma da fala para a transcrição (padrão: auto)")
     _args(sub, "previa", "gera o EDL e a prévia 480p para o P3")
+    p = _args(sub, "recorte", "short de recorte: segmentos de um longo aprovado, em 9:16 (7.6)")
+    p.add_argument("--segmentos", required=True, help="ids do longo, na ordem do short, separados por vírgula")
     p = _args(sub, "render", "render final a partir do EDL da prévia aprovada no P3 (F02)")
     p.add_argument("--p3", action="store_true", help="confirma que Pedro aprovou a prévia (P3)")
     a = ap.parse_args(argv)
@@ -97,6 +102,17 @@ def main(argv=None) -> int:
             return 0
         if a.comando == "render":
             return _render(a, caminho)
+        if a.comando == "recorte":
+            ids = [i.strip() for i in a.segmentos.split(",") if i.strip()]
+            pasta, edl, avisos = criar_recorte(a.canal, a.formato, caminho, ids)
+            arq_edl = escrever_edl(edl, pasta / "edl.json")
+            previa = montar(edl, "previa", pasta / "previa.mp4")
+            _gravar_json(pasta / "previa.json", {"edl_sha1": _sha1(arq_edl)})
+            print(f"recorte: {pasta}")
+            print(f"prévia: {previa}  ({edl['duracao_total_s']:.1f} s)")
+            for av in avisos:
+                print(f"aviso: {av}")
+            return 0
         resultado = validar(a.canal, a.formato, ler_roteiro(caminho), REGISTRO_PADRAO)
         if a.comando == "previa":
             edl = gerar_edl(resultado)

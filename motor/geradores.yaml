@@ -44,3 +44,11 @@ geradores:
     formatos: [longo]
     teto: ""
     status: aprovado
+
+  # C6, amostra 9:16 aprovada por Pedro em 2026-11-23 (short de roteiro novo, 40,1 s)
+  # layout 9:16: corte central; overlays nas laterais do material de origem podem ser cortados
+  - tipo: texto_tela
+    gerador: m5.montagem (template texto_tela do kit, layout 9:16)
+    formatos: [short_roteiro_novo, short_recorte]
+    teto: ""
+    status: aprovado

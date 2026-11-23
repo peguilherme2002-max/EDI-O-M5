@@ -58,6 +58,20 @@ def _kit(canal: str) -> dict:
     return {"fonte": arq, "texto": cores.get("texto", "#FFFFFF"), "fundo": cores.get("fundo", "#000000")}
 
 
+def _quebrar(texto: str, max_chars: int) -> list[str]:
+    """Quebra o texto em linhas de até max_chars, sem cortar palavras."""
+    linhas, atual = [], ""
+    for palavra in texto.split():
+        if atual and len(atual) + 1 + len(palavra) > max_chars:
+            linhas.append(atual)
+            atual = palavra
+        else:
+            atual = f"{atual} {palavra}".strip()
+    if atual:
+        linhas.append(atual)
+    return linhas or [texto]
+
+
 def montar(edl: dict, perfil: str, destino: Path) -> Path:
     if perfil not in PERFIS:
         raise ErroM5(f"perfil desconhecido: {perfil}")
@@ -65,8 +79,13 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
     fps = edl["fps"]
     p = PERFIS[perfil]
     kit = _kit(edl["canal"])
-    escala = (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
-              f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=black,fps={fps},setsar=1")
+    if H > W:
+        # 9:16 (shorts): camada de layout do kit — preenche a tela cortando as laterais pelo centro
+        escala = (f"scale={W}:{H}:force_original_aspect_ratio=increase,"
+                  f"crop={W}:{H},fps={fps},setsar=1")
+    else:
+        escala = (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+                  f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=black,fps={fps},setsar=1")
 
     with tempfile.TemporaryDirectory(prefix="m5_") as tmp:
         tmp = Path(tmp)
@@ -114,16 +133,24 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
 
         # texto na tela (template texto_tela do kit)
         vchain = "[0:v]"
-        fs, borda = int(H * 0.065), int(H * 0.025)
+        fs = int(min(H * 0.065, W * 0.075))
+        borda = int(fs * 0.38)
+        # 16:9: faixa a 80% da altura; 9:16: a 68%, acima da área dos botões dos shorts
+        centro_y = H * (0.68 if H > W else 0.80)
         for j, s in enumerate(edl["segmentos"]):
             t = s["texto_tela"]
             if not t:
                 continue
-            (tmp / f"t{j}.txt").write_text(t["texto"], encoding="utf-8")
+            linhas = _quebrar(t["texto"], max(8, int(W * 0.88 / (fs * 0.62))))
+            passo = fs * 1.55
+            topo = centro_y - passo * (len(linhas) - 1) / 2
             a, b = t["entrada_q"] / fps, t["saida_q"] / fps
-            vchain += (f"drawtext=fontfile=fonte.ttf:textfile=t{j}.txt:fontsize={fs}:"
-                       f"fontcolor={kit['texto']}:box=1:boxcolor={kit['fundo']}@0.7:boxborderw={borda}:"
-                       f"x=(w-text_w)/2:y=h*0.80-text_h/2:enable='between(t,{a:.3f},{b:.3f})',")
+            for li, linha in enumerate(linhas):
+                (tmp / f"t{j}_{li}.txt").write_text(linha, encoding="utf-8")
+                vchain += (f"drawtext=fontfile=fonte.ttf:textfile=t{j}_{li}.txt:fontsize={fs}:"
+                           f"fontcolor={kit['texto']}:box=1:boxcolor={kit['fundo']}@0.7:boxborderw={borda}:"
+                           f"x=(w-text_w)/2:y={topo + li * passo:.1f}-text_h/2:"
+                           f"enable='between(t,{a:.3f},{b:.3f})',")
         filtros.append((vchain.rstrip(",") if vchain != "[0:v]" else "[0:v]null") + "[vout]")
 
         saida = tmp / "saida.mp4"
