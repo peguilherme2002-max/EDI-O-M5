@@ -19,7 +19,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-from .canal import ErroM5, conferir_formato, ler_ficha, pasta_canal
+from .canal import RAIZ, ErroM5, conferir_formato, ler_ficha, pasta_canal
 from .transcricao import transcrever_palavras
 
 FORMATO_YTDLP = "bv*[height<=1080][vcodec^=avc1]+ba[ext=m4a]/b[height<=1080][ext=mp4]/bv*[height<=1080]+ba/b"
@@ -224,40 +224,46 @@ def ler_ficha_md(md: Path) -> tuple[Path, list[str], list[dict]]:
     return video, base, trechos
 
 
+def _fatias(ini: float, fim: float, titulo: str) -> list[Cena]:
+    """Trecho em cenas seguidas de até CORTE_MAX_S, para a montagem avançar no trecho em vez de repeti-lo."""
+    from .edl import CORTE_MAX_S
+    cenas, a = [], ini
+    while a < fim:
+        b = min(a + CORTE_MAX_S, fim)
+        cenas.append(Cena(len(cenas) + 1, round(a, 3), round(b, 3), "", titulo))
+        a = b
+    return cenas
+
+
 def importar_ficha(canal: str, md: Path) -> tuple[int, int]:
-    """Cada linha da ficha vira um clipe do catálogo: trecho recodificado, cortes de cena e miniaturas.
-    Sem transcrição (o áudio dos clipes não entra na montagem: kit volume_clipe 0). Retoma de onde parou."""
+    """Cada linha da ficha vira um clipe do catálogo SÓ com instruções: clipe.json aponta para o vídeo
+    original (campo video, relativo à raiz) e o trecho é a única cena. Nada é copiado nem recodificado."""
     video, base, trechos = ler_ficha_md(md)
     pasta = pasta_canal(canal) / "catalogo"
     pasta.mkdir(exist_ok=True)
+    _, resolucao = _ffprobe(video)
+    rel = video.relative_to(RAIZ).as_posix()
+    indice = _ler_indice(pasta)
     novos = ja = 0
     for t in trechos:
         clipe_id = f"{video.stem}_{int(t['inicio']):05d}-{int(t['fim']):05d}"
-        indice = _ler_indice(pasta)
         pasta_clipe = pasta / clipe_id
         if any(c["id"] == clipe_id for c in indice["clipes"]) and (pasta_clipe / "clipe.json").is_file():
             ja += 1
             continue
         pasta_clipe.mkdir(exist_ok=True)
-        saida = pasta_clipe / "video.mp4"
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t['inicio']:.3f}", "-to", f"{t['fim']:.3f}",
-                        "-i", str(video), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-                        "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", str(saida)], check=True)
-        duracao, resolucao = _ffprobe(saida)
-        cenas, _ = indexar(saida, pasta_clipe, transcrever=False)
-        _gravar_json(pasta_clipe / "palavras.json", [])
         etiquetas = list(dict.fromkeys(base + t["etiquetas"]))
-        # vídeo fora do canal (ex.: A:\pacotes_peqgameplay) guarda o caminho completo
-        arquivo = video.relative_to(pasta_canal(canal)).as_posix() if video.is_relative_to(pasta_canal(canal)) else video.as_posix()
-        origem = {"arquivo": arquivo, "ficha": md.name,
-                  "titulo": t["titulo"], "trecho": [t["inicio"], t["fim"]],
+        origem = {"arquivo": rel, "ficha": md.name, "titulo": t["titulo"], "trecho": [t["inicio"], t["fim"]],
                   "data": datetime.now().strftime("%Y-%m-%d %H:%M")}
-        dados = asdict(Clipe(clipe_id, origem, etiquetas, duracao, resolucao, cenas))
+        # duracao_s = fim do trecho: a montagem nunca passa do fim da linha da ficha
+        dados = asdict(Clipe(clipe_id, origem, etiquetas, t["fim"], resolucao,
+                             _fatias(t["inicio"], t["fim"], t["titulo"])))
         dados.pop("reaproveitado")
+        dados["video"] = rel
         _gravar_json(pasta_clipe / "clipe.json", dados)
         indice["clipes"] = [c for c in indice["clipes"] if c["id"] != clipe_id] + [{
             "id": clipe_id, "titulo": t["titulo"][:120], "etiquetas": etiquetas,
-            "duracao_s": duracao, "cenas": len(cenas), "arquivo": f"{clipe_id}/video.mp4"}]
-        _gravar_json(pasta / "indice.json", indice)
+            "duracao_s": t["fim"] - t["inicio"], "cenas": len(dados["cenas"]), "arquivo": rel}]
         novos += 1
+    _gravar_json(pasta / "indice.json", indice)
     return novos, ja

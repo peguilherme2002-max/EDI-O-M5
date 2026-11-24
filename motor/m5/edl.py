@@ -91,7 +91,7 @@ def _clipe(canal: str, seg: Segmento) -> dict:
         raise ErroM5(f"segmento {seg.id}: nenhum clipe do catálogo com as etiquetas {seg.visual.etiquetas} (F07)")
     pasta = pasta_canal(canal) / "catalogo" / achados[0]["id"]
     dados = json.loads((pasta / "clipe.json").read_text(encoding="utf-8"))
-    dados["video"] = pasta / "video.mp4"
+    dados["video"] = RAIZ / dados["video"] if dados.get("video") else pasta / "video.mp4"   # clipe só-instrução (m5 importar)
     return dados
 
 
