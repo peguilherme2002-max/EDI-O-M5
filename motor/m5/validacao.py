@@ -10,6 +10,7 @@ from .kit import Kit
 from .midia_web import midias_com_etiquetas
 from .registro import Gerador, buscar, ler_registro
 from .roteiro import Roteiro, Segmento
+from .sfx import arquivo_sfx
 
 # marcações da 7.3, da menos para a mais grave
 OK, BAIXAR, AVISO, PENDENCIA = 0, 1, 2, 3
@@ -56,7 +57,7 @@ class Resultado:
 
 def _material_disponivel(canal: str, tipo: str, segmento: Segmento) -> bool:
     """Material já presente no canal. Catálogo: algum clipe com todas as etiquetas do visual (C4).
-    Mídia web: alguma entrada do manifest de assets com todas as etiquetas. Sfx: sempre "baixar material"."""
+    Mídia web: alguma entrada do manifest de assets com todas as etiquetas. """
     if tipo == "clipe_catalogo":
         return bool(clipes_com_etiquetas(canal, segmento.visual.etiquetas))
     if tipo == "midia_web":
@@ -107,7 +108,12 @@ def _necessidades(seg: Segmento, fornecedor: str | None, canal: str,
     elif seg.texto_tela:
         nec.append(("texto_tela", f"texto na tela: \"{seg.texto_tela}\"", False, _problemas_texto_simples(canal)))
     for s in seg.sfx:
-        nec.append(("sfx", f"sfx: {s}", True, []))
+        try:
+            arquivo_sfx(canal, s)
+            prob = []
+        except ErroM5 as e:
+            prob = [str(e)]                # sfx inexistente ou ambíguo: o motor não chuta (F07)
+        nec.append(("sfx", f"sfx: {s}", False, prob))
     return nec
 
 

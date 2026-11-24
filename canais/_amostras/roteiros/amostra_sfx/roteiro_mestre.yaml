@@ -1,0 +1,33 @@
+# Amostra do gerador sfx (9.5, ordem de Pedro 24/11/2026) — 8 s, sem narração; não é vídeo de canal
+# s01 whoosh e s02 pop no texto que entra; s03 riser termina de subir no corte para s03; s04 ding (sem pico)
+titulo: Amostra sfx
+versao: 1
+segmentos:
+  - id: s01
+    intencao: gancho
+    narracao: null
+    visual: {fonte: catalogo, busca: trailer, etiquetas: [trailer]}
+    texto_tela: WHOOSH
+    sfx: [whoosh]
+    duracao_alvo_s: 2
+  - id: s02
+    intencao: contexto
+    narracao: null
+    visual: {fonte: catalogo, busca: trailer, etiquetas: [trailer]}
+    texto_tela: POP
+    sfx: [pop]
+    duracao_alvo_s: 2
+  - id: s03
+    intencao: revelacao
+    narracao: null
+    visual: {fonte: catalogo, busca: trailer, etiquetas: [trailer]}
+    texto_tela: RISER
+    sfx: [riser]
+    duracao_alvo_s: 2
+  - id: s04
+    intencao: cta
+    narracao: null
+    visual: {fonte: catalogo, busca: trailer, etiquetas: [trailer]}
+    texto_tela: DING
+    sfx: [dragon-studio-ding-sfx-472366]
+    duracao_alvo_s: 2

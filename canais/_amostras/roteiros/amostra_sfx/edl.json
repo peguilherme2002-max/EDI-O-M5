@@ -1,0 +1,158 @@
+{
+  "versao_edl": 2,
+  "canal": "_amostras",
+  "formato": "longo",
+  "resolucao": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "roteiro": "canais/_amostras/roteiros/amostra_sfx/roteiro_mestre.yaml",
+  "roteiro_sha1": "9081e823555e3d58e48b731c8ab3a4d542c4b34b",
+  "gerado_em": "2026-11-24 12:38",
+  "duracao_total_s": 8.0,
+  "quadros": 240,
+  "segmentos": [
+    {
+      "id": "s01",
+      "intencao": "gancho",
+      "inicio_q": 0,
+      "fim_q": 60,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 1,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 0,
+          "quadros": 31,
+          "entrada_q": 0,
+          "saida_q": 31
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 2,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 31,
+          "quadros": 29,
+          "entrada_q": 31,
+          "saida_q": 60
+        }
+      ],
+      "narracao": null,
+      "texto_tela": {
+        "texto": "WHOOSH",
+        "entrada_q": 0,
+        "saida_q": 60,
+        "alinhado_a_fala": false
+      },
+      "sfx": [
+        {
+          "nome": "whoosh",
+          "arquivo": "canais/_amostras/assets/sfx/whoosh.wav",
+          "evento_q": 0,
+          "pico_s": 0.039,
+          "inicio_s": -0.039
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "intencao": "contexto",
+      "inicio_q": 60,
+      "fim_q": 120,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 3,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 77,
+          "quadros": 60,
+          "entrada_q": 60,
+          "saida_q": 120
+        }
+      ],
+      "narracao": null,
+      "texto_tela": {
+        "texto": "POP",
+        "entrada_q": 60,
+        "saida_q": 120,
+        "alinhado_a_fala": false
+      },
+      "sfx": [
+        {
+          "nome": "pop",
+          "arquivo": "canais/_amostras/assets/sfx/pop.wav",
+          "evento_q": 60,
+          "pico_s": 0.011,
+          "inicio_s": 1.989
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "intencao": "revelacao",
+      "inicio_q": 120,
+      "fim_q": 180,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 4,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 124,
+          "quadros": 60,
+          "entrada_q": 120,
+          "saida_q": 180
+        }
+      ],
+      "narracao": null,
+      "texto_tela": {
+        "texto": "RISER",
+        "entrada_q": 120,
+        "saida_q": 180,
+        "alinhado_a_fala": false
+      },
+      "sfx": [
+        {
+          "nome": "riser",
+          "arquivo": "canais/_amostras/assets/sfx/riser.wav",
+          "evento_q": 120,
+          "pico_s": 3.137,
+          "inicio_s": 0.863
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "intencao": "cta",
+      "inicio_q": 180,
+      "fim_q": 240,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 5,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 170,
+          "quadros": 60,
+          "entrada_q": 180,
+          "saida_q": 240
+        }
+      ],
+      "narracao": null,
+      "texto_tela": {
+        "texto": "DING",
+        "entrada_q": 180,
+        "saida_q": 240,
+        "alinhado_a_fala": false
+      },
+      "sfx": [
+        {
+          "nome": "dragon-studio-ding-sfx-472366",
+          "arquivo": "canais/_amostras/assets/sfx/dragon-studio-ding-sfx-472366.mp3",
+          "evento_q": 180,
+          "pico_s": 0.0,
+          "inicio_s": 6.0
+        }
+      ]
+    }
+  ]
+}

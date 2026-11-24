@@ -7,7 +7,8 @@ Como funciona (tudo ffmpeg, determinístico):
 2. os pedaços são concatenados sem nova codificação
 3. passe final: texto na tela (texto simples: template texto_tela do kit; mapa: camada do template,
    .mov com alfa sobreposto de entrada_q a saida_q) + narração sobre o áudio do clipe
-   + música de fundo (se o kit pede: audio.musica_volume_db; abaixa sob a voz), loudnorm (-14 LUFS)
+   + música de fundo (se o kit pede: audio.musica_volume_db; abaixa sob a voz)
+   + sfx do EDL (volume fixo, não abaixa sob a voz: kit audio.sfx_volume_db), loudnorm (-14 LUFS)
 """
 import shutil
 import subprocess
@@ -20,6 +21,7 @@ from .templates import renderizar
 
 AMOSTRAS_POR_QUADRO = 1600          # 48000 Hz / 30 fps
 VOLUME_CLIPE = 0.18                 # áudio original do clipe por baixo da narração
+SFX_VOLUME_DB = -10                 # os sfx do kit vêm com pico em -1 dBFS; -10 dB fica sob a voz
 # música abaixa ~10 dB quando a voz passa do limiar; volta em ~0,6 s nas pausas
 DUCKING = "threshold=0.03:ratio=6:attack=30:release=600:makeup=1"
 PERFIS = {
@@ -87,6 +89,24 @@ def _musica(canal: str, kit_audio: dict, total_s: float, tmp: Path) -> bool:
                    f"afade=t=out:st={max(0.0, total_s - fade_out):.3f}:d={fade_out},"
                    f"volume={float(kit_audio['musica_volume_db'])}dB[mus]")
     _ff([*entradas, "-filter_complex", ";".join(filtros), "-map", "[mus]", "-c:a", "pcm_s16le", "mus.wav"], cwd=tmp)
+    return True
+
+
+def _sfx(edl: dict, volume_db: float, total_s: float, tmp: Path) -> bool:
+    """Faixa tmp/sfx.wav com todos os sfx do EDL nos seus inicio_s, no tamanho exato do vídeo."""
+    itens = [x for s in edl["segmentos"] for x in s.get("sfx", [])]
+    if not itens:
+        return False
+    entradas, filtros = [], []
+    for i, x in enumerate(itens):
+        entradas += ["-i", str(RAIZ / x["arquivo"])]
+        corte = f"atrim=start={-x['inicio_s']:.3f},asetpts=N/SR/TB," if x["inicio_s"] < 0 else ""
+        atraso = max(0, round(x["inicio_s"] * 1000))
+        filtros.append(f"[{i}:a]aresample=48000,aformat=channel_layouts=stereo,{corte}"
+                       f"adelay={atraso}:all=1[s{i}]")
+    filtros.append(f"{''.join(f'[s{i}]' for i in range(len(itens)))}amix=inputs={len(itens)}:normalize=0,"
+                   f"volume={volume_db}dB,apad,atrim=end_sample={round(total_s * 48000)}[sfx]")
+    _ff([*entradas, "-filter_complex", ";".join(filtros), "-map", "[sfx]", "-c:a", "pcm_s16le", "sfx.wav"], cwd=tmp)
     return True
 
 
@@ -221,14 +241,16 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
             entradas += ["-i", "mus.wav"]
             # ducking: a narração comprime a música enquanto fala; release longo = respira nas pausas
             filtros = ["[2:a]asplit=2[nv][ns]",
-                       f"[3:a][ns]sidechaincompress={DUCKING}[md]" if kit_audio.get("ducking", True) else "[3:a]anull[md]",
-                       "[1:a][nv][md]amix=inputs=3:normalize=0:duration=first,"
-                       "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]"]
-            k = 4
+                       f"[3:a][ns]sidechaincompress={DUCKING}[md]" if kit_audio.get("ducking", True) else "[3:a]anull[md]"]
+            mix, k = ["[1:a]", "[nv]", "[md]"], 4
         else:
-            filtros = ["[1:a][2:a]amix=inputs=2:normalize=0:duration=first,"
-                       "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]"]
-            k = 3
+            filtros, mix, k = [], ["[1:a]", "[2:a]"], 3
+        if _sfx(edl, float(kit_audio.get("sfx_volume_db", SFX_VOLUME_DB)), total_s, tmp):
+            entradas += ["-i", "sfx.wav"]
+            mix.append(f"[{k}:a]")
+            k += 1
+        filtros.append(f"{''.join(mix)}amix=inputs={len(mix)}:normalize=0:duration=first,"
+                       "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]")
 
         # texto na tela (template texto_tela do kit)
         vchain = "[0:v]"

@@ -143,3 +143,13 @@ geradores:
     formatos: [longo]
     teto: "escolhe a faixa só pela ordem de nome (todo vídeo curto usa a primeira); sem escolha por clima"
     status: aprovado
+
+  # sfx: amostra aprovada por Pedro em 2026-11-24 (_amostras/amostra_sfx, 8 s: whoosh, pop, riser, ding).
+  # Arquivo pelo nome em assets/**/sfx/ do canal; pico (sons.json) na entrada do texto_tela do segmento
+  # (sem texto_tela: início do segmento). Volume fixo -10 dB (kit audio.sfx_volume_db), sem ducking.
+  # limite: vários sfx no mesmo segmento caem no mesmo instante.
+  - tipo: sfx
+    gerador: m5.sfx
+    formatos: [longo]
+    teto: ""
+    status: aprovado

@@ -14,13 +14,15 @@ Regras de resolução (determinísticas, sem IA — o motor nunca chuta, F07):
 - visual web (midia_web.py): imagem → um corte parado no segmento inteiro; vídeo → do começo,
   repetindo do início se acabar antes do segmento
 - visual gerado: camada do template (visual.busca) sobre a cor de fundo do kit, o segmento inteiro
+- sfx (sfx.py): arquivo pelo nome nas pastas sfx/ do canal; o pico do som cai na entrada do
+  texto_tela do segmento (sem texto_tela: no início do segmento)
 """
 import json
 import subprocess
 from datetime import datetime
 from pathlib import Path
 
-from . import camadas
+from . import camadas, sfx as sons
 from .canal import FORMATOS, RAIZ, ErroM5, pasta_canal
 from .catalogo import clipes_com_etiquetas
 from .kit import Kit
@@ -186,6 +188,18 @@ def _texto_template(kit: Kit, seg: Segmento, n: dict | None, t_q: int, dur_q: in
             "alinhado_a_fala": nome in FALA}
 
 
+def _sfx(canal: str, seg: Segmento, evento_q: int) -> list[dict]:
+    itens = []
+    for nome in seg.sfx:
+        try:
+            arq, pico = sons.arquivo_sfx(canal, nome)
+        except ErroM5 as e:
+            raise ErroM5(f"segmento {seg.id}: {e}")
+        itens.append({"nome": nome, "arquivo": _rel(arq), "evento_q": evento_q, "pico_s": pico,
+                      "inicio_s": sons.inicio_s(evento_q, FPS, pico)})
+    return itens
+
+
 def gerar_edl(r: Resultado) -> dict:
     # pendência aberta = algo sem gerador; o motor não monta linha do tempo chutando (F06, F07)
     if r.pendencias:
@@ -201,8 +215,6 @@ def gerar_edl(r: Resultado) -> dict:
     for seg in rot.segmentos:
         n = _narracao_do_segmento(seg, narr) if seg.narracao else None
         dur_q = _q(n["duracao_s"] + RESPIRO_S) if n else _q(seg.duracao_alvo_s)
-        if seg.sfx:
-            raise ErroM5(f"segmento {seg.id}: a montagem ainda não sabe usar sfx (capacidade nova: 9.5)")
         texto = None
         if isinstance(seg.texto_tela, dict):
             texto = _texto_template(_kit(r.canal, cache), seg, n, t_q, dur_q)
@@ -217,6 +229,7 @@ def gerar_edl(r: Resultado) -> dict:
             "cortes": _cortes_do_visual(r.canal, seg, cursor, cache, dur_q, t_q),
             "narracao": None if not n else {"arquivo": n["audio"], "entrada_q": t_q, "duracao_s": n["duracao_s"]},
             "texto_tela": texto,
+            "sfx": _sfx(r.canal, seg, texto["entrada_q"] if texto else t_q),
         })
         t_q += dur_q
     return {
