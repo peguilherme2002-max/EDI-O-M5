@@ -15,6 +15,7 @@ divergencias_do_m5:
 
 # ---------------------------------------------------------------- FONTES
 fontes:                       # arquivos em ../assets/fontes/ (licença OFL)
+  titulo: ArchivoExpanded-Black   # texto simples do texto_tela (montagem._kit): a mesma fonte de impacto
   impacto:
     arquivo: ArchivoExpanded-Black.ttf
     uso: "títulos, números grandes, palavra de impacto, nome do bloco"
