@@ -133,7 +133,8 @@ templates:
       texto:          {tipo: texto, obrigatorio: true, nota: "vem dos timestamps da narração (M5 7.4)"}
       palavra_chave:  {tipo: lista_texto, obrigatorio: false}
     layout_1080p:
-      posicao: "rodapé central, base em y ≈ 1000"
+      posicao: "rodapé central, base em y ≈ 970"
+      base_y: 970        # subiu 30 px (Pedro, 23/11/2026)
       fonte: texto
       peso: bold
       caixa: minuscula

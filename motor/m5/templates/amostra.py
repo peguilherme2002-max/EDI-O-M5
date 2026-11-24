@@ -5,7 +5,7 @@ from pathlib import Path
 
 from ..canal import FORMATOS, ErroM5
 from ..kit import Kit
-from . import renderizar
+from . import FALA, renderizar
 
 FPS = 30
 
@@ -25,6 +25,8 @@ def converter_campos(spec: dict, pares: list[str]) -> dict:
                 campos[nome] = int(valor)
             except ValueError:
                 raise ErroM5(f"campo '{nome}' deve ser número inteiro")
+        elif tipo == "lista_texto":
+            campos[nome] = [v.strip() for v in valor.split(",") if v.strip()]
         elif tipo == "bool":
             campos[nome] = valor.strip().lower() in ("1", "true", "sim", "s", "yes")
         else:
@@ -44,6 +46,13 @@ def gerar_amostra(canal: str, formato: str, nome: str, pares: list[str], destino
         W, H = (854, 480) if W >= H else (480, 854)
     if fundo is not None and not fundo.is_file():
         raise ErroM5(f"vídeo de fundo não encontrado: {fundo}")
+    if nome in FALA and FALA[nome] in campos:
+        # amostra sem narração: palavras espaçadas por igual entre 0.2 s e 0.6 s antes do fim.
+        # Na montagem, _palavras vem dos timestamps da narração (M5 7.4).
+        n = len(str(campos[FALA[nome]]).split())
+        ini, fim = 0.2, max(0.4, dur_s - 0.6)
+        passo = (fim - ini) / max(1, n)
+        campos["_palavras"] = [[ini + i * passo, ini + (i + 1) * passo] for i in range(n)]
     with tempfile.TemporaryDirectory(prefix="m5_tpl_") as tmp:
         camada = renderizar(kit, nome, campos, dur_s, W, H, FPS, Path(tmp) / "camada.mov")
         if fundo is not None:

@@ -74,3 +74,10 @@ geradores:
     formatos: [longo]
     teto: ""
     status: aprovado
+
+  # F0.5 do cofre-de-leonida: amostra aprovada por Pedro em 2026-11-23 (base subiu para y 970)
+  - tipo: legenda_karaoke
+    gerador: m5.templates.legenda_karaoke
+    formatos: [longo]
+    teto: ""
+    status: aprovado

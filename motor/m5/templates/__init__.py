@@ -16,11 +16,14 @@ from ..canal import ErroM5
 from ..kit import Kit
 
 RENDERERS: dict[str, Callable] = {}
+FALA: dict[str, str] = {}   # template → campo de texto que segue a fala (recebe _palavras: [[inicio_s, fim_s], ...])
 
 
-def template(nome: str):
+def template(nome: str, fala: str | None = None):
     def registrar(fn):
         RENDERERS[nome] = fn
+        if fala:
+            FALA[nome] = fala
         return fn
     return registrar
 
@@ -41,12 +44,15 @@ def conferir_campos(spec: dict, campos: dict) -> list[str]:
             erros.append(f"campo '{nome}' deve ser número inteiro")
         if tipo == "bool" and not isinstance(valor, bool):
             erros.append(f"campo '{nome}' deve ser verdadeiro/falso")
+        if tipo == "lista_texto" and not (isinstance(valor, list) and all(isinstance(v, str) for v in valor)):
+            erros.append(f"campo '{nome}' deve ser lista de textos")
         if "valores" in regra and valor not in regra["valores"]:
             erros.append(f"campo '{nome}' = {valor!r} fora de {regra['valores']}")
         maximo = regra.get("maximo_caracteres")
         if maximo and isinstance(valor, str) and len(valor) > maximo:
             erros.append(f"campo '{nome}' com {len(valor)} caracteres (máximo {maximo})")
-    desconhecidos = [c for c in campos if c not in definicao and c not in ("template", "inicio_s", "duracao_s")]
+    desconhecidos = [c for c in campos if c not in definicao and c not in ("template", "inicio_s", "duracao_s")
+                    and not c.startswith("_")]   # _palavras etc.: postos pelo motor, não pelo roteiro
     if desconhecidos:
         erros.append(f"campos desconhecidos: {', '.join(desconhecidos)}")
     return erros
@@ -81,4 +87,4 @@ def renderizar(kit: Kit, nome: str, campos: dict, dur_s: float, W: int, H: int, 
 
 
 # registra os templates construídos
-from . import barra_progresso_lista, lista_item, numero_gigante  # noqa: E402,F401
+from . import barra_progresso_lista, legenda_karaoke, lista_item, numero_gigante  # noqa: E402,F401
