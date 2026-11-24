@@ -159,7 +159,7 @@ templates:
     layout_1080p:
       posicao: "centro, sobre o fundo de painel"
       ladrilho: {cantos_px: 16, cor_1: texto, cor_2: positivo_gradiente}
-      numero:   {fonte: impacto, cor: principal}
+      numero:   {fonte: impacto, cor: fundo, cor_unidade: principal}   # dígito azul-marinho nos ladrilhos (Pedro, 23/11/2026)
       rotulo:   {fonte: apoio, cor: texto, caixa_alta: true}
     animacao:
       entrada: "dígitos giram 0.1–0.2 s cada, ~1.5 s no total; tique sonoro em cada parada"
