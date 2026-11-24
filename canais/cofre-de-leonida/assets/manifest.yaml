@@ -47,6 +47,25 @@ acervo_extra:
   - {arquivo: acervo_extra/sfx/kit/,          origem: "Pedro (pasta Assets)", data: 2026-11-24}
   - {arquivo: acervo_extra/sfx/pixabay/,      origem: "Pedro (pasta Assets); nomes no padrão Pixabay", data: 2026-11-24}
   - {arquivo: acervo_extra/arquivado/,        origem: "duplicata idêntica do buzzer, arquivada (F20)", data: 2026-11-24}
+  # sfx do Roteiro v2 (perfis_joalheria): baixados por ordem de Pedro (24/11/2026), 1º resultado da busca na Pixabay (licença Pixabay)
+  - {arquivo: acervo_extra/sfx/pixabay/alarme.mp3,             origem: "https://pixabay.com/sound-effects/film-special-effects-house-fire-or-burglar-alarm-with-ending-36587/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/batida.mp3,             origem: "https://pixabay.com/sound-effects/film-special-effects-car-crash-sound-effect-376874/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/caixa-registradora.mp3, origem: "https://pixabay.com/sound-effects/film-special-effects-cash-register-kaching-sound-effect-125042/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/carimbo.mp3,            origem: "https://pixabay.com/sound-effects/film-special-effects-traditional-stamp-44189/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/chiado-gas.mp3,         origem: "https://pixabay.com/sound-effects/film-special-effects-gas-hiss-09-62141/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/grave-longo.mp3,        origem: "https://pixabay.com/sound-effects/film-special-effects-deep-haunting-drone-482880/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/helice.mp3,             origem: "https://pixabay.com/sound-effects/film-special-effects-helicopter-sound-8d-372463/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/impacto-distorcido.mp3, origem: "https://pixabay.com/sound-effects/musical-stab-f-01-brvhrtz-224599/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/impacto-eco.mp3,        origem: "https://pixabay.com/sound-effects/film-special-effects-dramatic-reverb-thud-631489/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/impacto-grave.mp3,      origem: "https://pixabay.com/sound-effects/film-special-effects-cinematic-boom-01-414572/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/pneu.mp3,               origem: "https://pixabay.com/sound-effects/city-chrysler-lhs-tire-squeal-03-04-25-2009-7154/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/porta-cofre.mp3,        origem: "https://pixabay.com/sound-effects/film-special-effects-vault-2-100077/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/sirene.mp3,             origem: "https://pixabay.com/sound-effects/film-special-effects-police-siren-sound-effect-240674/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/taser.mp3,              origem: "https://pixabay.com/sound-effects/film-special-effects-snd-tacataca1-412246/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/tiro.mp3,               origem: "https://pixabay.com/sound-effects/film-special-effects-single-gunshot-54-40780/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/tiro-eco.mp3,           origem: "https://pixabay.com/sound-effects/film-special-effects-gunshot-and-reverse-81760/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/trava-cofre.mp3,        origem: "https://pixabay.com/sound-effects/film-special-effects-clicking-dial-on-toy-76265/", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/vidro-quebrando.mp3,    origem: "https://pixabay.com/sound-effects/household-glass-breaking-504033/", data: 2026-11-24}
 
 # música de fundo: o motor usa as faixas desta pasta em ordem de nome, emendadas com crossfade
 # (kit audio.musica_volume_db). Licença não confirmada: Pedro mandou usar (24/11/2026).
