@@ -204,8 +204,9 @@ templates:
       numero: {tipo: int, obrigatorio: true}
       total:  {tipo: int, obrigatorio: true}
       titulo: {tipo: texto, obrigatorio: true, maximo_caracteres: 28}
+      lavagem: {tipo: escolha, valores: [rapida, longa], obrigatorio: false, nota: "padrão: rapida; longa fica de reserva (Pedro, 23/11/2026)"}
     layout_1080p:
-      lavagem: {cores: assinatura_gradiente, duracao_s: 0.4}
+      lavagem: {cores: assinatura_gradiente, duracao_s: 0.4, duracao_longa_s: 1.2}
       rotulo: {texto: "CAPÍTULO N/X", fonte: apoio, cor: principal, caixa_alta: true, espacamento: 0.2}
       titulo: {fonte: impacto, cor: texto}
       numero: {fonte: impacto, cor: destaque, efeito: "gira do capítulo anterior para o novo"}

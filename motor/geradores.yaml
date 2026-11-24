@@ -95,3 +95,10 @@ geradores:
     formatos: [longo]
     teto: ""
     status: aprovado
+
+  # F0.5 do cofre-de-leonida: amostras aprovadas por Pedro em 2026-11-23 (lavagem rápida; lavagem longa de reserva)
+  - tipo: transicao_bloco
+    gerador: m5.templates.transicao_bloco
+    formatos: [longo]
+    teto: ""
+    status: aprovado
