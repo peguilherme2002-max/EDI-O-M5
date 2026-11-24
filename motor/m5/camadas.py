@@ -14,7 +14,7 @@ import unicodedata
 
 from .canal import ErroM5
 from .kit import Kit
-from .roteiro import Segmento
+from .roteiro import Segmento, Visual
 from .templates import CONFERIR, FALA, RENDERERS, conferir_campos
 from .templates.amostra import converter_campos
 
@@ -47,9 +47,8 @@ def campos_texto_tela(seg: Segmento) -> tuple[str, dict]:
     return t.pop("template"), t
 
 
-def campos_gerado(kit: Kit, seg: Segmento) -> tuple[str, dict]:
-    nome = seg.visual.busca
-    return nome, converter_campos(kit.template(nome), seg.visual.etiquetas)
+def campos_gerado(kit: Kit, v: Visual) -> tuple[str, dict]:
+    return v.busca, converter_campos(kit.template(v.busca), v.etiquetas)
 
 
 def problemas(kit: Kit, nome: str, campos: dict, narracao: str, segue_fala_ok: bool = True) -> list[str]:

@@ -16,6 +16,7 @@ class Visual:
     fonte: str
     busca: str          # fonte=gerado: nome do tipo de asset a gerar (ex.: contador)
     etiquetas: list[str] = field(default_factory=list)
+    dur_s: float | None = None   # só na lista de cortes; mapa único = o segmento inteiro
 
 
 @dataclass
@@ -23,7 +24,7 @@ class Segmento:
     id: str
     intencao: str
     narracao: str        # texto + tags de voz; vazio = segmento sem narração
-    visual: Visual
+    visual: list[Visual]   # um item por corte; o mapa único vira lista de um item sem dur_s
     texto_tela: str | dict | None   # texto simples (template texto_tela do kit) ou {template: <nome>, campos...}
     sfx: list[str]
     duracao_alvo_s: float
@@ -67,6 +68,34 @@ def _lista_textos(valor, nome, erros, onde):
     return [v.strip() for v in valor]
 
 
+def _visual(vis, nome, erros, onde, com_dur) -> Visual | None:
+    campos = CAMPOS_VISUAL + (("dur_s",) if com_dur else ())
+    if not isinstance(vis, dict):
+        erros.append(f"{onde}: {nome} deve ser um mapa com {', '.join(campos)}")
+        return None
+    faltam_v = [c for c in campos if c not in vis]
+    sobram_v = [c for c in vis if c not in campos]
+    if faltam_v:
+        erros.append(f"{onde}: {nome} sem campos: {', '.join(faltam_v)}")
+    if sobram_v:
+        erros.append(f"{onde}: {nome} com campos desconhecidos: {', '.join(sobram_v)}")
+    if faltam_v or sobram_v:
+        return None
+    fonte = _texto(vis["fonte"], f"{nome}.fonte", erros, onde)
+    if fonte and fonte not in FONTES:
+        erros.append(f"{onde}: {nome}.fonte '{fonte}' fora de {sorted(FONTES)}")
+    busca = _texto(vis["busca"], f"{nome}.busca", erros, onde)
+    etiquetas = _lista_textos(vis["etiquetas"], f"{nome}.etiquetas", erros, onde)
+    dur = None
+    if com_dur:
+        dur = vis["dur_s"]
+        if isinstance(dur, bool) or not isinstance(dur, (int, float)) or dur <= 0:
+            erros.append(f"{onde}: {nome}.dur_s deve ser um número maior que zero")
+            return None
+        dur = float(dur)
+    return Visual(fonte or "", busca or "", etiquetas, dur)
+
+
 def _segmento(bruto, pos, erros) -> Segmento | None:
     onde = f"segmento {pos}"
     if not isinstance(bruto, dict):
@@ -106,22 +135,15 @@ def _segmento(bruto, pos, erros) -> Segmento | None:
 
     vis = bruto["visual"]
     visual = None
-    if not isinstance(vis, dict):
-        erros.append(f"{onde}: visual deve ser um mapa com {', '.join(CAMPOS_VISUAL)}")
+    if isinstance(vis, dict):
+        v = _visual(vis, "visual", erros, onde, com_dur=False)
+        visual = [v] if v else None
+    elif isinstance(vis, list) and vis:
+        itens = [_visual(item, f"visual[{i}]", erros, onde, com_dur=True) for i, item in enumerate(vis, 1)]
+        visual = itens if all(itens) else None
     else:
-        faltam_v = [c for c in CAMPOS_VISUAL if c not in vis]
-        sobram_v = [c for c in vis if c not in CAMPOS_VISUAL]
-        if faltam_v:
-            erros.append(f"{onde}: visual sem campos: {', '.join(faltam_v)}")
-        if sobram_v:
-            erros.append(f"{onde}: visual com campos desconhecidos: {', '.join(sobram_v)}")
-        if not faltam_v and not sobram_v:
-            fonte = _texto(vis["fonte"], "visual.fonte", erros, onde)
-            if fonte and fonte not in FONTES:
-                erros.append(f"{onde}: visual.fonte '{fonte}' fora de {sorted(FONTES)}")
-            busca = _texto(vis["busca"], "visual.busca", erros, onde)
-            etiquetas = _lista_textos(vis["etiquetas"], "visual.etiquetas", erros, onde)
-            visual = Visual(fonte or "", busca or "", etiquetas)
+        erros.append(f"{onde}: visual deve ser um mapa com {', '.join(CAMPOS_VISUAL)} "
+                     f"ou uma lista não vazia de cortes com {', '.join(CAMPOS_VISUAL)}, dur_s")
 
     if visual is None:
         return None

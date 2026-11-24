@@ -14,6 +14,9 @@ Regras de resolução (determinísticas, sem IA — o motor nunca chuta, F07):
 - visual web (midia_web.py): imagem → um corte parado no segmento inteiro; vídeo → do começo,
   repetindo do início se acabar antes do segmento
 - visual gerado: camada do template (visual.busca) sobre a cor de fundo do kit, o segmento inteiro
+- visual como lista de cortes: cada item ocupa a sua dur_s, na ordem; a soma é escalonada
+  proporcionalmente para preencher a duração real do segmento (decisão de Pedro). Cada item
+  segue a regra da sua fonte dentro do seu trecho
 - sfx (sfx.py): arquivo pelo nome nas pastas sfx/ do canal; o pico do som cai na entrada do
   texto_tela do segmento (sem texto_tela: no início do segmento)
 """
@@ -28,7 +31,7 @@ from .catalogo import clipes_com_etiquetas
 from .kit import Kit
 from .midia_web import midia
 from .templates import FALA
-from .roteiro import Roteiro, Segmento
+from .roteiro import Roteiro, Segmento, Visual
 from .validacao import PENDENCIA, Resultado, _rel
 
 FPS = 30
@@ -85,10 +88,10 @@ def _inicio_texto_na_fala(texto: str, narr: dict) -> float | None:
     return None
 
 
-def _clipe(canal: str, seg: Segmento) -> dict:
-    achados = clipes_com_etiquetas(canal, seg.visual.etiquetas)
+def _clipe(canal: str, v: Visual, onde: str) -> dict:
+    achados = clipes_com_etiquetas(canal, v.etiquetas)
     if not achados:
-        raise ErroM5(f"segmento {seg.id}: nenhum clipe do catálogo com as etiquetas {seg.visual.etiquetas} (F07)")
+        raise ErroM5(f"{onde}: nenhum clipe do catálogo com as etiquetas {v.etiquetas} (F07)")
     pasta = pasta_canal(canal) / "catalogo" / achados[0]["id"]
     dados = json.loads((pasta / "clipe.json").read_text(encoding="utf-8"))
     dados["video"] = RAIZ / dados["video"] if dados.get("video") else pasta / "video.mp4"   # clipe só-instrução (m5 importar)
@@ -126,14 +129,14 @@ def _duracao_video(arq: Path) -> float:
         raise ErroM5(f"não consegui ler a duração de {arq} (ffprobe)")
 
 
-def _cortes_web(canal: str, seg: Segmento, total_q: int, inicio_q: int) -> list[dict]:
-    tipo, arq = midia(canal, seg.visual.etiquetas, f"segmento {seg.id}")
+def _cortes_web(canal: str, v: Visual, onde: str, total_q: int, inicio_q: int) -> list[dict]:
+    tipo, arq = midia(canal, v.etiquetas, onde)
     if tipo == "imagem":
         return [{"tipo": "imagem", "arquivo": _rel(arq), "quadros": total_q,
                  "entrada_q": inicio_q, "saida_q": inicio_q + total_q}]
     dur_q = int(_duracao_video(arq) * FPS)            # para baixo: nunca pede quadro que não existe
     if dur_q <= 0:
-        raise ErroM5(f"segmento {seg.id}: vídeo web sem quadros: {arq} (F07)")
+        raise ErroM5(f"{onde}: vídeo web sem quadros: {arq} (F07)")
     cortes, feito = [], 0
     while feito < total_q:
         tam = min(dur_q, total_q - feito)
@@ -149,24 +152,46 @@ def _kit(canal: str, cache: dict) -> Kit:
     return cache["kit"]
 
 
-def _corte_gerado(kit: Kit, seg: Segmento, total_q: int, inicio_q: int) -> dict:
-    nome, campos = camadas.campos_gerado(kit, seg)
+def _corte_gerado(kit: Kit, v: Visual, seg: Segmento, onde: str, total_q: int, inicio_q: int) -> dict:
+    nome, campos = camadas.campos_gerado(kit, v)
     erros = camadas.problemas(kit, nome, campos, seg.narracao, segue_fala_ok=False)
     if erros:
-        raise ErroM5(f"segmento {seg.id}: visual gerado '{nome}': " + "; ".join(erros) + " (F07)")
+        raise ErroM5(f"{onde}: visual gerado '{nome}': " + "; ".join(erros) + " (F07)")
     return {"tipo": "gerado", "template": nome, "campos": campos, "quadros": total_q,
             "entrada_q": inicio_q, "saida_q": inicio_q + total_q}
 
 
+def _trechos(seg: Segmento, dur_q: int) -> list[int]:
+    """Quadros de cada item do visual. Mapa único: o segmento inteiro. Lista: dur_s escalonadas
+    para somar dur_q (fronteiras arredondadas sobre a soma acumulada: o total fecha exato)."""
+    if len(seg.visual) == 1 and seg.visual[0].dur_s is None:
+        return [dur_q]
+    total = sum(v.dur_s for v in seg.visual)
+    acum, fronteiras = 0.0, [0]
+    for v in seg.visual:
+        acum += v.dur_s
+        fronteiras.append(round(acum / total * dur_q))
+    trechos = [b - a for a, b in zip(fronteiras, fronteiras[1:])]
+    if min(trechos) < 1:
+        raise ErroM5(f"segmento {seg.id}: corte do visual com menos de 1 quadro depois do escalonamento "
+                     f"({dur_q} quadros para {len(trechos)} cortes) (F07)")
+    return trechos
+
+
 def _cortes_do_visual(canal: str, seg: Segmento, cursor: dict, cache: dict, dur_q: int, t_q: int) -> list[dict]:
-    fonte = seg.visual.fonte
-    if fonte == "catalogo":
-        return _cortes(_clipe(canal, seg), cursor, dur_q, t_q)
-    if fonte == "web":
-        return _cortes_web(canal, seg, dur_q, t_q)
-    if fonte == "gerado":
-        return [_corte_gerado(_kit(canal, cache), seg, dur_q, t_q)]
-    raise ErroM5(f"segmento {seg.id}: visual de fonte desconhecida '{fonte}' (F07)")
+    cortes, q = [], t_q
+    for i, (v, tam) in enumerate(zip(seg.visual, _trechos(seg, dur_q)), 1):
+        onde = f"segmento {seg.id}" if len(seg.visual) == 1 else f"segmento {seg.id}, visual[{i}]"
+        if v.fonte == "catalogo":
+            cortes += _cortes(_clipe(canal, v, onde), cursor, tam, q)
+        elif v.fonte == "web":
+            cortes += _cortes_web(canal, v, onde, tam, q)
+        elif v.fonte == "gerado":
+            cortes.append(_corte_gerado(_kit(canal, cache), v, seg, onde, tam, q))
+        else:
+            raise ErroM5(f"{onde}: visual de fonte desconhecida '{v.fonte}' (F07)")
+        q += tam
+    return cortes
 
 
 def _texto_template(kit: Kit, seg: Segmento, n: dict | None, t_q: int, dur_q: int) -> dict:

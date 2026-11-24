@@ -1,0 +1,73 @@
+{
+  "versao_edl": 2,
+  "canal": "_amostras",
+  "formato": "longo",
+  "resolucao": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "roteiro": "canais/_amostras/roteiros/amostra_cortes/roteiro_mestre.yaml",
+  "roteiro_sha1": "b0b7db21fa490a328cf7a0c22994b567b873ecf0",
+  "gerado_em": "2026-11-24 12:56",
+  "duracao_total_s": 5.0,
+  "quadros": 150,
+  "segmentos": [
+    {
+      "id": "s01",
+      "intencao": "gancho",
+      "inicio_q": 0,
+      "fim_q": 90,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 1,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 0,
+          "quadros": 30,
+          "entrada_q": 0,
+          "saida_q": 30
+        },
+        {
+          "tipo": "imagem",
+          "arquivo": "canais/_amostras/assets/recortes/trevor.png",
+          "quadros": 24,
+          "entrada_q": 30,
+          "saida_q": 54
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 2,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 31,
+          "quadros": 36,
+          "entrada_q": 54,
+          "saida_q": 90
+        }
+      ],
+      "narracao": null,
+      "texto_tela": null,
+      "sfx": []
+    },
+    {
+      "id": "s02",
+      "intencao": "contexto",
+      "inicio_q": 90,
+      "fim_q": 150,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 3,
+          "arquivo": "canais/_amostras/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 77,
+          "quadros": 60,
+          "entrada_q": 90,
+          "saida_q": 150
+        }
+      ],
+      "narracao": null,
+      "texto_tela": null,
+      "sfx": []
+    }
+  ]
+}

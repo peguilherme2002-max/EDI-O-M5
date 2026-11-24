@@ -1,0 +1,23 @@
+# Amostra do visual como lista de cortes (ordem de Pedro 24/11/2026) — 5 s, sem narração; não é vídeo de canal
+# s01: 3 cortes (catalogo, web, catalogo), dur_s somam 1,5 s e escalam para os 3 s do segmento (proporcional)
+# s02: mapa único, como antes
+titulo: Amostra lista de cortes
+versao: 1
+segmentos:
+  - id: s01
+    intencao: gancho
+    narracao: null
+    visual:
+      - {fonte: catalogo, busca: trailer, etiquetas: [trailer], dur_s: 0.5}
+      - {fonte: web, busca: Trevor, etiquetas: [trevor], dur_s: 0.4}
+      - {fonte: catalogo, busca: trailer, etiquetas: [trailer], dur_s: 0.6}
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 3
+  - id: s02
+    intencao: contexto
+    narracao: null
+    visual: {fonte: catalogo, busca: trailer, etiquetas: [trailer]}
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 2
