@@ -9,3 +9,12 @@ data,canal,video,formato,etapa,item,fornecedor,quantidade,unidade,refacao,obs
 2026-11-23 06:31,_amostras,amostra_c5,longo,construcao,narracao,elevenlabs,184,creditos,0,s05; estimado: 184 caracteres x 1 crédito (10.1); amostra C5; registrado na C7
 2026-11-23 06:31,_amostras,amostra_c5,longo,construcao,narracao,elevenlabs,121,creditos,0,s06; estimado: 121 caracteres x 1 crédito (10.1); amostra C5; registrado na C7
 2026-11-23 07:03,-,-,-,construcao,claude,claude_pro,6,% do limite semanal,0,construção C1–C7 até agora (semana de 2026-11-23); janela de 5 h em 39%; lido do painel do Claude Code
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,34,creditos,0,s01; informado pela API
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,48,creditos,0,s02; informado pela API
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,84,creditos,0,s03; informado pela API
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,66,creditos,0,s04; informado pela API
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,28,creditos,0,s05; informado pela API
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,10,creditos,0,s06; informado pela API
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,71,creditos,0,s07; informado pela API
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,81,creditos,0,s08; informado pela API
+2026-11-24 10:24,cofre-de-leonida,piloto_a4,longo,producao,narracao,elevenlabs,90,creditos,0,s09; informado pela API

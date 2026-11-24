@@ -134,3 +134,12 @@ geradores:
     formatos: [longo]
     teto: "busca por scraping é frágil: se o Bing mudar, o comando para com erro; usar --url"
     status: aprovado
+
+  # A4 do cofre-de-leonida: amostra aprovada por Pedro em 2026-11-24 (prévia do piloto com música).
+  # Faixa contínua de assets/musica/ (ordem de nome, crossfade entre faixas), fade in/out,
+  # ducking sob a narração (sidechaincompress). Liga só com kit audio.musica_volume_db.
+  - tipo: musica_fundo
+    gerador: m5.montagem._musica
+    formatos: [longo]
+    teto: "escolhe a faixa só pela ordem de nome (todo vídeo curto usa a primeira); sem escolha por clima"
+    status: aprovado

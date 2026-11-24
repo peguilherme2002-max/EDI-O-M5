@@ -141,11 +141,9 @@ def _do_cache(pasta: Path, chave: str) -> Narracao | None:
 def narrar(canal: str, formato: str, roteiro: Roteiro, ids: list[str] | None = None,
            arquivos: Path | None = None, fornecedor: str | None = None,
            voz: str | None = None) -> list[Narracao]:
-    # F01: nenhum crédito de voz antes do P2. O registro do P2 no motor ainda não existe;
-    # até existir, só as amostras da construção podem narrar.
-    if canal != "_amostras":
-        raise ErroM5("narração fora de canais/_amostras ainda não liberada: falta o registro do P2 no "
-                     "motor (F01). Decisão de Pedro antes do primeiro canal.")
+    # F01: nenhum crédito de voz antes do P2 (registro em p2.yaml, conferido pelo sha1 do roteiro)
+    from .p2 import exigir_p2
+    exigir_p2(canal, roteiro, "a narração")
     ficha = ler_ficha(canal)
     conferir_formato(ficha, canal, formato)
     fornecedor = fornecedor or fornecedor_voz(ficha, formato)

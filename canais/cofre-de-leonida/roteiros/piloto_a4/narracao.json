@@ -1,0 +1,70 @@
+{
+  "canal": "cofre-de-leonida",
+  "formato": "longo",
+  "roteiro_sha1": "35470e5fefa1d77bd5e79d577061827c0c4d14bd",
+  "segmentos": [
+    {
+      "id": "s01",
+      "chave": "7132d01a9e2d558b",
+      "audio": "canais/cofre-de-leonida/assets/narracao/7132d01a9e2d558b.mp3",
+      "duracao_s": 4.272,
+      "palavras": 14
+    },
+    {
+      "id": "s02",
+      "chave": "3114a4b50660fdc9",
+      "audio": "canais/cofre-de-leonida/assets/narracao/3114a4b50660fdc9.mp3",
+      "duracao_s": 5.573,
+      "palavras": 20
+    },
+    {
+      "id": "s03",
+      "chave": "f80c9c44be5c5831",
+      "audio": "canais/cofre-de-leonida/assets/narracao/f80c9c44be5c5831.mp3",
+      "duracao_s": 12.307,
+      "palavras": 37
+    },
+    {
+      "id": "s04",
+      "chave": "3dcf35a29278bc7c",
+      "audio": "canais/cofre-de-leonida/assets/narracao/3dcf35a29278bc7c.mp3",
+      "duracao_s": 7.941,
+      "palavras": 30
+    },
+    {
+      "id": "s05",
+      "chave": "c570fb8df21f31ee",
+      "audio": "canais/cofre-de-leonida/assets/narracao/c570fb8df21f31ee.mp3",
+      "duracao_s": 3.019,
+      "palavras": 12
+    },
+    {
+      "id": "s06",
+      "chave": "c0c48a74c56f8cc8",
+      "audio": "canais/cofre-de-leonida/assets/narracao/c0c48a74c56f8cc8.mp3",
+      "duracao_s": 1.207,
+      "palavras": 4
+    },
+    {
+      "id": "s07",
+      "chave": "02113c0dea846fdd",
+      "audio": "canais/cofre-de-leonida/assets/narracao/02113c0dea846fdd.mp3",
+      "duracao_s": 8.824,
+      "palavras": 29
+    },
+    {
+      "id": "s08",
+      "chave": "67d213225fa0d008",
+      "audio": "canais/cofre-de-leonida/assets/narracao/67d213225fa0d008.mp3",
+      "duracao_s": 10.913,
+      "palavras": 33
+    },
+    {
+      "id": "s09",
+      "chave": "a86fc1bcf906f848",
+      "audio": "canais/cofre-de-leonida/assets/narracao/a86fc1bcf906f848.mp3",
+      "duracao_s": 11.564,
+      "palavras": 45
+    }
+  ]
+}

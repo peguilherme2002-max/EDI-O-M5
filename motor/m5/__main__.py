@@ -4,6 +4,7 @@
   m5 edl     --canal <c> --formato <f> --roteiro <arquivo>
   m5 narrar  --canal <c> --formato <f> --roteiro <arquivo> [--segmentos s01,s02] [--arquivos <pasta>]
   m5 captar  --canal <c> --formato <f> --url <link> [--inicio 0:30 --fim 1:00] [--etiquetas a,b] [--idioma pt]
+  m5 travar  --canal <c> --formato <f> --roteiro <arquivo>          → p2.yaml (P2), libera narração e prévia
   m5 previa  --canal <c> --formato <f> --roteiro <arquivo>          → EDL + previa.mp4 (480p) para o P3
   m5 render  --canal <c> --formato <f> --roteiro <arquivo> --p3     → final.mp4, só depois do P3 (F02)
   m5 recorte --canal <c> --formato short_recorte --roteiro <roteiro do longo> --segmentos s01,s03
@@ -33,6 +34,7 @@ from .edl import escrever_edl, gerar_edl
 from .montagem import montar
 from .recorte import criar_recorte
 from .narracao import narrar
+from .p2 import exigir_p2, travar
 from .roteiro import ler_roteiro
 from .validacao import ROTULO, escrever_relatorio, validar
 
@@ -55,10 +57,8 @@ def _gravar_json(arq: Path, dados) -> None:
 
 
 def _render(a, caminho: Path) -> int:
-    # F02: nenhum render final antes do P3. O registro do P3 no motor ainda não existe;
-    # até existir, só as amostras da construção, com a confirmação explícita --p3.
-    if a.canal != "_amostras":
-        raise ErroM5("render fora de canais/_amostras ainda não liberado: falta o registro do P3 no motor (F02)")
+    # F02: nenhum render final antes do P3. --p3 confirma a aprovação de Pedro; fora de _amostras
+    # fica registrada em p3.yaml com o sha1 do edl.json aprovado (mesmo modelo do p2.yaml).
     if not a.p3:
         raise ErroM5("render final só depois do P3: passe --p3 quando Pedro aprovar a prévia (F02)")
     arq_edl, marca = caminho.with_name("edl.json"), caminho.with_name("previa.json")
@@ -67,6 +67,12 @@ def _render(a, caminho: Path) -> int:
     if json.loads(marca.read_text(encoding="utf-8"))["edl_sha1"] != _sha1(arq_edl):
         raise ErroM5("o edl.json mudou depois da prévia: gere e aprove uma nova prévia (F02)")
     edl = json.loads(arq_edl.read_text(encoding="utf-8"))
+    if a.canal != "_amostras":
+        from datetime import datetime
+        import yaml
+        caminho.with_name("p3.yaml").write_text(yaml.safe_dump(
+            {"portao": "P3", "aprovado_por": "Pedro", "data": datetime.now().strftime("%Y-%m-%d %H:%M"),
+             "edl_sha1": _sha1(arq_edl)}, allow_unicode=True, sort_keys=False), encoding="utf-8")
     final = montar(edl, "final", caminho.with_name("final.mp4"))
     print(f"final: {final}  ({edl['duracao_total_s']:.1f} s)")
     return 0
@@ -88,6 +94,7 @@ def main(argv=None) -> int:
     p.add_argument("--fim", help="fim do trecho")
     p.add_argument("--etiquetas", help="etiquetas separadas por vírgula, usadas para casar com o roteiro")
     p.add_argument("--idioma", default="auto", help="idioma da fala para a transcrição (padrão: auto)")
+    _args(sub, "travar", "registra o P2: grava p2.yaml com o sha1 do roteiro (exige validação sem pendências)")
     _args(sub, "previa", "gera o EDL e a prévia 480p para o P3")
     p = _args(sub, "recorte", "short de recorte: segmentos de um longo aprovado, em 9:16 (7.6)")
     p.add_argument("--segmentos", required=True, help="ids do longo, na ordem do short, separados por vírgula")
@@ -185,7 +192,11 @@ def main(argv=None) -> int:
                 print(f"aviso: {av}")
             return 0
         resultado = validar(a.canal, a.formato, ler_roteiro(caminho), REGISTRO_PADRAO)
+        if a.comando == "travar":
+            print(f"P2 registrado: {travar(resultado.roteiro, resultado.pendencias)}")
+            return 0
         if a.comando == "previa":
+            exigir_p2(a.canal, resultado.roteiro, "a prévia")
             edl = gerar_edl(resultado)
             arq_edl = escrever_edl(edl, caminho.with_name("edl.json"))
             previa = montar(edl, "previa", caminho.with_name("previa.mp4"))

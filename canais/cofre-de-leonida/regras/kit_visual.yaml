@@ -61,6 +61,9 @@ audio:
   loudness_lufs: -14
   true_peak_dbfs: -1
   musica: "contínua e baixa sob a voz"
+  volume_clipe: 0          # áudio original dos clipes removido; a música de fundo completa (Pedro, 24/11/2026)
+  musica_volume_db: -20    # música de fundo (assets/musica/), relativa a -14 LUFS; amostra aprovada por Pedro, 24/11/2026
+  ducking: true            # a música abaixa quando a narração fala
 
 # ---------------------------------------------------------------- TEMPLATES (9)
 # Cada template recebe "campos" vindos do roteiro_mestre (campo texto_tela do segmento).

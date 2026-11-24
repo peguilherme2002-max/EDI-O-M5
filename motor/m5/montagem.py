@@ -6,8 +6,8 @@ Como funciona (tudo ffmpeg, determinístico):
    (corte de imagem: a imagem parada; corte gerado: a camada do template sobre a cor de fundo do kit)
 2. os pedaços são concatenados sem nova codificação
 3. passe final: texto na tela (texto simples: template texto_tela do kit; mapa: camada do template,
-   .mov com alfa sobreposto de entrada_q a saida_q) + narração sobre o áudio do clipe,
-   loudnorm (-14 LUFS)
+   .mov com alfa sobreposto de entrada_q a saida_q) + narração sobre o áudio do clipe
+   + música de fundo (se o kit pede: audio.musica_volume_db; abaixa sob a voz), loudnorm (-14 LUFS)
 """
 import shutil
 import subprocess
@@ -20,6 +20,8 @@ from .templates import renderizar
 
 AMOSTRAS_POR_QUADRO = 1600          # 48000 Hz / 30 fps
 VOLUME_CLIPE = 0.18                 # áudio original do clipe por baixo da narração
+# música abaixa ~10 dB quando a voz passa do limiar; volta em ~0,6 s nas pausas
+DUCKING = "threshold=0.03:ratio=6:attack=30:release=600:makeup=1"
 PERFIS = {
     "previa": {"altura": 480, "x264": ["-preset", "veryfast", "-crf", "28"], "audio": "128k"},
     "final": {"altura": None, "x264": ["-preset", "medium", "-crf", "18"], "audio": "192k"},
@@ -37,6 +39,55 @@ def _tem_audio(video: Path) -> bool:
     r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries", "stream=index",
                         "-of", "csv=p=0", str(video)], capture_output=True, text=True)
     return bool(r.stdout.strip())
+
+
+def _duracao(arq: Path) -> float:
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                        str(arq)], capture_output=True, text=True)
+    try:
+        return float(r.stdout.strip())
+    except ValueError:
+        raise ErroM5(f"faixa de música ilegível: {arq} (F07)")
+
+
+def _musica(canal: str, kit_audio: dict, total_s: float, tmp: Path) -> bool:
+    """Faixa de fundo contínua em tmp/mus.wav, no tamanho exato do vídeo.
+
+    Só existe se o kit pede (audio.musica_volume_db). Faixas: assets/musica/ em ordem de nome,
+    cada uma normalizada a -14 LUFS e emendada na seguinte com crossfade (volta à primeira se
+    acabarem); fade in no início, fade out no fim. Nunca corte seco.
+    """
+    if "musica_volume_db" not in kit_audio:
+        return False
+    pasta = pasta_canal(canal) / "assets" / "musica"
+    faixas = sorted(f for f in pasta.glob("*") if f.suffix.lower() in (".mp3", ".wav", ".m4a")) if pasta.is_dir() else []
+    if not faixas:
+        raise ErroM5(f"o kit do canal '{canal}' pede música, mas {pasta} não tem faixas (F07)")
+    xf = float(kit_audio.get("musica_crossfade_s", 4))
+    usadas, acumulado = [], 0.0
+    while acumulado < total_s:
+        f = faixas[len(usadas) % len(faixas)]
+        d = _duracao(f)
+        if d <= 2 * xf:
+            raise ErroM5(f"faixa curta demais para o crossfade de {xf} s: {f} (F07)")
+        usadas.append(f)
+        acumulado += d - (xf if len(usadas) > 1 else 0)
+    entradas, filtros = [], []
+    for i, f in enumerate(usadas):
+        entradas += ["-i", str(f)]
+        filtros.append(f"[{i}:a]aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-14:TP=-1.5,"
+                       f"aresample=48000[f{i}]")
+    atual = "[f0]"
+    for i in range(1, len(usadas)):
+        filtros.append(f"{atual}[f{i}]acrossfade=d={xf}:c1=tri:c2=tri[x{i}]")
+        atual = f"[x{i}]"
+    amostras = round(total_s * 48000)
+    fade_in, fade_out = float(kit_audio.get("musica_fade_in_s", 2)), float(kit_audio.get("musica_fade_out_s", 3))
+    filtros.append(f"{atual}atrim=end_sample={amostras},asetpts=N/SR/TB,afade=t=in:d={fade_in},"
+                   f"afade=t=out:st={max(0.0, total_s - fade_out):.3f}:d={fade_out},"
+                   f"volume={float(kit_audio['musica_volume_db'])}dB[mus]")
+    _ff([*entradas, "-filter_complex", ";".join(filtros), "-map", "[mus]", "-c:a", "pcm_s16le", "mus.wav"], cwd=tmp)
+    return True
 
 
 def _resolucao(edl: dict, perfil: str) -> tuple[int, int]:
@@ -99,6 +150,9 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
         lista_v, lista_a = [], []
         cortes = [c for s in edl["segmentos"] for c in s["cortes"]]
         templates_kit = None
+        # áudio original dos clipes: kit audio.volume_clipe (0 = removido); sem a chave, o padrão
+        kit_audio = (ler_yaml(pasta_canal(edl["canal"]) / "regras" / "kit_visual.yaml") or {}).get("audio") or {}
+        vol_clipe = float(kit_audio.get("volume_clipe", VOLUME_CLIPE))
         if H > W and _usa_template(edl):
             raise ErroM5("os templates do kit ainda não têm layout 9:16 (capacidade nova: 9.5)")
         for i, c in enumerate(cortes):
@@ -128,9 +182,9 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
             ini = c["origem_inicio_q"] / fps
             _ff(["-ss", f"{ini:.4f}", "-i", str(src), "-frames:v", str(c["quadros"]), "-an",
                  "-vf", escala, "-c:v", "libx264", *p["x264"], "-pix_fmt", "yuv420p", str(v)])
-            if _tem_audio(src):
+            if vol_clipe > 0 and _tem_audio(src):
                 _ff(["-ss", f"{ini:.4f}", "-i", str(src), "-vn",
-                     "-af", f"aresample=48000,aformat=channel_layouts=stereo,volume={VOLUME_CLIPE},"
+                     "-af", f"aresample=48000,aformat=channel_layouts=stereo,volume={vol_clipe},"
                             f"apad,atrim=end_sample={amostras}", "-c:a", "pcm_s16le", str(a)])
             else:
                 _ff(["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
@@ -162,9 +216,19 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
         _ff([*entradas, "-filter_complex", ";".join(filtros), "-map", "[narr]", "-c:a", "pcm_s16le",
              "narr.wav"], cwd=tmp)
         entradas = ["-i", "base_v.mp4", "-i", "base_a.wav", "-i", "narr.wav"]
-        filtros = ["[1:a][2:a]amix=inputs=2:normalize=0:duration=first,"
-                   "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]"]
-        k = 3
+        total_s = sum(c["quadros"] for c in cortes) / fps
+        if _musica(edl["canal"], kit_audio, total_s, tmp):
+            entradas += ["-i", "mus.wav"]
+            # ducking: a narração comprime a música enquanto fala; release longo = respira nas pausas
+            filtros = ["[2:a]asplit=2[nv][ns]",
+                       f"[3:a][ns]sidechaincompress={DUCKING}[md]" if kit_audio.get("ducking", True) else "[3:a]anull[md]",
+                       "[1:a][nv][md]amix=inputs=3:normalize=0:duration=first,"
+                       "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]"]
+            k = 4
+        else:
+            filtros = ["[1:a][2:a]amix=inputs=2:normalize=0:duration=first,"
+                       "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]"]
+            k = 3
 
         # texto na tela (template texto_tela do kit)
         vchain = "[0:v]"

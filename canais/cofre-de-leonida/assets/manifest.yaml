@@ -35,3 +35,23 @@ web:
 
 recortes:
   - {"arquivo": "recortes/trevor.png", "original": "recortes/originais/trevor.jpg", "origem": "https://i.pinimg.com/originals/bc/a9/33/bca9331eb4e46d2ab262839416453521.jpg", "pagina": "https://www.pinterest.co.kr/pin/852306298202965721/", "data": "2026-11-24", "etiquetas": ["trevor", "gta v", "recorte"], "busca": "Trevor Philips GTA 5", "modelo": "birefnet-general", "tamanho": "2884x3998"}
+
+# acervo extra: pasta Assets enviada por Pedro, organizada; índice em acervo_extra/indice.md. Ainda não ligado ao motor.
+acervo_extra:
+  - {arquivo: acervo_extra/gameplay/,         origem: "Pedro (pasta Assets); 8 gameplays GTA VI + catálogos de cenas", data: 2026-11-24}
+  - {arquivo: acervo_extra/clipes/,           origem: "Pedro (pasta Assets); 2 clipes recortados + fichas", data: 2026-11-24}
+  - {arquivo: acervo_extra/logos/,            origem: "Pedro (pasta Assets); logos GTA VI e Rockstar", data: 2026-11-24}
+  - {arquivo: acervo_extra/musicas/kit/,      origem: "Pedro (pasta Assets); licença a confirmar", data: 2026-11-24}
+  - {arquivo: acervo_extra/musicas/pixabay/,  origem: "Pedro (pasta Assets); nomes no padrão Pixabay, licença a confirmar", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/kit/,          origem: "Pedro (pasta Assets)", data: 2026-11-24}
+  - {arquivo: acervo_extra/sfx/pixabay/,      origem: "Pedro (pasta Assets); nomes no padrão Pixabay, licença a confirmar", data: 2026-11-24}
+  - {arquivo: acervo_extra/arquivado/,        origem: "duplicata idêntica do buzzer, arquivada (F20)", data: 2026-11-24}
+
+# música de fundo: o motor usa as faixas desta pasta em ordem de nome, emendadas com crossfade
+# (kit audio.musica_volume_db). Licença não confirmada: Pedro mandou usar (24/11/2026).
+musica:
+  - {arquivo: musica/01-gta-trap-longa.mp3,           origem: "acervo_extra (Pedro, 24/11/2026); cópia de musicas/kit/musica-2-gta-trap-longa.mp3, ~126 BPM", data: 2026-11-24}
+  - {arquivo: musica/02-miami-synth-rush.mp3,         origem: "acervo_extra (Pedro, 24/11/2026); cópia de musicas/pixabay/ronaldoreyz-miami-synth-rush-retro-80s-background-music-464903.mp3", data: 2026-11-24}
+  - {arquivo: musica/03-neon-synthwave-vibe.mp3,      origem: "acervo_extra (Pedro, 24/11/2026); cópia de musicas/pixabay/echoes_of_lumen-neon-synthwave-vibe-554114.mp3", data: 2026-11-24}
+  - {arquivo: musica/04-80s-chillwave-dreamy-outrun.mp3, origem: "acervo_extra (Pedro, 24/11/2026); cópia de musicas/pixabay/osynthw-80s-chillwave-dreamy-outrun-345498.mp3", data: 2026-11-24}
+  - {arquivo: musica/05-epic-cinematic-trap.mp3,      origem: "acervo_extra (Pedro, 24/11/2026); cópia de musicas/pixabay/abydos_music-epic-cinematic-trap-171871.mp3", data: 2026-11-24}

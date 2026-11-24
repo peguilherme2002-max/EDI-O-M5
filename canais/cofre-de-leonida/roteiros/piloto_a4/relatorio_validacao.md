@@ -5,7 +5,7 @@
 - roteiro: canais/cofre-de-leonida/roteiros/piloto_a4/roteiro_mestre.yaml (versão 1)
 - sha1 do roteiro: 35470e5fefa1d77bd5e79d577061827c0c4d14bd
 - registro: motor/geradores.yaml
-- gerado em: 2026-11-24 10:15
+- gerado em: 2026-11-24 10:21
 - segmentos: 9 · duração-alvo total: 77 s
 
 ## Resumo
