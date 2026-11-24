@@ -139,7 +139,7 @@ geradores:
   # Faixa contínua de assets/musica/ (ordem de nome, crossfade entre faixas), fade in/out,
   # ducking sob a narração (sidechaincompress). Liga só com kit audio.musica_volume_db.
   - tipo: musica_fundo
-    gerador: m5.montagem._musica
+    gerador: m5.montagem (função _musica)
     formatos: [longo]
     teto: "escolhe a faixa só pela ordem de nome (todo vídeo curto usa a primeira); sem escolha por clima"
     status: aprovado
