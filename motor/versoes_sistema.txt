@@ -25,3 +25,8 @@ modelo whisper    ggml-large-v3-turbo.bin
 modelo rembg      birefnet-general.onnx (972666916 bytes)
                   sha1 e199e023c0c0dcbb43623ca8c7058cadbef3dfb1
                   C:\Users\pegui\.u2net\birefnet-general.onnx
+
+# economia de tokens do Claude Code (decisão de Pedro, 2026-11-24; escopo global, fora do Git)
+caveman           4.2.0 (plugin Claude Code, JuliusBrussee/caveman; caveman-compress não usado)
+ponytail          5.3.3 (plugin Claude Code, DietrichGebert/ponytail)
+rtk               1.2.1 (winget rtk-ai.rtk; hook PreToolUse Bash em ~/.claude/settings.json)
