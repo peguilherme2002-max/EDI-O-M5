@@ -4,7 +4,7 @@
 
 versao: 1
 data: 2026-11-23
-status: rascunho            # vira "aprovado" depois da F0.5
+status: aprovado            # F0.5: os 9 templates aprovados por Pedro em amostras (23–24/11/2026)
 canal: cofre-de-leonida
 resolucao_base: [1920, 1080] # 16:9, 30 fps. O 9:16 dos shorts é adaptação de layout (M5 7.6), definida depois de F18
 

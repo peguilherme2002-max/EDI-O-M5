@@ -44,7 +44,7 @@ Vídeos longos (15 a 20 min, 16:9) sobre **GTA VI**, 1 por semana. Os shorts sae
 - **Falar com todo mundo:** nos bordões e chamadas, evitar "mano" e termos que excluam as mulheres do público. Variações com o tema do cofre ("próxima gaveta", "esse tava no fundo do cofre", "se o cofre valeu, se inscreve") podem ser usadas para não ficar repetitivo.
 
 ## Estética
-- Kit visual: `regras/kit_visual.yaml` (3 fontes, paleta de 8 cores, 10 templates). Documentação: `assets/referencias/GUIA-DE-TEMPLATES.md`.
+- Kit visual: `regras/kit_visual.yaml` (3 fontes, paleta de 8 cores, 9 templates). Documentação: `assets/referencias/GUIA-DE-TEMPLATES.md`.
 - Assinatura: gradiente **laranja → magenta → roxo** sobre fundo azul-marinho; texto creme; amarelo só para atenção.
 - **Curiosidades:** gameplay em planos longos (3 a 8 s) gravado para a frase, com grafismo novo a cada ~1,5 s. Imagem literal para fala concreta e imagem bonita para fala abstrata.
 - **Listas:** o texto fica parado em zonas fixas e a imagem corre por baixo, em **ritmo calmo: planos de 2,5 a 3,5 s** (decisão de Pedro, 23/11/2026; entre o Grand Gabe e o R5, e não o ritmo de trailer do R2). A troca visual entre os cortes vem das etiquetas e dos grafismos. Todo texto entra num corte.
