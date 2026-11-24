@@ -174,7 +174,7 @@ templates:
     descricao: "frase de alguém (imprensa, Rockstar, comunidade) com marca-texto que corre com a fala"
     campos:
       frase:          {tipo: texto, obrigatorio: true, maximo_caracteres: 180}
-      autor:          {tipo: texto, obrigatorio: true}
+      autor:          {tipo: texto, obrigatorio: false, nota: "sem autor = frase do próprio narrador (Pedro, 24/11/2026)"}
       trecho_marcado: {tipo: texto, obrigatorio: false}
     layout_1080p:
       posicao: "esquerda, x ≈ 140–1000, centralizada na vertical"

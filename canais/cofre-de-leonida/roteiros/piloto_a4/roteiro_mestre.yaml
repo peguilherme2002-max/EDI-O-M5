@@ -1,0 +1,104 @@
+﻿# Piloto A4 (doc 9.2) — gancho + contexto do roteiro "5 perfis criminais, 1 joalheria (GTA 6)".
+# Texto da narração sem mudanças (Pedro, 24/11/2026). Esqueleto aprovado no P1 (68217d0).
+# Não conta como longo aprovado para F18.
+titulo: Piloto A4 — 5 perfis criminais (gancho + contexto)
+versao: 1
+segmentos:
+  - id: s01
+    intencao: gancho
+    narracao: 'No GTA 5, você roubava a Vangelico, perdia as estrelas e pronto: ficha limpa.'
+    visual:
+      fonte: catalogo
+      busca: GTA 5 Vangelico assalto vitrines estourando
+      etiquetas: [gta v, vangelico, joalheria]
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 5
+
+  - id: s02
+    intencao: gancho
+    narracao: 'No GTA 6, isso acabou. Agora, dependendo de como você assalta uma joalheria, a polícia nem te deixa se render.'
+    visual:
+      fonte: catalogo
+      busca: GTA 6 joalheria assalto
+      etiquetas: [gta vi, joalheria]
+    texto_tela: {template: legenda_karaoke, texto: 'a polícia nem te deixa se render', palavra_chave: [render]}
+    sfx: []
+    duracao_alvo_s: 7
+
+  - id: s03
+    intencao: gancho
+    narracao: 'Cinco perfis. Cinco jeitos de agir. Cinco resultados. E um objetivo só: as joias. Dá pra fazer no modo paz e amor, sem ninguém nem perceber que você passou ali. Ou no modo GTA raiz, no talo.'
+    visual:
+      fonte: catalogo
+      busca: GTA 6 joalheria gameplay vitrines joias
+      etiquetas: [gta vi, joalheria]
+    texto_tela: {template: numero_gigante, valor: '5', rotulo_baixo: PERFIS CRIMINAIS}
+    sfx: []
+    duracao_alvo_s: 12
+
+  - id: s04
+    intencao: revelacao
+    narracao: 'Só que agora o jogo anota tudo. E aqui vem a parte estranha: o cara que escapa da maior perseguição desse vídeo é justamente o que o jogo mais castiga.'
+    visual:
+      fonte: catalogo
+      busca: GTA 6 perseguição policial caos cinco estrelas
+      etiquetas: [gta vi, perseguicao]
+    texto_tela: {template: citacao, frase: 'o jogo anota tudo.', trecho_marcado: anota tudo}
+    sfx: []
+    duracao_alvo_s: 9
+
+  - id: s05
+    intencao: gancho
+    narracao: 'Esse perfil? Quando você chega nele, é melhor nem sair de casa.'
+    visual:
+      fonte: web
+      busca: PNG do Trevor bem renderizado
+      etiquetas: [gta v, trevor]
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 4
+
+  - id: s06
+    intencao: gancho
+    narracao: 'Bora abrir esse cofre.'
+    visual:
+      fonte: gerado
+      busca: logo_flutuante
+      etiquetas: [modo=abertura]
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 3
+
+  - id: s07
+    intencao: contexto
+    narracao: 'No GTA 5, roubar joalheria era uma missão com roteiro. O Lester planejava, você escolhia entre entrar armado ou entrar com gás pelo telhado, e o jogo seguia dali.'
+    visual:
+      fonte: catalogo
+      busca: GTA 5 Lester quadro de planejamento Vangelico
+      etiquetas: [gta v, lester, vangelico]
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 11
+
+  - id: s08
+    intencao: contexto
+    narracao: "No GTA 6 é diferente. Depois da missão Yasmani's Jewelry Jobs, no capítulo 3, as joalherias aparecem marcadas no mapa, e o assalto vira escolha sua. Como entrar, o que levar, como sair."
+    visual:
+      fonte: catalogo
+      busca: GTA 6 mapa joalherias marcadas
+      etiquetas: [gta vi, mapa, joalheria]
+    texto_tela: {template: legenda_karaoke, texto: 'como entrar, o que levar, como sair', palavra_chave: [sair]}
+    sfx: []
+    duracao_alvo_s: 13
+
+  - id: s09
+    intencao: contexto
+    narracao: 'E tem nome pra isso: perfil criminal. O Jason e a Lucia têm cada um o seu, e ele muda conforme o jeito que você comete os crimes. Ele não diz se você joga bem ou mal. Ele diz que tipo de criminoso você é.'
+    visual:
+      fonte: catalogo
+      busca: GTA 6 tela do perfil criminal Jason Lucia
+      etiquetas: [gta vi, perfil]
+    texto_tela: {template: citacao, frase: 'Ele diz que tipo de criminoso você é.', trecho_marcado: tipo de criminoso}
+    sfx: []
+    duracao_alvo_s: 13

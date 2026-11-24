@@ -36,7 +36,7 @@ def citacao(kit, spec, campos, n_quadros, W, H, fps):
     x_ini, x_fim = L.get("x", [140, 1000])
 
     frase = str(campos["frase"])
-    autor = str(campos["autor"])
+    autor = str(campos.get("autor") or "")          # sem autor: frase do próprio narrador
     if Au.get("caixa_alta", True):
         autor = autor.upper()
     palavras = frase.split()
@@ -81,7 +81,7 @@ def citacao(kit, spec, campos, n_quadros, W, H, fps):
 
     entre = alt * Fr.get("entrelinha", 1.6)
     vao_au = Au.get("vao_px", 44)
-    altura_bloco = alt + (len(linhas) - 1) * entre + vao_au + alt_au
+    altura_bloco = alt + (len(linhas) - 1) * entre + ((vao_au + alt_au) if autor else 0)
     y0 = 1080 / 2 - altura_bloco / 2
     pos = {}
     for n, linha in enumerate(linhas):
@@ -102,8 +102,9 @@ def citacao(kit, spec, campos, n_quadros, W, H, fps):
     cor_txt = kit.cor(Fr.get("cor", "texto"))
     for i, p in enumerate(palavras):
         escrever(t.d, *P(*pos[i]), p, f, cor_txt)
-    escrever(t.d, *P(tx, y0 + (len(linhas) - 1) * entre + alt + vao_au), autor, f_au,
-             kit.cor(Au.get("cor", "destaque")), esp_au)
+    if autor:
+        escrever(t.d, *P(tx, y0 + (len(linhas) - 1) * entre + alt + vao_au), autor, f_au,
+                 kit.cor(Au.get("cor", "destaque")), esp_au)
     fixa = t.final()
 
     # marca-texto de cada palavra marcada (recorte pronto para crescer da esquerda para a direita)
