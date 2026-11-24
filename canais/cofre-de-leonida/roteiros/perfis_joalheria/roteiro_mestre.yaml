@@ -1,0 +1,1019 @@
+# 5 perfis criminais, 1 joalheria — transcrição do A:\ROTEIROS\Roteiro M5 v2.pdf (Pedro, 24/11/2026), sem mudanças no texto.
+# Esqueleto aprovado no P1 por Pedro em 24/11/2026 (esqueleto.md, 487a705).
+titulo: 5 perfis criminais, 1 joalheria
+versao: 1
+segmentos:
+  # GANCHO — 0:00 a 0:41
+  - id: G01
+    intencao: gancho
+    narracao: ''
+    visual:
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @07:38 caminhão esmagando viatura', etiquetas: [gta6, caminhao], dur_s: 0.5}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @04:53 SWAT de rapel no telhado', etiquetas: [gta6, swat], dur_s: 0.4}
+      - {fonte: web, busca: 'GTA 5 Vangelico vitrine estourando (Jewel Store Job)', etiquetas: [gta5, vangelico, vidro], dur_s: 0.4}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ vitrine quebrando', etiquetas: [gta6, joalheria, vidro], dur_s: 0.4}
+      - {fonte: gerado, busca: 'tela preta', etiquetas: [corte_seco], dur_s: 0.3}
+    texto_tela: null
+    sfx: 'batida + sirene nos dois primeiros cortes; vidro estourando nos dois seguintes; áudio corta seco no preto'
+    duracao_alvo_s: 2.0
+
+  - id: G02
+    intencao: gancho
+    narracao: '[casual] No GTA 5, você roubava a Vangelico, perdia as estrelas <break time="0.3s" /> e pronto. Ficha limpa.'
+    visual:
+      - {fonte: web, busca: 'GTA 5 Jewel Store Job entrada na Vangelico', etiquetas: [gta5, vangelico], dur_s: 1.0}
+      - {fonte: web, busca: 'GTA 5 estrelas de procurado piscando e sumindo', etiquetas: [gta5, estrelas], dur_s: 1.0}
+      - {fonte: web, busca: 'GTA 5 Michael andando de boa na calçada', etiquetas: [gta5, rua], dur_s: 1.0}
+      - {fonte: gerado, busca: 'congela o último quadro + carimbo do kit', etiquetas: [freeze, carimbo], dur_s: 1.0}
+    texto_tela: 'FICHA LIMPA (carimbo no último corte)'
+    sfx: 'carimbo batendo no "limpa"'
+    duracao_alvo_s: 4.0
+
+  - id: G03
+    intencao: gancho
+    narracao: '[serious] No GTA 6? <break time="0.4s" /> Isso acabou.'
+    visual:
+      - {fonte: web, busca: 'GTA 6 skyline de Vice City ao pôr do sol, plano aéreo', etiquetas: [gta6, vicecity, cinema], dur_s: 0.8}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ máscara sendo colocada', etiquetas: [gta6, mascara], dur_s: 0.8}
+      - {fonte: web, busca: 'tela do perfil criminal, zoom rápido no ícone', etiquetas: [gta6, perfil], dur_s: 0.9}
+    texto_tela: null
+    sfx: 'impacto grave no "acabou"'
+    duracao_alvo_s: 2.5
+
+  - id: G04
+    intencao: gancho
+    narracao: 'Agora, dependendo de como você assalta uma joalheria, <break time="0.2s" /> a polícia nem te deixa se render.'
+    visual:
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ entrada no salão', etiquetas: [gta6, joalheria], dur_s: 0.8}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @00:50 aviso de perfil violento', etiquetas: [gta6, aviso, perfil], dur_s: 1.0}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @01:45 viatura chegando', etiquetas: [gta6, policia], dur_s: 0.7}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @03:35 policiais avançando no corredor', etiquetas: [gta6, policia], dur_s: 0.8}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @03:30 policial atirando', etiquetas: [gta6, policia, tiro], dur_s: 0.7}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @03:45 troca de tiros, plano fechado', etiquetas: [gta6, policia], dur_s: 1.0}
+    texto_tela: 'SEM RENDIÇÃO (no último corte)'
+    sfx: 'sirene subindo do início ao fim'
+    duracao_alvo_s: 5.0
+
+  - id: G05
+    intencao: gancho
+    narracao: 'Cinco perfis. <break time="0.2s" /> Cinco jeitos de agir. <break time="0.2s" /> Cinco resultados. <break time="0.3s" /> E um objetivo só: <break time="0.3s" /> [whispers] as joias.'
+    visual:
+      - {fonte: web, busca: 'ícone Profissional na tela do perfil', etiquetas: [perfil, profissional], dur_s: 0.45}
+      - {fonte: web, busca: 'ícone Hostil na tela do perfil', etiquetas: [perfil, hostil], dur_s: 0.45}
+      - {fonte: web, busca: 'ícone Brutal na tela do perfil', etiquetas: [perfil, brutal], dur_s: 0.45}
+      - {fonte: web, busca: 'ícone Psicopata na tela do perfil', etiquetas: [perfil, psicopata], dur_s: 0.45}
+      - {fonte: gerado, busca: 'ícone Irremediável desfocado com glitch (template do kit)', etiquetas: [perfil, cofre], dur_s: 0.45}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @09:08 Wasted', etiquetas: [gta6, wasted], dur_s: 0.55}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ close nas joias na vitrine', etiquetas: [gta6, joias], dur_s: 0.9}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ mão pegando as joias', etiquetas: [gta6, joias], dur_s: 0.9}
+    texto_tela: '5 PERFIS → 5 JEITOS → 5 RESULTADOS (sincronizado com a fala)'
+    sfx: 'whoosh curto em cada ícone; trilha cai para quase nada no sussurro'
+    duracao_alvo_s: 4.6
+
+  - id: G06
+    intencao: gancho
+    narracao: 'Dá pra fazer no modo paz e amor, sem ninguém perceber.'
+    visual:
+      - {fonte: web, busca: 'yt:Rpf46vovV8k Snap Gun abrindo porta', etiquetas: [gta6, furtivo, snapgun], dur_s: 0.75}
+      - {fonte: web, busca: 'yt:Rpf46vovV8k visão de foco destacando alarme', etiquetas: [gta6, foco], dur_s: 0.75}
+      - {fonte: web, busca: 'yt:xp3ov0MDIcQ alarme sendo desativado', etiquetas: [gta6, alarme], dur_s: 0.75}
+      - {fonte: web, busca: 'ícone amarelo surgindo à direita da tela', etiquetas: [gta6, icone_amarelo], dur_s: 0.75}
+    texto_tela: null
+    sfx: 'cliques baixos; trilha leve'
+    duracao_alvo_s: 3.0
+
+  - id: G07
+    intencao: gancho
+    narracao: '<break time="0.2s" /> [laughs] Ou no modo GTA raiz. <break time="0.2s" /> No talo.'
+    visual:
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ segurança levando tiro na perna', etiquetas: [gta6, hostil], dur_s: 0.4}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @02:53 explosão', etiquetas: [gta6, explosao], dur_s: 0.4}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @01:50 viatura 429 quase capotando', etiquetas: [gta6, fuga], dur_s: 0.5}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @07:58 batida forte', etiquetas: [gta6, batida], dur_s: 0.5}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @04:10 tiroteio no corredor', etiquetas: [gta6, policia], dur_s: 0.4}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @03:25 troca de viatura em movimento', etiquetas: [gta6, fuga], dur_s: 0.4}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @08:05 SWAT no corredor', etiquetas: [gta6, swat], dur_s: 0.4}
+    texto_tela: 'NO TALO (no último corte)'
+    sfx: 'drop: trilha volta no máximo no "raiz"'
+    duracao_alvo_s: 3.0
+
+  - id: G08
+    intencao: gancho
+    narracao: 'E tem um que nem se contenta com joalheria.'
+    visual:
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ porta da joalheria fechando', etiquetas: [gta6, joalheria], dur_s: 0.6}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @00:12 chegada ao banco, sem mostrar o nome', etiquetas: [gta6, lombank, cofre], dur_s: 0.9}
+      - {fonte: gerado, busca: 'zoom rápido com glitch sobre a fachada (template do kit)', etiquetas: [cofre], dur_s: 0.7}
+    texto_tela: 'JOALHERIA? POUCO.'
+    sfx: 'impacto com eco'
+    duracao_alvo_s: 2.2
+
+  - id: G09
+    intencao: gancho
+    narracao: 'Só que agora <break time="0.2s" /> o jogo anota tudo.'
+    visual:
+      - {fonte: web, busca: 'tela do perfil criminal (aba Jason & Lucia)', etiquetas: [perfil], dur_s: 0.7}
+      - {fonte: web, busca: 'marcador amarelo de tiro que incapacita', etiquetas: [icone_amarelo], dur_s: 0.5}
+      - {fonte: web, busca: 'marcador vermelho de tiro na cabeça', etiquetas: [icone_vermelho], dur_s: 0.5}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @01:48 aviso Jason is now psycho', etiquetas: [aviso, psicopata, conferir], dur_s: 0.8}
+    texto_tela: 'O JOGO ANOTA TUDO'
+    sfx: 'tique de notificação em cada marcador'
+    duracao_alvo_s: 2.5
+
+  - id: G10
+    intencao: gancho
+    narracao: '[curious] E a parte estranha: <break time="0.4s" /> quem escapa da maior perseguição do vídeo <break time="0.3s" /> é justamente quem o jogo mais castiga.'
+    visual:
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @02:00 perseguição', etiquetas: [gta6, fuga], dur_s: 1.0}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @07:40 caminhão avançando', etiquetas: [gta6, fuga], dur_s: 0.9}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @07:55 SWAT descendo de rapel', etiquetas: [gta6, lombank, cofre], dur_s: 0.8}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @09:12 helicóptero roubado no heliponto', etiquetas: [gta6, helicoptero, cofre], dur_s: 1.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @09:40 voo entre arranha-céus', etiquetas: [gta6, helicoptero, cofre], dur_s: 1.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @11:20 salto de paraquedas', etiquetas: [gta6, paraquedas, cofre], dur_s: 0.8}
+    texto_tela: null
+    sfx: 'trilha desce; riser cresce até "castiga"'
+    duracao_alvo_s: 5.5
+
+  - id: G11
+    intencao: gancho
+    narracao: 'Esse perfil? <break time="0.7s" /> [serious] Quando você chega nele… <break time="0.4s" /> é melhor nem sair de casa.'
+    visual:
+      - {fonte: gerado, busca: 'ícone Irremediável desfocado, zoom lento com glitch (template do kit)', etiquetas: [perfil, cofre], dur_s: 3.0}
+      - {fonte: gerado, busca: 'tela preta', etiquetas: [silencio], dur_s: 1.5}
+    texto_tela: '???'
+    sfx: 'trilha corta inteira em "Esse perfil?"; só um grave longo'
+    duracao_alvo_s: 4.5
+
+  - id: G12
+    intencao: gancho
+    narracao: 'Bora abrir esse cofre.'
+    visual:
+      - {fonte: web, busca: 'Trevor Philips PNG render alta resolução, entrando na tela', etiquetas: [gta5, trevor, png], dur_s: 1.2}
+      - {fonte: gerado, busca: 'template abertura do cofre (kit_visual)', etiquetas: [vinheta], dur_s: 0.8}
+    texto_tela: 'COFRE DE LEONIDA'
+    sfx: 'trava do cofre girando + porta abrindo'
+    duracao_alvo_s: 2.0
+
+  # CONTEXTO — 0:41 a 1:25
+  - id: C01
+    intencao: contexto
+    narracao: '[casual] No GTA 5, roubar joalheria era uma missão com roteiro. <break time="0.3s" /> O Lester planejava, você escolhia: entrar armado ou entrar com gás pelo telhado. E o jogo seguia dali.'
+    visual:
+      - {fonte: web, busca: 'GTA 5 quadro de planejamento do Lester', etiquetas: [gta5, lester], dur_s: 2.5}
+      - {fonte: web, busca: 'GTA 5 planta da Vangelico no planejamento', etiquetas: [gta5, vangelico], dur_s: 2.0}
+      - {fonte: web, busca: 'GTA 5 escolha de abordagem armada ou furtiva', etiquetas: [gta5, escolha], dur_s: 2.5}
+      - {fonte: web, busca: 'GTA 5 entrada na Vangelico', etiquetas: [gta5, vangelico], dur_s: 2.0}
+      - {fonte: web, busca: 'GTA 5 telhado da Vangelico, duto de ventilação', etiquetas: [gta5, gas], dur_s: 2.0}
+    texto_tela: null
+    sfx: 'trilha leve, tom de lembrança'
+    duracao_alvo_s: 11.0
+
+  - id: C02
+    intencao: contexto
+    narracao: 'No GTA 6 é diferente. <break time="0.4s" /> Depois da missão Yasmani''s Jewelry Jobs, no capítulo 3, as joalherias aparecem marcadas no mapa. E o assalto vira escolha sua. <break time="0.3s" /> Como entrar. <break time="0.2s" /> O que levar. <break time="0.2s" /> Como sair.'
+    visual:
+      - {fonte: web, busca: 'GTA 6 mapa com as joalherias marcadas', etiquetas: [gta6, mapa], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 6 zoom no ícone de joalheria no mapa', etiquetas: [gta6, mapa], dur_s: 2.0}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ fachada da joalheria', etiquetas: [gta6, joalheria], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:xp3ov0MDIcQ porta dos fundos', etiquetas: [gta6, entrada], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ vitrines', etiquetas: [gta6, joias], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:xp3ov0MDIcQ saída pela rua', etiquetas: [gta6, saida], dur_s: 2.5}
+    texto_tela: 'COMO ENTRAR → O QUE LEVAR → COMO SAIR (sincronizado com a fala)'
+    sfx: 'whoosh na abertura do mapa'
+    duracao_alvo_s: 15.0
+
+  - id: C03
+    intencao: contexto
+    narracao: 'E tem nome pra isso: <break time="0.3s" /> perfil criminal. O Jason e a Lucia têm cada um o seu, e ele muda conforme o jeito que você comete os crimes.'
+    visual:
+      - {fonte: web, busca: 'GTA 6 tela do perfil, aba Jason & Lucia', etiquetas: [perfil], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 6 Jason em gameplay', etiquetas: [gta6, jason], dur_s: 2.5}
+      - {fonte: web, busca: 'GTA 6 Lucia em gameplay', etiquetas: [gta6, lucia], dur_s: 2.5}
+      - {fonte: web, busca: 'GTA 6 crime em gameplay, plano aberto', etiquetas: [gta6], dur_s: 4.0}
+    texto_tela: 'PERFIL CRIMINAL'
+    sfx: null
+    duracao_alvo_s: 12.0
+
+  - id: C04
+    intencao: transicao
+    narracao: '[serious] Ele não diz se você joga bem ou mal. <break time="0.4s" /> Ele diz que tipo de criminoso você é.'
+    visual:
+      - {fonte: web, busca: 'close lento no ícone do perfil', etiquetas: [perfil], dur_s: 5.0}
+      - {fonte: gerado, busca: 'tela preta', etiquetas: [silencio], dur_s: 1.0}
+    texto_tela: null
+    sfx: 'impacto grave em "criminoso"; 1 s de silêncio'
+    duracao_alvo_s: 6.0
+
+  # DEGRAU 5 — PROFISSIONAL
+  - id: D5-00
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: gerado, busca: 'template cartela_degrau sobre skyline de Vice City de dia; escada dos 5 degraus com o atual aceso', etiquetas: [cartela, vicecity, escada], dur_s: 2.5}
+    texto_tela: 'DEGRAU 5 — PROFISSIONAL · Regra quebrada: nenhuma · faltam 4'
+    sfx: 'clique de trava do cofre'
+    duracao_alvo_s: 2.5
+
+  - id: D5-01
+    intencao: desenvolvimento
+    narracao: '[casual] Começando pelo degrau mais baixo: <break time="0.3s" /> o Profissional. É onde todo mundo começa: o crime limpo, sem vítima, sem agressão à toa. <break time="0.3s" /> [curious] E repara: ameaçar o funcionário não te tira daqui, <break time="0.2s" /> desde que ninguém se machuque.'
+    visual:
+      - {fonte: web, busca: 'tela do perfil mostrando Profissional', etiquetas: [perfil, profissional], dur_s: 3.0}
+      - {fonte: web, busca: 'ícone amarelo surgindo numa ação limpa', etiquetas: [icone_amarelo], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:xp3ov0MDIcQ jogador agachado checando o ambiente', etiquetas: [gta6, furtivo], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 6 funcionário com as mãos pra cima', etiquetas: [gta6, ameaca], dur_s: 3.0}
+      - {fonte: web, busca: 'tela do perfil sem mudança após a ameaça', etiquetas: [perfil, prova], dur_s: 2.5}
+    texto_tela: 'AMEAÇAR ≠ MACHUCAR (no último corte)'
+    sfx: 'trilha calma'
+    duracao_alvo_s: 14.0
+
+  - id: D5-02
+    intencao: contexto
+    narracao: 'No GTA 5, ele seria o cara do gás na Vangelico: <break time="0.2s" /> disfarce de dedetizador, gás pelo duto e todo mundo apagado. <break time="0.3s" /> Sem um tiro.'
+    visual:
+      - {fonte: web, busca: 'GTA 5 Jewel Store Job disfarce de dedetizador', etiquetas: [gta5, gas], dur_s: 2.5}
+      - {fonte: web, busca: 'GTA 5 gás descendo pelo duto', etiquetas: [gta5, gas], dur_s: 2.5}
+      - {fonte: web, busca: 'GTA 5 clientes desmaiando na Vangelico', etiquetas: [gta5, gas], dur_s: 2.5}
+      - {fonte: web, busca: 'GTA 5 vitrines sendo esvaziadas em silêncio', etiquetas: [gta5, joias], dur_s: 2.5}
+    texto_tela: null
+    sfx: 'chiado de gás'
+    duracao_alvo_s: 10.0
+
+  - id: D5-03
+    intencao: desenvolvimento
+    narracao: 'No GTA 6, ferramenta pra assalto limpo é o que não falta. <break time="0.3s" /> A Snap Gun, que vem da missão do Yasmani, abre porta com alarme sem barulho. O foco mostra alarmes e cofres, <break time="0.2s" /> e o binóculo marca quem tá lá dentro.'
+    visual:
+      - {fonte: web, busca: 'yt:Rpf46vovV8k Snap Gun abrindo porta', etiquetas: [gta6, snapgun], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:Rpf46vovV8k porta abrindo sem alarme', etiquetas: [gta6, snapgun, prova], dur_s: 2.5}
+      - {fonte: web, busca: 'visão de foco destacando alarme', etiquetas: [gta6, foco, prova], dur_s: 2.5}
+      - {fonte: web, busca: 'visão de foco destacando cofre', etiquetas: [gta6, foco, prova], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:xp3ov0MDIcQ binóculo marcando segurança', etiquetas: [gta6, binoculo], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:xp3ov0MDIcQ segurança marcado andando', etiquetas: [gta6, binoculo], dur_s: 3.0}
+    texto_tela: 'SNAP GUN · FOCO · BINÓCULO (um por vez)'
+    sfx: 'clique da Snap Gun; ping no foco'
+    duracao_alvo_s: 16.0
+
+  - id: D5-04
+    intencao: revelacao
+    narracao: '[excited] E o jogo recompensa cada passo: desativar o alarme, <break time="0.2s" /> destruir a fita da câmera, <break time="0.2s" /> sair sem disparar nada. Cada uma acende um ícone amarelo do lado direito da tela.'
+    visual:
+      - {fonte: web, busca: 'alarme sendo desativado', etiquetas: [gta6, alarme, prova], dur_s: 3.0}
+      - {fonte: web, busca: 'fita da câmera sendo destruída', etiquetas: [gta6, camera, prova], dur_s: 3.5}
+      - {fonte: web, busca: 'saída sem alarme', etiquetas: [gta6, saida], dur_s: 3.0}
+      - {fonte: web, busca: 'ícone amarelo no canto direito, com zoom', etiquetas: [icone_amarelo, prova], dur_s: 3.5}
+    texto_tela: 'seta animada apontando o ícone amarelo'
+    sfx: 'ding a cada ícone'
+    duracao_alvo_s: 13.0
+
+  - id: D5-05
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: web, busca: 'yt:xp3ov0MDIcQ assalto furtivo contínuo', etiquetas: [gta6, respiro], dur_s: 4.5}
+      - {fonte: web, busca: 'GTA 6 assalto furtivo que dá errado: alarme disparando de repente', etiquetas: [gta6, quebra_padrao, buscar], dur_s: 4.5}
+    texto_tela: null
+    sfx: 'respiro: som do jogo alto, trilha a −12 dB; o alarme do segundo corte entra alto e corta'
+    duracao_alvo_s: 9.0
+
+  - id: D5-06
+    intencao: desenvolvimento
+    narracao: 'Nesse nível, o foco sobe com finalização furtiva e com tiro que incapacita sem matar. <break time="0.3s" /> Se der ruim e você ficar com poucas estrelas, <break time="0.2s" /> ainda dá pra se render. <break time="0.4s" /> E tem até troféu pra quem leva isso a sério: <break time="0.3s" /> o Sneakthief, por roubar uma joalheria sem ser detectado.'
+    visual:
+      - {fonte: web, busca: 'finalização furtiva GTA 6', etiquetas: [gta6, furtivo], dur_s: 3.0}
+      - {fonte: web, busca: 'barra de foco subindo', etiquetas: [gta6, foco, prova], dur_s: 3.0}
+      - {fonte: web, busca: 'tiro no braço desarmando inimigo', etiquetas: [gta6, icone_amarelo], dur_s: 3.0}
+      - {fonte: web, busca: 'personagem se rendendo com mãos pra cima', etiquetas: [gta6, rendicao], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:Rpf46vovV8k notificação do troféu Sneakthief', etiquetas: [gta6, trofeu, prova], dur_s: 4.0}
+      - {fonte: web, busca: 'yt:Rpf46vovV8k saída tranquila', etiquetas: [gta6, saida], dur_s: 3.0}
+    texto_tela: 'TROFÉU: SNEAKTHIEF (no corte do troféu)'
+    sfx: 'som de troféu'
+    duracao_alvo_s: 19.0
+
+  - id: D5-DT
+    intencao: humor
+    narracao: '<DETALHE: uma frase curta sobre um detalhe que aparece no clipe do Profissional>'
+    visual:
+      - {fonte: web, busca: 'detalhe marcado na decupagem dos clipes do Profissional', etiquetas: [detalhe, conferir], dur_s: 5.0}
+    texto_tela: 'DETALHE'
+    sfx: null
+    duracao_alvo_s: 5.0
+
+  - id: D5-07
+    intencao: humor
+    narracao: '[sarcastic] É o assalto mais seguro da lista. <break time="0.4s" /> E também o que todo canal já mostrou.'
+    visual:
+      - {fonte: web, busca: 'rua normal de Vice City, nenhuma estrela', etiquetas: [gta6, saida, vicecity], dur_s: 3.5}
+      - {fonte: web, busca: 'personagem caminhando de boa com as joias', etiquetas: [gta6, saida], dur_s: 3.5}
+    texto_tela: null
+    sfx: null
+    duracao_alvo_s: 7.0
+
+  - id: D5-08
+    intencao: transicao
+    narracao: '[whispers] Ah, e repara nesse ícone amarelo. <break time="0.3s" /> Guarda essa cor… <break time="0.4s" /> [serious] porque daqui a dois degraus ela muda.'
+    visual:
+      - {fonte: web, busca: 'zoom lento no ícone amarelo', etiquetas: [icone_amarelo], dur_s: 4.0}
+      - {fonte: gerado, busca: 'congela o quadro e dessatura, só o amarelo fica colorido', etiquetas: [freeze], dur_s: 4.0}
+    texto_tela: 'GUARDA ESSA COR'
+    sfx: 'trilha abaixa no sussurro'
+    duracao_alvo_s: 8.0
+
+  - id: D5-09
+    intencao: transicao
+    narracao: 'Então vamos subir um degrau.'
+    visual:
+      - {fonte: gerado, busca: 'template transição de degrau (kit_visual)', etiquetas: [transicao], dur_s: 3.0}
+    texto_tela: null
+    sfx: 'whoosh de subida'
+    duracao_alvo_s: 3.0
+
+  # DEGRAU 4 — HOSTIL
+  - id: D4-00
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: gerado, busca: 'template cartela_degrau sobre a orla de Vice City à tarde; escada dos 5 degraus com o atual aceso', etiquetas: [cartela, vicecity, escada], dur_s: 2.5}
+    texto_tela: 'DEGRAU 4 — HOSTIL · Regra quebrada: usar força · faltam 3'
+    sfx: 'clique de trava do cofre'
+    duracao_alvo_s: 2.5
+
+  - id: D4-01
+    intencao: desenvolvimento
+    narracao: '[casual] O segundo degrau é o Hostil. <break time="0.3s" /> Esse aqui não tem paciência pra duto de ventilação. <break time="0.2s" /> Entra pela porta da frente e, se alguém atrapalhar, usa a força.'
+    visual:
+      - {fonte: web, busca: 'tela do perfil mostrando Hostil', etiquetas: [perfil, hostil], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ máscara sendo colocada', etiquetas: [gta6, mascara], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ entrada pela porta da frente', etiquetas: [gta6, joalheria], dur_s: 3.5}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ arma apontada para o salão', etiquetas: [gta6, hostil], dur_s: 3.5}
+    texto_tela: null
+    sfx: 'trilha ganha batida'
+    duracao_alvo_s: 13.0
+
+  - id: D4-02
+    intencao: revelacao
+    narracao: '[serious] Só que ele tem uma linha que não cruza: <break time="0.4s" /> derruba, <break time="0.2s" /> mas não mata.'
+    visual:
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ funcionários deitando no chão', etiquetas: [gta6, hostil], dur_s: 4.0}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ plano fechado do jogador', etiquetas: [gta6], dur_s: 4.0}
+    texto_tela: 'DERRUBA. NÃO MATA.'
+    sfx: 'impacto seco em "não mata"'
+    duracao_alvo_s: 8.0
+
+  - id: D4-03
+    intencao: contexto
+    narracao: 'É a outra escolha da Vangelico no GTA 5. Entrar armado, mandar todo mundo deitar e quebrar as vitrines contra o relógio. <break time="0.3s" /> Barulho tinha. <break time="0.2s" /> Mas ninguém precisava morrer.'
+    visual:
+      - {fonte: web, busca: 'GTA 5 Jewel Store Job abordagem armada, entrada', etiquetas: [gta5, vangelico], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 5 clientes deitando na Vangelico', etiquetas: [gta5, vangelico], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 5 vitrines quebrando na Vangelico', etiquetas: [gta5, vidro], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 5 cronômetro do assalto na tela', etiquetas: [gta5, timer], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 5 fuga de moto da Vangelico', etiquetas: [gta5, fuga], dur_s: 3.0}
+    texto_tela: null
+    sfx: 'alarme do GTA 5 ao fundo'
+    duracao_alvo_s: 15.0
+
+  - id: D4-04
+    intencao: desenvolvimento
+    narracao: 'No GTA 6, ele põe a máscara, entra e toma conta do salão. <break time="0.2s" /> Quebra as vitrines, pega o que dá e não fica um segundo a mais.'
+    visual:
+      - {fonte: web, busca: 'GTA 6 Lucia no comando do salão de uma joalheria (clipe a buscar; ver pendências)', etiquetas: [gta6, hostil, lucia, buscar], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ vitrine quebrando', etiquetas: [gta6, vidro], dur_s: 3.5}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ joias na sacola', etiquetas: [gta6, joias], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ saída apressada', etiquetas: [gta6, saida], dur_s: 3.5}
+    texto_tela: null
+    sfx: 'vidro quebrando sincronizado'
+    duracao_alvo_s: 13.0
+
+  - id: D4-05
+    intencao: revelacao
+    narracao: '[curious] E se o segurança reagir? <break time="0.4s" /> Tiro na perna. <break time="0.2s" /> Ou no ombro. <break time="0.3s" /> É exatamente isso que o jogo marca como Hostil: incapacitar sem matar.'
+    visual:
+      - {fonte: web, busca: 'segurança sacando arma na joalheria', etiquetas: [gta6, seguranca, conferir], dur_s: 3.0}
+      - {fonte: web, busca: 'tiro na perna do segurança, câmera lenta', etiquetas: [gta6, hostil, conferir], dur_s: 3.0}
+      - {fonte: web, busca: 'marcador amarelo de tiro que incapacita', etiquetas: [icone_amarelo], dur_s: 3.0}
+      - {fonte: web, busca: 'segurança caído e vivo', etiquetas: [gta6, hostil], dur_s: 3.0}
+    texto_tela: 'INCAPACITAR ≠ MATAR'
+    sfx: 'tiro com eco + câmera lenta'
+    duracao_alvo_s: 12.0
+
+  - id: D4-05b
+    intencao: revelacao
+    narracao: 'Só esse roubo aqui rendeu <VALOR>.'
+    visual:
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ valor do roubo na tela', etiquetas: [gta6, dinheiro, conferir], dur_s: 4.0}
+    texto_tela: '<VALOR> em destaque amarelo'
+    sfx: 'caixa registradora'
+    duracao_alvo_s: 4.0
+
+  - id: D4-06
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ vitrines quebrando, plano longo', etiquetas: [gta6, respiro], dur_s: 12.0}
+    texto_tela: null
+    sfx: 'respiro: som do jogo alto, trilha a −12 dB'
+    duracao_alvo_s: 12.0
+
+  - id: D4-DT
+    intencao: humor
+    narracao: '<DETALHE: uma frase curta sobre um detalhe que aparece no clipe do Hostil>'
+    visual:
+      - {fonte: web, busca: 'detalhe marcado na decupagem dos clipes do Hostil', etiquetas: [detalhe, conferir], dur_s: 5.0}
+    texto_tela: 'DETALHE'
+    sfx: null
+    duracao_alvo_s: 5.0
+
+  - id: D4-07
+    intencao: desenvolvimento
+    narracao: 'Na prática, o Hostil ainda conta como criminoso limpinho. <break time="0.2s" /> [laughs] Limpinho entre aspas, né. <break time="0.3s" /> Tem as mesmas vantagens do Profissional: o foco sobe com finalização furtiva e com tiro que incapacita, aquele que acende em amarelo, tipo um tiro no braço pra desarmar. <break time="0.3s" /> E ainda dá pra se render.'
+    visual:
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ saída pela porta', etiquetas: [gta6, saida], dur_s: 4.0}
+      - {fonte: web, busca: 'tiro no braço desarmando inimigo', etiquetas: [gta6, icone_amarelo], dur_s: 4.5}
+      - {fonte: web, busca: 'barra de foco subindo', etiquetas: [gta6, foco], dur_s: 4.5}
+      - {fonte: web, busca: 'finalização furtiva GTA 6', etiquetas: [gta6, furtivo], dur_s: 4.5}
+      - {fonte: web, busca: 'personagem se rendendo', etiquetas: [gta6, rendicao], dur_s: 4.5}
+    texto_tela: null
+    sfx: null
+    duracao_alvo_s: 22.0
+
+  - id: D4-08
+    intencao: revelacao
+    narracao: 'E a polícia pega mais leve com quem tá nesses dois primeiros níveis: <break time="0.2s" /> costuma vir de taser, não de fuzil. <break time="0.4s" /> [laughs] Bem diferente do GTA 5, onde era só encostar numa viatura pra levar uma estrela e tomar bala.'
+    visual:
+      - {fonte: web, busca: 'yt:Jo3xWCdK8AQ reação da polícia na saída', etiquetas: [gta6, policia, conferir], dur_s: 5.0}
+      - {fonte: web, busca: 'GTA 6 policial com taser', etiquetas: [gta6, taser], dur_s: 4.0}
+      - {fonte: gerado, busca: 'tela dividida: GTA 5 encostando na viatura, ganhando estrela e tomando bala à esquerda × GTA 6 policial chegando de taser à direita', etiquetas: [split, gta5, gta6], dur_s: 10.0}
+    texto_tela: 'TASER, NÃO FUZIL'
+    sfx: 'estalo de taser'
+    duracao_alvo_s: 19.0
+
+  - id: D4-09
+    intencao: transicao
+    narracao: '[serious] Até aqui, ninguém morreu. <break time="0.3s" /> E a polícia ainda vem de taser. Guarda essa palavra, taser… <break time="0.5s" /> porque daqui a pouco ela some.'
+    visual:
+      - {fonte: web, busca: 'policial com taser, zoom lento', etiquetas: [gta6, taser], dur_s: 6.0}
+      - {fonte: gerado, busca: 'congela o quadro e dessatura', etiquetas: [freeze], dur_s: 6.0}
+    texto_tela: 'GUARDA ESSA PALAVRA: TASER'
+    sfx: 'trilha vai baixando'
+    duracao_alvo_s: 12.0
+
+  - id: D4-10
+    intencao: transicao
+    narracao: '<break time="0.3s" /> A partir do próximo degrau, <break time="0.3s" /> a coisa muda.'
+    visual:
+      - {fonte: gerado, busca: 'tela escurecendo até o preto', etiquetas: [virada], dur_s: 5.0}
+    texto_tela: null
+    sfx: 'trilha para; 1 s de silêncio; batida grave'
+    duracao_alvo_s: 5.0
+
+  # DEGRAU 3 — BRUTAL
+  - id: D3-00
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: gerado, busca: 'template cartela_degrau, variação vermelha, sobre Vice City ao entardecer; escada dos 5 degraus com o atual aceso', etiquetas: [cartela, vicecity, escada], dur_s: 3.0}
+    texto_tela: 'DEGRAU 3 — BRUTAL · Regra quebrada: matar · faltam 2'
+    sfx: 'impacto + entra trilha nova, mais pesada'
+    duracao_alvo_s: 3.0
+
+  - id: D3-01
+    intencao: desenvolvimento
+    narracao: 'Terceiro degrau, o do meio: <break time="0.2s" /> o Brutal. <break time="0.3s" /> E é provavelmente onde a maioria dos jogadores vai parar. <break time="0.4s" /> [casual] Se foi aqui que você parou, já comenta aí: Brutal.'
+    visual:
+      - {fonte: web, busca: 'tela do perfil mostrando Brutal', etiquetas: [perfil, brutal], dur_s: 3.0}
+      - {fonte: web, busca: 'jogador saindo de carro mal estacionado com arma na mão', etiquetas: [gta6, brutal], dur_s: 3.5}
+      - {fonte: web, busca: 'yt:JCkGkPPGbok caminhando até a joalheria armado', etiquetas: [gta6, brutal], dur_s: 3.5}
+      - {fonte: gerado, busca: 'template CTA comentários curto (kit_visual) sobre gameplay do Brutal', etiquetas: [cta], dur_s: 4.0}
+    texto_tela: 'COMENTA: FOI AQUI QUE VOCÊ PAROU? (no último corte)'
+    sfx: null
+    duracao_alvo_s: 14.0
+
+  - id: D3-02
+    intencao: desenvolvimento
+    narracao: '[serious] Aqui, a linha que o Hostil não cruzava já era. <break time="0.3s" /> O Brutal mata inimigo, polícia e civil. <break time="0.2s" /> Tiro na cabeça. <break time="0.2s" /> Terminar quem já tá no chão. <break time="0.4s" /> O jogo anota tudo.'
+    visual:
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @00:50 tiroteio', etiquetas: [gta6, brutal], dur_s: 2.5}
+      - {fonte: web, busca: 'marcador vermelho de tiro na cabeça', etiquetas: [icone_vermelho], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @03:40 policial caindo', etiquetas: [gta6, brutal], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @01:00 tiroteio, plano aberto', etiquetas: [gta6, brutal], dur_s: 2.5}
+      - {fonte: web, busca: 'tela do perfil com ícone Brutal', etiquetas: [perfil], dur_s: 2.5}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @01:10 aviso de perfil violento', etiquetas: [aviso], dur_s: 2.5}
+    texto_tela: null
+    sfx: 'tiros secos sincronizados com "tiro na cabeça"'
+    duracao_alvo_s: 15.0
+
+  - id: D3-03
+    intencao: desenvolvimento
+    narracao: 'Mas o jogo é justo num ponto: <break time="0.3s" /> se defender não conta contra você. O que pesa é atacar quem tá desarmado ou não tá reagindo.'
+    visual:
+      - {fonte: web, busca: 'jogador se protegendo atrás de cobertura e revidando', etiquetas: [gta6, defesa], dur_s: 4.0}
+      - {fonte: web, busca: 'inimigo armado atirando primeiro', etiquetas: [gta6, defesa], dur_s: 4.0}
+      - {fonte: web, busca: 'tela do perfil sem mudança', etiquetas: [perfil], dur_s: 4.0}
+    texto_tela: 'SE DEFENDER NÃO CONTA'
+    sfx: null
+    duracao_alvo_s: 12.0
+
+  - id: D3-04
+    intencao: contexto
+    narracao: '[casual] No GTA 5, isso era o dia a dia. O cara entrava na loja de conveniência, apontava a arma pro atendente e, se desse vontade, atirava. <break time="0.3s" /> O jogo não anotava nada. <break time="0.2s" /> Perdeu as estrelas, ficha limpa.'
+    visual:
+      - {fonte: web, busca: 'GTA 5 assalto a loja de conveniência, entrada', etiquetas: [gta5, loja], dur_s: 3.5}
+      - {fonte: web, busca: 'GTA 5 arma apontada pro atendente', etiquetas: [gta5, loja], dur_s: 3.5}
+      - {fonte: web, busca: 'GTA 5 sacola enchendo de dinheiro', etiquetas: [gta5, loja], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 5 tiro no caixa e fuga', etiquetas: [gta5, loja], dur_s: 4.0}
+      - {fonte: web, busca: 'GTA 5 estrelas sumindo', etiquetas: [gta5, estrelas], dur_s: 4.0}
+    texto_tela: 'FICHA LIMPA (mesmo carimbo de G02)'
+    sfx: 'carimbo'
+    duracao_alvo_s: 18.0
+
+  - id: D3-05
+    intencao: desenvolvimento
+    narracao: 'Na joalheria, o Brutal não negocia. <break time="0.3s" /> O segurança reagiu? <break time="0.2s" /> Cai na hora. <break time="0.3s" /> A polícia chegou na porta? <break time="0.2s" /> Troca tiro.'
+    visual:
+      - {fonte: web, busca: 'yt:JCkGkPPGbok confronto com segurança na joalheria', etiquetas: [gta6, brutal, conferir], dur_s: 3.5}
+      - {fonte: web, busca: 'yt:JCkGkPPGbok tiro na cabeça do segurança', etiquetas: [gta6, brutal, conferir], dur_s: 3.5}
+      - {fonte: web, busca: 'yt:JCkGkPPGbok troca de tiro na porta com a polícia', etiquetas: [gta6, brutal, conferir], dur_s: 4.0}
+    texto_tela: null
+    sfx: 'tiro em cada pergunta respondida'
+    duracao_alvo_s: 11.0
+
+  - id: D3-06
+    intencao: humor
+    narracao: '[laughs] Não tem rota marcada nem carro esperando. <break time="0.2s" /> O carro de fuga é o primeiro que passar na frente.'
+    visual:
+      - {fonte: web, busca: 'jogador puxando motorista e roubando carro na rua', etiquetas: [gta6, fuga], dur_s: 4.0}
+      - {fonte: web, busca: 'arrancada desastrada batendo no poste', etiquetas: [gta6, fuga], dur_s: 4.0}
+    texto_tela: null
+    sfx: 'pneu cantando'
+    duracao_alvo_s: 8.0
+
+  - id: D3-07
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @01:20 confronto, plano longo', etiquetas: [gta6, respiro], dur_s: 10.0}
+    texto_tela: null
+    sfx: 'respiro: tiroteio do jogo em primeiro plano, trilha a −12 dB'
+    duracao_alvo_s: 10.0
+
+  - id: D3-DT
+    intencao: humor
+    narracao: '<DETALHE: uma frase curta sobre um detalhe que aparece no clipe do Brutal>'
+    visual:
+      - {fonte: web, busca: 'detalhe marcado na decupagem dos clipes do Brutal', etiquetas: [detalhe, conferir], dur_s: 5.0}
+    texto_tela: 'DETALHE'
+    sfx: null
+    duracao_alvo_s: 5.0
+
+  - id: D3-08
+    intencao: revelacao
+    narracao: 'E aqui o GTA 6 faz uma coisa interessante: <break time="0.3s" /> ele muda o que te recompensa. <break time="0.4s" /> [curious] Lembra do amarelo? <break time="0.5s" /> No Profissional e no Hostil, o foco subia com o tiro que incapacita, o marcador amarelo. <break time="0.3s" /> No Brutal, ele sobe com tiro na cabeça. <break time="0.3s" /> O marcador vermelho.'
+    visual:
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @00:50 aviso de perfil violento', etiquetas: [aviso], dur_s: 4.0}
+      - {fonte: catalogo, busca: 'reuso do corte final de D5-08 (amarelo congelado)', etiquetas: [icone_amarelo, callback], dur_s: 3.5}
+      - {fonte: web, busca: 'marcador amarelo de tiro que incapacita', etiquetas: [icone_amarelo], dur_s: 4.0}
+      - {fonte: web, busca: 'tiro na cabeça com marcador vermelho', etiquetas: [icone_vermelho], dur_s: 4.5}
+      - {fonte: web, busca: 'barra de foco subindo com tiro na cabeça', etiquetas: [foco], dur_s: 4.0}
+      - {fonte: gerado, busca: 'amarelo virando vermelho em transição (template do kit)', etiquetas: [callback], dur_s: 3.0}
+    texto_tela: 'AMARELO → VERMELHO'
+    sfx: 'ding do D5 + o mesmo ding distorcido no vermelho'
+    duracao_alvo_s: 23.0
+
+  - id: D3-09
+    intencao: revelacao
+    narracao: 'Ou seja, o jogo não te pune por ser violento. <break time="0.3s" /> Ele se adapta ao criminoso que você escolheu ser.'
+    visual:
+      - {fonte: web, busca: 'tela do perfil com ícone Brutal, zoom lento', etiquetas: [perfil], dur_s: 4.5}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @01:40 jogador entrando na viatura', etiquetas: [gta6, fuga], dur_s: 4.5}
+    texto_tela: null
+    sfx: null
+    duracao_alvo_s: 9.0
+
+  - id: D3-10
+    intencao: desenvolvimento
+    narracao: '[excited] E olha a fuga desse cara: <break time="0.2s" /> rouba uma viatura da própria polícia. <break time="0.3s" /> Quando ela não aguenta mais, troca por outra. <break time="0.3s" /> Depois rouba um caminhão e passa por cima do que estiver na frente. <break time="0.6s" /> Até que não dá mais.'
+    visual:
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @01:45 fuga na viatura 429', etiquetas: [gta6, fuga], dur_s: 6.0}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @03:20 troca de viatura', etiquetas: [gta6, fuga], dur_s: 5.0}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @07:38 caminhão esmagando viatura', etiquetas: [gta6, caminhao], dur_s: 6.0}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @07:58 batida forte', etiquetas: [gta6, batida], dur_s: 6.0}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @08:50 últimos segundos antes do Wasted', etiquetas: [gta6, fuga], dur_s: 3.0}
+    texto_tela: null
+    sfx: 'sirenes contínuas; batida com impacto alto'
+    duracao_alvo_s: 26.0
+
+  - id: D3-11
+    intencao: humor
+    narracao: ''
+    visual:
+      - {fonte: gerado, busca: 'yt:9TLwyuGDSmI @09:07 quadro do impacto congelado com zoom curto', etiquetas: [gta6, freeze], dur_s: 0.6}
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @09:08 tela Wasted', etiquetas: [gta6, wasted], dur_s: 3.0}
+    texto_tela: null
+    sfx: 'trilha corta no congelamento; só o som do Wasted'
+    duracao_alvo_s: 3.6
+
+  - id: D3-12
+    intencao: transicao
+    narracao: '[laughs] Esse não escapou. <break time="0.4s" /> E o cara que escapa da maior perseguição do vídeo? <break time="0.3s" /> Calma, a gente ainda não chegou nele. <break time="0.4s" /> [serious] Antes, vem o degrau em que o jogo te avisa na cara o que você virou.'
+    visual:
+      - {fonte: web, busca: 'yt:9TLwyuGDSmI @09:10 Wasted em câmera lenta', etiquetas: [gta6, wasted], dur_s: 5.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @09:40 helicóptero, só silhueta e desfocado', etiquetas: [cofre, teaser], dur_s: 2.0}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @01:48 aviso na tela, borrado (teaser do próximo degrau)', etiquetas: [teaser, conferir], dur_s: 5.0}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @02:30 corredores do hospital, sem placa', etiquetas: [gta6, teaser], dur_s: 5.0}
+      - {fonte: gerado, busca: 'tela preta', etiquetas: [virada], dur_s: 1.0}
+    texto_tela: null
+    sfx: 'riser curto; corte seco no preto'
+    duracao_alvo_s: 18.0
+
+  # DEGRAU 2 — PSICOPATA
+  - id: D2-00
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: gerado, busca: 'template cartela_degrau, variação com glitch, sobre Vice City à noite com neon; escada dos 5 degraus com o atual aceso', etiquetas: [cartela, vicecity, escada], dur_s: 3.0}
+    texto_tela: 'DEGRAU 2 — PSICOPATA · Regra quebrada: o próprio objetivo · falta 1'
+    sfx: 'impacto com distorção'
+    duracao_alvo_s: 3.0
+
+  - id: D2-01
+    intencao: humor
+    narracao: '[serious] O Psicopata. <break time="0.6s" /> [laughs] Mano, esse cara não tem plano nenhum.'
+    visual:
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @02:30 corredores, sem placa', etiquetas: [gta6, psicopata], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @02:40 escritório sendo invadido', etiquetas: [gta6, psicopata], dur_s: 3.0}
+    texto_tela: null
+    sfx: null
+    duracao_alvo_s: 6.0
+
+  - id: D2-02
+    intencao: humor
+    narracao: 'Pra falar a verdade, nem sei se ele quer as joias. <break time="0.3s" /> Polícia chegou? <break time="0.3s" /> [excited] Pra ele, essa é a parte boa.'
+    visual:
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @02:53 explosão', etiquetas: [gta6, explosao], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @03:30 policiais chegando', etiquetas: [gta6, policia], dur_s: 3.5}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @03:50 troca de tiros', etiquetas: [gta6, policia], dur_s: 3.5}
+    texto_tela: null
+    sfx: 'trilha sobe junto com "a parte boa"'
+    duracao_alvo_s: 10.0
+
+  - id: D2-03
+    intencao: desenvolvimento
+    narracao: 'E o jogo sabe reconhecer esse cara. Matar polícia e civil aos montes, matar bicho de estimação, jogar corpo de prédio… <break time="0.4s" /> [laughs] até passar de carro por cima de túmulo conta ponto pro Psicopata.'
+    visual:
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @04:00 combate contra policiais', etiquetas: [gta6, policia], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @04:20 combate em corredor', etiquetas: [gta6, policia], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @04:53 SWAT de rapel no telhado', etiquetas: [gta6, swat], dur_s: 3.0}
+      - {fonte: web, busca: 'GTA 6 carro passando por cima de túmulos no cemitério', etiquetas: [gta6, cemiterio, buscar], dur_s: 4.0}
+      - {fonte: web, busca: 'tela do perfil com ícone Psicopata', etiquetas: [perfil], dur_s: 3.0}
+    texto_tela: 'ATÉ TÚMULO CONTA'
+    sfx: null
+    duracao_alvo_s: 16.0
+
+  - id: D2-04
+    intencao: revelacao
+    narracao: '[excited] Olha aí o aviso que eu falei: <break time="0.3s" /> o Jason acabou de virar Psicopata.'
+    visual:
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @01:48 aviso Jason is now psycho, com zoom', etiquetas: [aviso, psicopata, conferir], dur_s: 4.0}
+      - {fonte: gerado, busca: 'congela o aviso com contorno amarelo do kit', etiquetas: [freeze], dur_s: 3.0}
+    texto_tela: 'destaque no aviso'
+    sfx: 'notificação do jogo + impacto'
+    duracao_alvo_s: 7.0
+
+  - id: D2-05
+    intencao: humor
+    narracao: 'Se você jogou GTA 5, você conhece esse cara. <break time="0.5s" /> Ele tem até nome: <break time="0.5s" /> [laughs] Trevor Philips.'
+    visual:
+      - {fonte: web, busca: 'GTA 5 Trevor em caos de cinco estrelas', etiquetas: [gta5, trevor], dur_s: 4.0}
+      - {fonte: web, busca: 'Trevor Philips PNG render (o mesmo de G12) entrando', etiquetas: [gta5, trevor, png, callback], dur_s: 4.0}
+    texto_tela: 'TREVOR PHILIPS'
+    sfx: 'risada do Trevor do jogo, se houver no clipe'
+    duracao_alvo_s: 8.0
+
+  - id: D2-06
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: web, busca: 'GTA 5 Trevor explosões e perseguição, plano longo', etiquetas: [gta5, trevor, respiro], dur_s: 7.0}
+    texto_tela: null
+    sfx: 'respiro: só áudio do jogo'
+    duracao_alvo_s: 7.0
+
+  - id: D2-DT
+    intencao: humor
+    narracao: '<DETALHE: uma frase curta sobre um detalhe que aparece no clipe do Psicopata>'
+    visual:
+      - {fonte: web, busca: 'detalhe marcado na decupagem dos clipes do Psicopata', etiquetas: [detalhe, conferir], dur_s: 5.0}
+    texto_tela: 'DETALHE'
+    sfx: null
+    duracao_alvo_s: 5.0
+
+  - id: D2-07
+    intencao: desenvolvimento
+    narracao: 'Na joalheria, o Psicopata entra atirando. <break time="0.2s" /> As vitrines estouram antes do primeiro grito, <break time="0.2s" /> e as joias são quase um detalhe.'
+    visual:
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM entrada atirando na joalheria', etiquetas: [gta6, psicopata, conferir], dur_s: 3.5}
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM vitrines estourando', etiquetas: [gta6, vidro, conferir], dur_s: 3.5}
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM joias no chão', etiquetas: [gta6, joias, conferir], dur_s: 4.0}
+    texto_tela: null
+    sfx: 'vidro + tiros'
+    duracao_alvo_s: 11.0
+
+  - id: D2-08
+    intencao: revelacao
+    narracao: '[whispers] Porque, pra ele, <break time="0.3s" /> o assalto de verdade começa quando a primeira sirene toca.'
+    visual:
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM saída da joalheria em câmera lenta', etiquetas: [gta6, conferir], dur_s: 4.0}
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM primeira viatura chegando', etiquetas: [gta6, policia, conferir], dur_s: 3.0}
+    texto_tela: null
+    sfx: 'silêncio no sussurro; sirene entra exatamente em "toca"'
+    duracao_alvo_s: 7.0
+
+  - id: D2-09
+    intencao: revelacao
+    narracao: '[serious] E aqui o jogo responde à altura. <break time="0.4s" /> Lembra do taser? <break time="0.7s" /> Sumiu. <break time="0.4s" /> Com o perfil de Psicopata, se render deixa de ser opção: a polícia nem te oferece mais. Ela não sai atirando à toa, mas a chance de vir com força letal fica bem maior.'
+    visual:
+      - {fonte: catalogo, busca: 'reuso do freeze do taser de D4-09', etiquetas: [taser, callback], dur_s: 3.0}
+      - {fonte: gerado, busca: 'taser some num glitch (template do kit)', etiquetas: [callback], dur_s: 2.0}
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM polícia partindo pra cima', etiquetas: [gta6, policia, conferir], dur_s: 5.0}
+      - {fonte: web, busca: 'yt:VtQxuP95vhE policiais com fuzil', etiquetas: [gta6, policia], dur_s: 5.0}
+      - {fonte: web, busca: 'yt:VtQxuP95vhE estrelas subindo', etiquetas: [gta6, estrelas], dur_s: 4.0}
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM perseguição', etiquetas: [gta6, fuga, conferir], dur_s: 5.0}
+    texto_tela: 'SEM TASER. SEM RENDIÇÃO.'
+    sfx: 'estalo de taser invertido no "sumiu"'
+    duracao_alvo_s: 24.0
+
+  - id: D2-10
+    intencao: desenvolvimento
+    narracao: '[excited] Primeiro, uma viatura. <break time="0.3s" /> Depois, mais três. <break time="0.3s" /> Depois… <break time="0.5s" /> <VALOR: fechar no número de estrelas que o clipe atingir>.'
+    visual:
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM escalada da perseguição, estrela por estrela', etiquetas: [gta6, estrelas, conferir], dur_s: 8.0}
+    texto_tela: 'contador de estrelas subindo'
+    sfx: 'cada estrela = um impacto'
+    duracao_alvo_s: 8.0
+
+  - id: D2-11
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: web, busca: 'yt:VeQh-m4N0tM pico da perseguição, plano longo', etiquetas: [gta6, respiro, conferir], dur_s: 20.0}
+    texto_tela: null
+    sfx: 'respiro: perseguição em primeiro plano, trilha a −12 dB'
+    duracao_alvo_s: 20.0
+
+  - id: D2-12
+    intencao: transicao
+    narracao: '[serious] Só que até aqui, tudo tem volta. Dá pra sair do Psicopata e descer até o Profissional. <break time="0.3s" /> Mas se você continua, o jogo começa a avisar: o ícone racha, aparecem alertas, e ainda dá tempo de parar. <break time="0.5s" /> Se não parar, vem o último degrau. <break time="0.8s" /> [whispers] E esse não tem volta.'
+    visual:
+      - {fonte: web, busca: 'tela do perfil com ícone Psicopata', etiquetas: [perfil], dur_s: 5.0}
+      - {fonte: web, busca: 'ícone rachando com alertas', etiquetas: [perfil, alerta, buscar], dur_s: 6.0}
+      - {fonte: web, busca: 'alerta de perfil na tela', etiquetas: [alerta, buscar], dur_s: 5.0}
+      - {fonte: gerado, busca: 'ícone Irremediável desfocado (o mesmo de G11), zoom lento', etiquetas: [cofre, callback], dur_s: 7.0}
+      - {fonte: gerado, busca: 'tela preta', etiquetas: [silencio], dur_s: 3.0}
+    texto_tela: null
+    sfx: 'trilha some aos poucos; "não tem volta" no silêncio total'
+    duracao_alvo_s: 26.0
+
+  # DEGRAU 1 — IRREMEDIÁVEL (o cofre)
+  - id: D1-00
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: gerado, busca: 'template cartela_degrau, porta do cofre abrindo, sobre Vice City de madrugada; escada dos 5 degraus com o último aceso', etiquetas: [cartela, cofre, vicecity, escada], dur_s: 4.0}
+    texto_tela: 'DEGRAU 1 — IRREMEDIÁVEL · Regra quebrada: todas · o último'
+    sfx: 'trava do cofre girando (callback de G12)'
+    duracao_alvo_s: 4.0
+
+  - id: D1-01
+    intencao: revelacao
+    narracao: '[serious] O último degrau: <break time="0.5s" /> o Irremediável.'
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @00:10 chegada ao banco, plano lento', etiquetas: [gta6, lombank], dur_s: 5.0}
+    texto_tela: null
+    sfx: 'grave contínuo'
+    duracao_alvo_s: 5.0
+
+  - id: D1-02
+    intencao: desenvolvimento
+    narracao: 'Você não chega aqui num assalto só. Chega sendo Psicopata, de novo e de novo, <break time="0.2s" /> sem fazer uma única coisa não violenta no caminho.'
+    visual:
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @03:30 combate com policiais', etiquetas: [gta6, hospital], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @02:00 mezanino', etiquetas: [gta6, lombank], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @04:53 SWAT no telhado', etiquetas: [gta6, swat], dur_s: 3.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @02:30 helicópteros da polícia', etiquetas: [gta6, lombank], dur_s: 3.0}
+    texto_tela: null
+    sfx: null
+    duracao_alvo_s: 12.0
+
+  - id: D1-03
+    intencao: revelacao
+    narracao: 'E quando chega, <break time="0.3s" /> acabou. <break time="0.6s" /> O Irremediável é permanente. Não adianta passar uma semana sendo bonzinho depois: <break time="0.3s" /> naquele save, o seu personagem fica marcado pra sempre.'
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @02:40 tiroteio no mezanino', etiquetas: [gta6, lombank], dur_s: 5.0}
+      - {fonte: web, busca: 'GTA 6 personagem andando de boa na rua (ironia)', etiquetas: [gta6, rua], dur_s: 5.0}
+      - {fonte: gerado, busca: 'ícone Irremediável, agora nítido, com carimbo PERMANENTE', etiquetas: [perfil, cofre], dur_s: 5.0}
+    texto_tela: 'PERMANENTE'
+    sfx: 'carimbo pesado (versão grave do carimbo de G02)'
+    duracao_alvo_s: 15.0
+
+  - id: D1-04
+    intencao: revelacao
+    narracao: 'E o jogo não faz cerimônia. <break time="0.3s" /> Um aviso na tela, e pronto: <break time="0.5s" /> Irremediável.'
+    visual:
+      - {fonte: web, busca: 'yt:fFXsjtzdskw @08:00 SWAT no corredor (sem tela de aviso)', etiquetas: [gta6, swat], dur_s: 9.0}
+    texto_tela: null
+    sfx: 'impacto em "Irremediável"'
+    duracao_alvo_s: 9.0
+
+  - id: D1-05
+    intencao: contexto
+    narracao: '[casual] No GTA 5, nada disso existia. Você destruía Los Santos de manhã, perdia as estrelas à tarde e, à noite, <break time="0.2s" /> tava andando de boa na rua. <break time="0.3s" /> Sem marca nenhuma.'
+    visual:
+      - {fonte: web, busca: 'GTA 5 caos de manhã, explosões', etiquetas: [gta5, caos], dur_s: 4.0}
+      - {fonte: web, busca: 'GTA 5 estrelas sumindo à tarde', etiquetas: [gta5, estrelas], dur_s: 4.0}
+      - {fonte: gerado, busca: 'tela dividida: GTA 5 andando normal pela rua à noite à esquerda × GTA 6 com o ícone Irremediável fixo na tela à direita', etiquetas: [split, gta5, gta6], dur_s: 4.0}
+      - {fonte: gerado, busca: 'carimbo FICHA LIMPA (o mesmo de G02)', etiquetas: [callback], dur_s: 3.0}
+    texto_tela: 'MANHÃ → TARDE → NOITE'
+    sfx: 'carimbo'
+    duracao_alvo_s: 15.0
+
+  - id: D1-06
+    intencao: revelacao
+    narracao: '[serious] No GTA 6, a cidade esquece a perseguição. <break time="0.6s" /> O seu perfil, não.'
+    visual:
+      - {fonte: web, busca: 'GTA 6 rua calma após perseguição', etiquetas: [gta6, rua], dur_s: 3.5}
+      - {fonte: gerado, busca: 'ícone Irremediável nítido', etiquetas: [perfil], dur_s: 3.5}
+    texto_tela: null
+    sfx: 'silêncio antes de "não"'
+    duracao_alvo_s: 7.0
+
+  - id: D1-07
+    intencao: desenvolvimento
+    narracao: 'Esse aqui é tão fora da curva que joalheria não basta. <break time="0.3s" /> Ele vai direto no banco: <break time="0.2s" /> o Lombank, no centro de Vice City. <break time="0.4s" /> Ele não tá roubando joia. <break time="0.2s" /> Tá indo até onde o jogo deixa ir.'
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @00:10 chegada ao Lombank', etiquetas: [gta6, lombank], dur_s: 5.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @00:20 fachada do banco', etiquetas: [gta6, lombank], dur_s: 5.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @02:00 tiros do mezanino contra a polícia', etiquetas: [gta6, lombank], dur_s: 5.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @02:20 mezanino, outro ângulo', etiquetas: [gta6, lombank], dur_s: 5.0}
+    texto_tela: 'LOMBANK · VICE CITY'
+    sfx: 'trilha pesada volta'
+    duracao_alvo_s: 20.0
+
+  - id: D1-08
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @02:30 pico do mezanino, plano longo', etiquetas: [gta6, respiro], dur_s: 12.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @07:55 SWAT descendo de rapel, plano longo', etiquetas: [gta6, swat, respiro], dur_s: 13.0}
+    texto_tela: null
+    sfx: 'respiro: tiroteio do jogo em primeiro plano, trilha a −12 dB'
+    duracao_alvo_s: 25.0
+
+  - id: D1-DT
+    intencao: humor
+    narracao: '<DETALHE: uma frase curta sobre um detalhe que aparece no clipe do Lombank ou do hospital>'
+    visual:
+      - {fonte: web, busca: 'detalhe marcado na decupagem dos clipes do Irremediável', etiquetas: [detalhe, conferir], dur_s: 5.0}
+    texto_tela: 'DETALHE'
+    sfx: null
+    duracao_alvo_s: 5.0
+
+  - id: D1-09
+    intencao: revelacao
+    narracao: '[serious] E o jogo cobra. <break time="0.7s" /> Lembra que eu falei que era melhor nem sair de casa? <break time="0.4s" /> Agora você entende.'
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @08:10 SWAT cercando', etiquetas: [gta6, swat], dur_s: 5.0}
+      - {fonte: web, busca: 'GTA 6 porta de casa / personagem saindo de casa', etiquetas: [gta6, callback], dur_s: 5.0}
+    texto_tela: '"É MELHOR NEM SAIR DE CASA"'
+    sfx: null
+    duracao_alvo_s: 10.0
+
+  - id: D1-10
+    intencao: revelacao
+    narracao: 'Cometeu qualquer crime, a polícia atira. Não tenta prender, não oferece rendição. <break time="0.4s" /> [sarcastic] Ironicamente, ela volta a ser a polícia do GTA 5.'
+    visual:
+      - {fonte: web, busca: 'GTA 6 policial atirando sem aviso', etiquetas: [gta6, policia, buscar], dur_s: 4.0}
+      - {fonte: web, busca: 'GTA 6 polícia abrindo fogo de imediato', etiquetas: [gta6, policia, buscar], dur_s: 4.0}
+      - {fonte: gerado, busca: 'tela dividida: GTA 5 polícia atirando logo de cara (o mesmo de D4-08) à esquerda × GTA 6 polícia atirando no Irremediável à direita', etiquetas: [split, gta5, gta6, callback], dur_s: 4.0}
+    texto_tela: null
+    sfx: null
+    duracao_alvo_s: 12.0
+
+  - id: D1-11
+    intencao: revelacao
+    narracao: '[serious] E vem o detalhe mais pesado: <break time="0.4s" /> o foco não sobe com mais nada. <break time="0.2s" /> Nem furtividade. <break time="0.3s" /> Nem tiro na cabeça.'
+    visual:
+      - {fonte: web, busca: 'barra de foco parada após ação', etiquetas: [foco, buscar], dur_s: 5.0}
+      - {fonte: gerado, busca: 'marcadores amarelo e vermelho apagando (template do kit)', etiquetas: [callback], dur_s: 5.0}
+    texto_tela: 'FOCO TRAVADO'
+    sfx: 'ding do D5 cortado no meio'
+    duracao_alvo_s: 10.0
+
+  - id: D1-12
+    intencao: revelacao
+    narracao: 'Lembra que eu falei que o jogo não te pune por ser violento? <break time="0.4s" /> Pois é. <break time="0.5s" /> Aqui ele pune. É o único perfil que o jogo não recompensa de jeito nenhum.'
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @08:20 SWAT no mezanino', etiquetas: [gta6, swat], dur_s: 7.0}
+      - {fonte: gerado, busca: 'ícone Irremediável nítido, zoom lento', etiquetas: [perfil], dur_s: 7.0}
+    texto_tela: 'AQUI ELE PUNE'
+    sfx: null
+    duracao_alvo_s: 14.0
+
+  - id: D1-13
+    intencao: desenvolvimento
+    narracao: 'E a conta não fica só no combate. <break time="0.3s" /> Sem spoiler: <break time="0.2s" /> alguns finais ficam indisponíveis pra quem tá no Psicopata ou no Irremediável. Jason e Lucia conversam de outro jeito entre eles, e os outros personagens também passam a te tratar diferente.'
+    visual:
+      - {fonte: web, busca: 'GTA 6 Jason e Lucia reagindo de forma diferente por causa do perfil, cena sem spoiler (ver pendência D1-13)', etiquetas: [gta6, jason, lucia, buscar, conferir], dur_s: 7.0}
+      - {fonte: web, busca: 'GTA 6 Jason e Lucia juntos em gameplay', etiquetas: [gta6, jason, lucia], dur_s: 7.0}
+      - {fonte: web, busca: 'GTA 6 personagem secundário conversando com o jogador', etiquetas: [gta6, buscar], dur_s: 6.0}
+    texto_tela: 'SEM SPOILER'
+    sfx: 'trilha mais emocional'
+    duracao_alvo_s: 20.0
+
+  - id: D1-14
+    intencao: revelacao
+    narracao: '[curious] E o desfecho? <break time="0.6s" /> [excited] Dessa vez ele escapa. Rouba um helicóptero no topo do banco, atravessa a cidade e salta de paraquedas no subúrbio.'
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @09:10 roubo do helicóptero no heliponto', etiquetas: [gta6, helicoptero], dur_s: 8.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @09:30 voo entre os arranha-céus', etiquetas: [gta6, helicoptero], dur_s: 12.0}
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @11:15 salto e paraquedas sobre o subúrbio', etiquetas: [gta6, paraquedas], dur_s: 10.0}
+    texto_tela: null
+    sfx: 'trilha no máximo do vídeo; hélice alta'
+    duracao_alvo_s: 30.0
+
+  - id: D1-15
+    intencao: revelacao
+    narracao: '<break time="0.5s" /> [serious] Da polícia, ele escapou. <break time="0.7s" /> Do perfil, não.'
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @11:50 pouso do paraquedas, plano aberto', etiquetas: [gta6, paraquedas], dur_s: 4.0}
+      - {fonte: gerado, busca: 'ícone Irremediável sobre o quadro congelado', etiquetas: [perfil, cofre], dur_s: 2.0}
+    texto_tela: null
+    sfx: 'trilha corta seco no "não"'
+    duracao_alvo_s: 6.0
+
+  # FECHAMENTO
+  - id: F01
+    intencao: transicao
+    narracao: ''
+    visual:
+      - {fonte: web, busca: 'yt:4exFH-lq9uE @09:15 helicóptero decolando do Lombank', etiquetas: [gta6, helicoptero], dur_s: 4.0}
+    texto_tela: null
+    sfx: 'trilha calma volta'
+    duracao_alvo_s: 4.0
+
+  - id: F02
+    intencao: cta
+    narracao: '[casual] Cinco degraus, <break time="0.2s" /> e cinco criminosos que não têm nada a ver uns com os outros.'
+    visual:
+      - {fonte: web, busca: 'tela do perfil passando pelos cinco ícones na ordem da escada', etiquetas: [perfil], dur_s: 7.0}
+    texto_tela: null
+    sfx: null
+    duracao_alvo_s: 7.0
+
+  - id: F03
+    intencao: cta
+    narracao: 'O Profissional, que sai sem ninguém saber. <break time="0.3s" /> O Hostil, que derruba, mas não mata. <break time="0.3s" /> O Brutal, que mata e faz o jogo mudar a recompensa. <break time="0.3s" /> O Psicopata, que transforma o roubo em guerra. <break time="0.5s" /> E o Irremediável, que vai tão longe que não dá mais pra voltar.'
+    visual:
+      - {fonte: catalogo, busca: 'ícone Profissional + melhor corte de D5-04', etiquetas: [callback, profissional], dur_s: 4.5}
+      - {fonte: catalogo, busca: 'ícone Hostil + melhor corte de D4-05', etiquetas: [callback, hostil], dur_s: 4.5}
+      - {fonte: catalogo, busca: 'ícone Brutal + caminhão de D3-10', etiquetas: [callback, brutal], dur_s: 4.5}
+      - {fonte: catalogo, busca: 'ícone Psicopata + explosão de D2-02', etiquetas: [callback, psicopata], dur_s: 4.5}
+      - {fonte: catalogo, busca: 'ícone Irremediável + helicóptero de D1-14', etiquetas: [callback, irremediavel], dur_s: 6.0}
+    texto_tela: 'nome de cada perfil sincronizado com a fala'
+    sfx: 'clique de trava do cofre em cada perfil'
+    duracao_alvo_s: 24.0
+
+  - id: F04
+    intencao: cta
+    narracao: 'E esse sistema divide a comunidade. Tem quem ache que o jogo tá punindo justamente o que sempre foi a graça do GTA: <break time="0.2s" /> sair tocando o terror. <break time="0.4s" /> E tem quem curta exatamente isso: a cidade finalmente reage ao tipo de criminoso que você é. <break time="0.4s" /> Os dois lados têm um ponto.'
+    visual:
+      - {fonte: catalogo, busca: 'caos do Psicopata (D2-11)', etiquetas: [callback], dur_s: 5.0}
+      - {fonte: web, busca: 'print de post ou comentário real reclamando que o sistema pune o caos', etiquetas: [comunidade, print, buscar], dur_s: 2.5}
+      - {fonte: catalogo, busca: 'assalto limpo do Profissional (D5-05)', etiquetas: [callback], dur_s: 5.0}
+      - {fonte: web, busca: 'print de post ou comentário real elogiando a cidade que reage', etiquetas: [comunidade, print, buscar], dur_s: 2.5}
+      - {fonte: web, busca: 'terceiro print, do lado que tiver mais repercussão', etiquetas: [comunidade, print, buscar], dur_s: 2.5}
+      - {fonte: gerado, busca: 'tela dividida: caos à esquerda, furtivo à direita', etiquetas: [split], dur_s: 4.5}
+    texto_tela: 'TERROR LIBERADO × CIDADE QUE REAGE'
+    sfx: null
+    duracao_alvo_s: 22.0
+
+  - id: F05
+    intencao: cta
+    narracao: '[excited] E agora eu quero saber de você. <break time="0.3s" /> Segura a seta pra direita aí no seu jogo e me conta nos comentários: em que nível tá o seu Jason? <break time="0.3s" /> E a sua Lucia? <break time="0.4s" /> [laughs] Porque cada um tem o seu, e eu aposto que tem muita gente com o Jason num nível e a Lucia em outro completamente diferente.'
+    visual:
+      - {fonte: web, busca: 'GTA 6 segurando seta direita: aba Jason & Lucia abrindo', etiquetas: [perfil, tutorial], dur_s: 9.0}
+      - {fonte: web, busca: 'aba do perfil com Jason e Lucia em níveis diferentes', etiquetas: [perfil, buscar], dur_s: 9.0}
+      - {fonte: web, busca: 'GTA 6 Lucia em gameplay, plano de destaque', etiquetas: [gta6, lucia], dur_s: 4.0}
+      - {fonte: gerado, busca: 'template CTA comentários (kit_visual)', etiquetas: [cta], dur_s: 5.0}
+    texto_tela: 'COMENTA: EM QUE NÍVEL TÁ O SEU JASON? E A LUCIA?'
+    sfx: null
+    duracao_alvo_s: 27.0
+
+  - id: F06
+    intencao: cta
+    narracao: '<break time="0.4s" /> Cofre fechado. <break time="0.3s" /> Te vejo na próxima.'
+    visual:
+      - {fonte: gerado, busca: 'template encerramento do cofre (kit_visual)', etiquetas: [vinheta], dur_s: 5.0}
+      - {fonte: gerado, busca: 'template tela final (kit_visual): espaço para vídeo sugerido e inscrição, sobre Vice City ao amanhecer', etiquetas: [tela_final, vicecity], dur_s: 10.0}
+    texto_tela: 'COFRE DE LEONIDA'
+    sfx: 'porta do cofre fechando; trilha sobe até o fim da tela final'
+    duracao_alvo_s: 15.0
