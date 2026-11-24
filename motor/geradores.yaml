@@ -67,3 +67,10 @@ geradores:
     formatos: [longo]
     teto: ""
     status: aprovado
+
+  # F0.5 do cofre-de-leonida: amostra aprovada por Pedro em 2026-11-23 (212 GB / GTA VI / tamanho do jogo)
+  - tipo: numero_gigante
+    gerador: m5.templates.numero_gigante
+    formatos: [longo]
+    teto: ""
+    status: aprovado

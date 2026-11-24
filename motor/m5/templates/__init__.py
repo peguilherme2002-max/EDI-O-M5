@@ -81,4 +81,4 @@ def renderizar(kit: Kit, nome: str, campos: dict, dur_s: float, W: int, H: int, 
 
 
 # registra os templates construídos
-from . import barra_progresso_lista, lista_item  # noqa: E402,F401
+from . import barra_progresso_lista, lista_item, numero_gigante  # noqa: E402,F401
