@@ -52,10 +52,10 @@ segmentos:
     intencao: gancho
     narracao: 'Esse perfil? Quando você chega nele, é melhor nem sair de casa.'
     visual:
-      fonte: web
-      busca: PNG do Trevor bem renderizado
-      etiquetas: [gta v, trevor]
-    texto_tela: null
+      fonte: catalogo
+      busca: GTA 6 gameplay andando pela cidade
+      etiquetas: [gta vi, gameplay]
+    texto_tela: {template: recorte_surpresa, etiquetas: [trevor, recorte], lado: direita}
     sfx: []
     duracao_alvo_s: 4
 

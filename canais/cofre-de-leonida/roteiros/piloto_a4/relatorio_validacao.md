@@ -3,9 +3,9 @@
 - canal: cofre-de-leonida
 - formato: longo
 - roteiro: canais/cofre-de-leonida/roteiros/piloto_a4/roteiro_mestre.yaml (versão 1)
-- sha1 do roteiro: 0f7c6ee32301c6074d7aa778fb175170ee61218e
+- sha1 do roteiro: 35470e5fefa1d77bd5e79d577061827c0c4d14bd
 - registro: motor/geradores.yaml
-- gerado em: 2026-11-24 09:51
+- gerado em: 2026-11-24 10:15
 - segmentos: 9 · duração-alvo total: 77 s
 
 ## Resumo
@@ -61,7 +61,8 @@
 ### s05 — teto conhecido → aviso
 
 - [ok] narração, 63 caracteres, fornecedor elevenlabs — m5.narracao
-- [teto conhecido → aviso] visual web: "PNG do Trevor bem renderizado" — m5.midia_web: imagem fora de 16:9 fica com faixas pretas (sem zoom nem recorte); material será baixado
+- [baixar material] visual catalogo: "GTA 6 gameplay andando pela cidade" — m5.catalogo: material não está no canal; será baixado
+- [teto conhecido → aviso] texto na tela: template recorte_surpresa — m5.templates.recorte_surpresa: busca por scraping é frágil: se o Bing mudar, o comando para com erro; usar --url
 
 ### s06 — ok
 

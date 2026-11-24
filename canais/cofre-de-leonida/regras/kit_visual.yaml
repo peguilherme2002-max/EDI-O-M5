@@ -237,6 +237,16 @@ templates:
       som: "clique curto"
     posicao: "terço inferior, centralizado (ou ao lado da logo no fecho)"
 
+  # ---------- RECORTE (gerador aprovado por Pedro em 2026-11-24; PNG feito pelo m5 recortar)
+  recorte_surpresa:
+    campos:
+      etiquetas: {tipo: lista_texto, obrigatorio: true}
+      lado:      {valores: [esquerda, centro, direita]}
+      raios:     {tipo: bool}
+    layout_1080p:
+      contorno: {cor: principal, px: 8}
+      clarao:   {cor: texto, opacidade: 0.7, duracao_s: 0.15}
+
 # ---------------------------------------------------------------- CRESCIMENTO
 repertorio:
   regra_entrada: "F15: template novo só após aparecer em ≥2 vídeos aprovados no P4 + aprovação de Pedro"

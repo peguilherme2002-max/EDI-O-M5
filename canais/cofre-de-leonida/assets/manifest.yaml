@@ -32,3 +32,6 @@ referencias:
 # mídia web (visual.fonte=web): o motor usa a 1ª entrada com todas as etiquetas do visual (motor/m5/midia_web.py)
 web:
   - {arquivo: mapa/mapa-oficial-leonida-rgb.png, origem: "Rockstar Games, 'Leonida Map Poster · Printable' (rockstargames.com/VI/media)", data: 2026-11-24, etiquetas: [mapa, leonida]}
+
+recortes:
+  - {"arquivo": "recortes/trevor.png", "original": "recortes/originais/trevor.jpg", "origem": "https://i.pinimg.com/originals/bc/a9/33/bca9331eb4e46d2ab262839416453521.jpg", "pagina": "https://www.pinterest.co.kr/pin/852306298202965721/", "data": "2026-11-24", "etiquetas": ["trevor", "gta v", "recorte"], "busca": "Trevor Philips GTA 5", "modelo": "birefnet-general", "tamanho": "2884x3998"}
