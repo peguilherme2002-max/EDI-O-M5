@@ -10,7 +10,7 @@ resolucao_base: [1920, 1080] # 16:9, 30 fps. O 9:16 dos shorts é adaptação de
 
 divergencias_do_m5:
   - "F0.3 prevê 2 fontes; o kit usa 3 (decisão de Pedro, 23/11/2026)."
-  - "F0.3 prevê 4–5 templates; o kit usa 10: um conjunto por vertente + logo e botões de identidade (decisão de Pedro, 23/11/2026)."
+  - "F0.3 prevê 4–5 templates; o kit usa 9: um conjunto por vertente + logo e botões de identidade (decisão de Pedro, 23/11/2026; mapa retirado em 24/11/2026)."
   - "Pedro prefere não fixar regras de edição agora: os templates ficam posicionados e ele ajusta nos testes do motor."
 
 # ---------------------------------------------------------------- FONTES
@@ -62,7 +62,7 @@ audio:
   true_peak_dbfs: -1
   musica: "contínua e baixa sob a voz"
 
-# ---------------------------------------------------------------- TEMPLATES (10)
+# ---------------------------------------------------------------- TEMPLATES (9)
 # Cada template recebe "campos" vindos do roteiro_mestre (campo texto_tela do segmento).
 # Exemplo no roteiro: texto_tela: {template: lista_item, numero: 7, selo: CARRO, titulo: "...", subtitulo: "..."}
 templates:
@@ -166,17 +166,8 @@ templates:
       saida: fade
     referencia: "../assets/referencias/curiosidades-grand-gabe/template-de-curiosidades.md §3.3"
 
-  mapa:
-    vertente: curiosidades
-    descricao: "mapa de Leonida recolorido, com local marcado"
-    especificacao: "../assets/mapa/especificacao-mapa.md"
-    arquivo_base: "../assets/mapa/mapa-oficial-leonida-rgb.png"   # 5775 × 7900, sRGB
-    campos:
-      modo:     {tipo: escolha, valores: [ilha, regiao, ponto], obrigatorio: true}
-      local:    {tipo: texto, obrigatorio: true, exemplo: "Vice Beach"}
-      grade:    {tipo: texto, obrigatorio: false, exemplo: "G8", nota: "coordenada da grade A–M × 1–9 do mapa oficial"}
-      etiqueta: {tipo: texto, obrigatorio: false}
-    referencia: "R4 8:47 (card 3D inclinado)"
+  # mapa: deixou de ser template (Pedro, 24/11/2026). A imagem oficial fica guardada em
+  # ../assets/mapa/mapa-oficial-leonida-rgb.png (5775 × 7900) para zoom direto na parte a evidenciar.
 
   citacao:
     vertente: curiosidades

@@ -21,7 +21,7 @@ identidade:
 
 mapa:
   - {arquivo: mapa/mapa-oficial-leonida-rgb.png, origem: "Rockstar Games, 'Leonida Map Poster · Printable' (rockstargames.com/VI/media), convertido de CMYK para sRGB; 5775 × 7900", data: 2026-11-23}
-  - {arquivo: mapa/especificacao-mapa.md,        origem: "especificação do template de mapa (Fase 0)", data: 2026-11-23}
+  - {arquivo: mapa/arquivado/especificacao-mapa.md, origem: "especificação do template de mapa (Fase 0); arquivada: o mapa deixou de ser template (Pedro, 24/11/2026)", data: 2026-11-23}
 
 referencias:
   - {arquivo: referencias/GUIA-DE-TEMPLATES.md, origem: "guia de identidade e templates (Fase 0); explica o porquê do kit_visual.yaml", data: 2026-11-23}
