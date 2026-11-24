@@ -3,8 +3,10 @@
 Como funciona (tudo ffmpeg, determinístico):
 1. cada corte vira um pedaço de vídeo com o número exato de quadros e um pedaço de áudio
    com o número exato de amostras (48000/30 = 1600 por quadro) → nada desalinha
+   (corte de imagem: a imagem parada; corte gerado: a camada do template sobre a cor de fundo do kit)
 2. os pedaços são concatenados sem nova codificação
-3. passe final: texto na tela (template texto_tela do kit) + narração sobre o áudio do clipe,
+3. passe final: texto na tela (texto simples: template texto_tela do kit; mapa: camada do template,
+   .mov com alfa sobreposto de entrada_q a saida_q) + narração sobre o áudio do clipe,
    loudnorm (-14 LUFS)
 """
 import shutil
@@ -13,6 +15,8 @@ import tempfile
 from pathlib import Path
 
 from .canal import RAIZ, ErroM5, ler_yaml, pasta_canal
+from .kit import Kit
+from .templates import renderizar
 
 AMOSTRAS_POR_QUADRO = 1600          # 48000 Hz / 30 fps
 VOLUME_CLIPE = 0.18                 # áudio original do clipe por baixo da narração
@@ -72,13 +76,16 @@ def _quebrar(texto: str, max_chars: int) -> list[str]:
     return linhas or [texto]
 
 
+def _usa_template(edl: dict) -> bool:
+    return any(c.get("tipo") == "gerado" for s in edl["segmentos"] for c in s["cortes"]) or         any(isinstance(s["texto_tela"], dict) and "template" in s["texto_tela"] for s in edl["segmentos"])
+
+
 def montar(edl: dict, perfil: str, destino: Path) -> Path:
     if perfil not in PERFIS:
         raise ErroM5(f"perfil desconhecido: {perfil}")
     W, H = _resolucao(edl, perfil)
     fps = edl["fps"]
     p = PERFIS[perfil]
-    kit = _kit(edl["canal"])
     if H > W:
         # 9:16 (shorts): camada de layout do kit — preenche a tela cortando as laterais pelo centro
         escala = (f"scale={W}:{H}:force_original_aspect_ratio=increase,"
@@ -91,13 +98,36 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
         tmp = Path(tmp)
         lista_v, lista_a = [], []
         cortes = [c for s in edl["segmentos"] for c in s["cortes"]]
+        templates_kit = None
+        if H > W and _usa_template(edl):
+            raise ErroM5("os templates do kit ainda não têm layout 9:16 (capacidade nova: 9.5)")
         for i, c in enumerate(cortes):
+            v, a = tmp / f"v{i:05d}.mp4", tmp / f"a{i:05d}.wav"
+            amostras = c["quadros"] * AMOSTRAS_POR_QUADRO
+            tipo = c.get("tipo", "video")
+            if tipo in ("imagem", "gerado"):
+                if tipo == "imagem":
+                    _ff(["-loop", "1", "-framerate", str(fps), "-i", str(RAIZ / c["arquivo"]),
+                         "-frames:v", str(c["quadros"]), "-vf", escala,
+                         "-c:v", "libx264", *p["x264"], "-pix_fmt", "yuv420p", str(v)])
+                else:
+                    templates_kit = templates_kit or Kit(edl["canal"])
+                    camada = renderizar(templates_kit, c["template"], c["campos"], c["quadros"] / fps,
+                                        W, H, fps, tmp / f"g{i:05d}.mov")
+                    r, g, b, _ = templates_kit.cor("fundo")
+                    _ff(["-f", "lavfi", "-i", f"color=c=0x{r:02x}{g:02x}{b:02x}:s={W}x{H}:r={fps}",
+                         "-i", str(camada), "-filter_complex", "[0:v][1:v]overlay=0:0:format=auto,setsar=1[v]",
+                         "-map", "[v]", "-frames:v", str(c["quadros"]),
+                         "-c:v", "libx264", *p["x264"], "-pix_fmt", "yuv420p", str(v)])
+                _ff(["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
+                     "-af", f"atrim=end_sample={amostras}", "-c:a", "pcm_s16le", str(a)])
+                lista_v.append(f"file '{v.name}'")
+                lista_a.append(f"file '{a.name}'")
+                continue
             src = RAIZ / c["arquivo"]
             ini = c["origem_inicio_q"] / fps
-            v, a = tmp / f"v{i:05d}.mp4", tmp / f"a{i:05d}.wav"
             _ff(["-ss", f"{ini:.4f}", "-i", str(src), "-frames:v", str(c["quadros"]), "-an",
                  "-vf", escala, "-c:v", "libx264", *p["x264"], "-pix_fmt", "yuv420p", str(v)])
-            amostras = c["quadros"] * AMOSTRAS_POR_QUADRO
             if _tem_audio(src):
                 _ff(["-ss", f"{ini:.4f}", "-i", str(src), "-vn",
                      "-af", f"aresample=48000,aformat=channel_layouts=stereo,volume={VOLUME_CLIPE},"
@@ -112,11 +142,12 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
         _ff(["-f", "concat", "-safe", "0", "-i", "v.txt", "-c", "copy", "base_v.mp4"], cwd=tmp)
         _ff(["-f", "concat", "-safe", "0", "-i", "a.txt", "-c", "copy", "base_a.wav"], cwd=tmp)
 
-        # faixa de narração: um trecho por segmento, cortado/completado no tamanho exato do segmento
-        shutil.copyfile(kit["fonte"], tmp / "fonte.ttf")
-        entradas = ["-i", "base_v.mp4", "-i", "base_a.wav"]
+        # faixa de narração: um trecho por segmento, cortado/completado no tamanho exato do segmento.
+        # Feita num comando à parte: no mesmo grafo do vídeo, o ffmpeg atrasava a fala quando um
+        # segmento não tinha narração (logs/falhas.md, 24/11/2026)
+        entradas = []
         filtros, rotulos = [], []
-        k = 2
+        k = 0
         for j, s in enumerate(edl["segmentos"]):
             amostras = (s["fim_q"] - s["inicio_q"]) * AMOSTRAS_POR_QUADRO
             if s["narracao"]:
@@ -128,19 +159,31 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
                 filtros.append(f"anullsrc=r=48000:cl=stereo,atrim=end_sample={amostras}[n{j}]")
             rotulos.append(f"[n{j}]")
         filtros.append(f"{''.join(rotulos)}concat=n={len(rotulos)}:v=0:a=1[narr]")
-        filtros.append("[1:a][narr]amix=inputs=2:normalize=0:duration=first,"
-                       "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]")
+        _ff([*entradas, "-filter_complex", ";".join(filtros), "-map", "[narr]", "-c:a", "pcm_s16le",
+             "narr.wav"], cwd=tmp)
+        entradas = ["-i", "base_v.mp4", "-i", "base_a.wav", "-i", "narr.wav"]
+        filtros = ["[1:a][2:a]amix=inputs=2:normalize=0:duration=first,"
+                   "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[aout]"]
+        k = 3
 
         # texto na tela (template texto_tela do kit)
         vchain = "[0:v]"
+        kit = None
         fs = int(min(H * 0.065, W * 0.075))
         borda = int(fs * 0.38)
         # 16:9: faixa a 80% da altura; 9:16: a 68%, acima da área dos botões dos shorts
         centro_y = H * (0.68 if H > W else 0.80)
+        camadas = []
         for j, s in enumerate(edl["segmentos"]):
             t = s["texto_tela"]
             if not t:
                 continue
+            if "template" in t:
+                camadas.append(t)
+                continue
+            if kit is None:
+                kit = _kit(edl["canal"])
+                shutil.copyfile(kit["fonte"], tmp / "fonte.ttf")
             linhas = _quebrar(t["texto"], max(8, int(W * 0.88 / (fs * 0.62))))
             passo = fs * 1.55
             topo = centro_y - passo * (len(linhas) - 1) / 2
@@ -151,7 +194,19 @@ def montar(edl: dict, perfil: str, destino: Path) -> Path:
                            f"fontcolor={kit['texto']}:box=1:boxcolor={kit['fundo']}@0.7:boxborderw={borda}:"
                            f"x=(w-text_w)/2:y={topo + li * passo:.1f}-text_h/2:"
                            f"enable='between(t,{a:.3f},{b:.3f})',")
-        filtros.append((vchain.rstrip(",") if vchain != "[0:v]" else "[0:v]null") + "[vout]")
+        filtros.append((vchain.rstrip(",") if vchain != "[0:v]" else "[0:v]null") + "[vt]")
+        # camadas de template (texto_tela como mapa): .mov com alfa, posto no tempo de entrada
+        atual = "[vt]"
+        for j, t in enumerate(camadas):
+            templates_kit = templates_kit or Kit(edl["canal"])
+            n_q = t["saida_q"] - t["entrada_q"]
+            mov = renderizar(templates_kit, t["template"], t["campos"], n_q / fps, W, H, fps, tmp / f"c{j:04d}.mov")
+            entradas += ["-i", str(mov)]
+            filtros.append(f"[{k}:v]setpts=PTS-STARTPTS+{t['entrada_q'] / fps:.4f}/TB[c{j}]")
+            filtros.append(f"{atual}[c{j}]overlay=0:0:eof_action=pass:format=auto[o{j}]")
+            atual = f"[o{j}]"
+            k += 1
+        filtros.append(f"{atual}null[vout]")
 
         saida = tmp / "saida.mp4"
         _ff([*entradas, "-filter_complex", ";".join(filtros), "-map", "[vout]", "-map", "[aout]",

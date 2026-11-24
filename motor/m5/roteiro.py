@@ -24,7 +24,7 @@ class Segmento:
     intencao: str
     narracao: str        # texto + tags de voz; vazio = segmento sem narração
     visual: Visual
-    texto_tela: str | None
+    texto_tela: str | dict | None   # texto simples (template texto_tela do kit) ou {template: <nome>, campos...}
     sfx: list[str]
     duracao_alvo_s: float
 
@@ -88,7 +88,15 @@ def _segmento(bruto, pos, erros) -> Segmento | None:
     if intencao and intencao not in INTENCOES:
         erros.append(f"{onde}: intencao '{intencao}' fora de {sorted(INTENCOES)}")
     narracao = _texto(bruto["narracao"], "narracao", erros, onde, obrigatorio=False) or ""
-    texto_tela = _texto(bruto["texto_tela"], "texto_tela", erros, onde, obrigatorio=False) or None
+    if isinstance(bruto["texto_tela"], dict):
+        texto_tela = dict(bruto["texto_tela"])
+        nome = texto_tela.get("template")
+        if not isinstance(nome, str) or not nome.strip():
+            erros.append(f"{onde}: texto_tela como mapa precisa do campo 'template' (nome de um template do kit)")
+        else:
+            texto_tela["template"] = nome.strip()
+    else:
+        texto_tela = _texto(bruto["texto_tela"], "texto_tela", erros, onde, obrigatorio=False) or None
     sfx = _lista_textos(bruto["sfx"], "sfx", erros, onde)
 
     dur = bruto["duracao_alvo_s"]

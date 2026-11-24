@@ -4,7 +4,10 @@ from datetime import datetime
 from pathlib import Path
 
 from .canal import RAIZ, ErroM5, conferir_formato, fornecedor_voz, ler_ficha
+from . import camadas
 from .catalogo import clipes_com_etiquetas
+from .kit import Kit
+from .midia_web import midias_com_etiquetas
 from .registro import Gerador, buscar, ler_registro
 from .roteiro import Roteiro, Segmento
 
@@ -53,26 +56,58 @@ class Resultado:
 
 def _material_disponivel(canal: str, tipo: str, segmento: Segmento) -> bool:
     """Material já presente no canal. Catálogo: algum clipe com todas as etiquetas do visual (C4).
-    Mídia web e sfx: ainda sem índice local; sempre "baixar material"."""
+    Mídia web: alguma entrada do manifest de assets com todas as etiquetas. Sfx: sempre "baixar material"."""
     if tipo == "clipe_catalogo":
         return bool(clipes_com_etiquetas(canal, segmento.visual.etiquetas))
+    if tipo == "midia_web":
+        return any(arq.is_file() for _, arq in midias_com_etiquetas(canal, segmento.visual.etiquetas))
     return False
 
 
-def _necessidades(seg: Segmento, fornecedor: str | None) -> list[tuple[str, str, bool]]:
-    """(tipo, descrição, exige_material) de cada coisa que o segmento pede."""
+def _kit(canal: str) -> Kit | None:
+    try:
+        return Kit(canal)
+    except ErroM5:
+        return None
+
+
+def _problemas_texto_simples(canal: str) -> list[str]:
+    from .montagem import _kit as kit_texto_simples
+    try:
+        kit_texto_simples(canal)
+        return []
+    except ErroM5 as e:
+        return [f"texto simples precisa do template texto_tela do kit: {e}"]
+
+
+def _necessidades(seg: Segmento, fornecedor: str | None, canal: str,
+                  kit: Kit | None) -> list[tuple[str, str, bool, list[str]]]:
+    """(tipo, descrição, exige_material, problemas) de cada coisa que o segmento pede.
+    problemas: o que impede a montagem de fazer o item (vira pendência; o motor não chuta, F07)."""
     nec = []
     if seg.narracao:
-        nec.append(("narracao", f"narração, {len(seg.narracao)} caracteres, fornecedor {fornecedor or '?'}", False))
+        nec.append(("narracao", f"narração, {len(seg.narracao)} caracteres, fornecedor {fornecedor or '?'}", False, []))
     v = seg.visual
     if v.fonte == "gerado":
-        nec.append((v.busca, f"visual gerado: {v.busca}", False))
+        prob = ["o kit do canal não pôde ser lido"] if kit is None else []
+        if kit is not None:
+            try:
+                nome, campos = camadas.campos_gerado(kit, seg)
+                prob = camadas.problemas(kit, nome, campos, seg.narracao, segue_fala_ok=False)
+            except ErroM5 as e:
+                prob = [str(e)]
+        nec.append((v.busca, f"visual gerado: {v.busca}", False, prob))
     else:
-        nec.append((TIPO_POR_FONTE[v.fonte], f"visual {v.fonte}: \"{v.busca}\"", True))
-    if seg.texto_tela:
-        nec.append(("texto_tela", f"texto na tela: \"{seg.texto_tela}\"", False))
+        nec.append((TIPO_POR_FONTE[v.fonte], f"visual {v.fonte}: \"{v.busca}\"", True, []))
+    if isinstance(seg.texto_tela, dict):
+        nome, campos = camadas.campos_texto_tela(seg)
+        prob = (["o kit do canal não pôde ser lido"] if kit is None
+                else camadas.problemas(kit, nome, campos, seg.narracao))
+        nec.append((nome, f"texto na tela: template {nome}", False, prob))
+    elif seg.texto_tela:
+        nec.append(("texto_tela", f"texto na tela: \"{seg.texto_tela}\"", False, _problemas_texto_simples(canal)))
     for s in seg.sfx:
-        nec.append(("sfx", f"sfx: {s}", True))
+        nec.append(("sfx", f"sfx: {s}", True, []))
     return nec
 
 
@@ -100,10 +135,11 @@ def validar(canal: str, formato: str, roteiro: Roteiro, registro_path: Path) -> 
     registro = ler_registro(registro_path)
     fornecedor = fornecedor_voz(ficha, formato)
 
+    kit = _kit(canal)
     resultados = []
     for seg in roteiro.segmentos:
         rs = ResultadoSegmento(seg)
-        for tipo, desc, exige in _necessidades(seg, fornecedor):
+        for tipo, desc, exige, problemas in _necessidades(seg, fornecedor, canal, kit):
             if tipo == "narracao" and not fornecedor:
                 rs.itens.append(Item(tipo, desc, PENDENCIA, f"a ficha do canal não define fornecedor de voz para {formato}"))
                 continue
@@ -111,6 +147,8 @@ def validar(canal: str, formato: str, roteiro: Roteiro, registro_path: Path) -> 
             marca, nota = _avaliar(tipo, exige, ger, em_teste, formato,
                                    _material_disponivel(canal, tipo, seg) if exige else True,
                                    aceitar_em_teste=(canal == "_amostras"))
+            if problemas and marca != PENDENCIA:
+                marca, nota = PENDENCIA, "a montagem não consegue: " + "; ".join(problemas) + " (corrigir o roteiro ou 9.5)"
             rs.itens.append(Item(tipo, desc, marca, nota))
         resultados.append(rs)
     return Resultado(canal, formato, roteiro, registro_path, resultados,

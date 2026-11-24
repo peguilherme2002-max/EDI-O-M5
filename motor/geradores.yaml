@@ -116,3 +116,12 @@ geradores:
     formatos: [longo]
     teto: ""
     status: aprovado
+
+  # A4 do cofre-de-leonida: amostra técnica aprovada por Pedro em 2026-11-24
+  # (mapa oficial como imagem web, com lista_item por cima). Imagem fica parada no segmento;
+  # vídeo roda do início e repete. A mídia vem do manifest de assets (etiquetas).
+  - tipo: midia_web
+    gerador: m5.midia_web
+    formatos: [longo]
+    teto: "imagem fora de 16:9 fica com faixas pretas (sem zoom nem recorte)"
+    status: aprovado

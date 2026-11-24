@@ -1,0 +1,341 @@
+{
+  "versao_edl": 2,
+  "canal": "cofre-de-leonida",
+  "formato": "longo",
+  "resolucao": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "roteiro": "canais/cofre-de-leonida/templates/amostras/montagem/roteiro_mestre.yaml",
+  "roteiro_sha1": "147631ab82b70ae4acd411966478abe39c1e4541",
+  "gerado_em": "2026-11-24 09:39",
+  "duracao_total_s": 36.7,
+  "quadros": 1101,
+  "segmentos": [
+    {
+      "id": "s00",
+      "intencao": "gancho",
+      "inicio_q": 0,
+      "fim_q": 90,
+      "cortes": [
+        {
+          "tipo": "gerado",
+          "template": "logo_flutuante",
+          "campos": {
+            "modo": "abertura"
+          },
+          "quadros": 90,
+          "entrada_q": 0,
+          "saida_q": 90
+        }
+      ],
+      "narracao": null,
+      "texto_tela": null
+    },
+    {
+      "id": "s01",
+      "intencao": "gancho",
+      "inicio_q": 90,
+      "fim_q": 472,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 1,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 0,
+          "quadros": 31,
+          "entrada_q": 90,
+          "saida_q": 121
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 2,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 31,
+          "quadros": 46,
+          "entrada_q": 121,
+          "saida_q": 167
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 3,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 77,
+          "quadros": 47,
+          "entrada_q": 167,
+          "saida_q": 214
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 4,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 124,
+          "quadros": 46,
+          "entrada_q": 214,
+          "saida_q": 260
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 5,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 170,
+          "quadros": 53,
+          "entrada_q": 260,
+          "saida_q": 313
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 6,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 223,
+          "quadros": 71,
+          "entrada_q": 313,
+          "saida_q": 384
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 7,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 294,
+          "quadros": 46,
+          "entrada_q": 384,
+          "saida_q": 430
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 8,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 340,
+          "quadros": 42,
+          "entrada_q": 430,
+          "saida_q": 472
+        }
+      ],
+      "narracao": {
+        "arquivo": "canais/_amostras/assets/narracao/f95529502af71dd1.mp3",
+        "entrada_q": 90,
+        "duracao_s": 12.399
+      },
+      "texto_tela": {
+        "template": "legenda_karaoke",
+        "campos": {
+          "texto": "ela está maior, mais viva e muito mais perigosa",
+          "palavra_chave": [
+            "perigosa"
+          ],
+          "_palavras": [
+            [
+              0.11,
+              0.284
+            ],
+            [
+              0.307,
+              0.435
+            ],
+            [
+              0.504,
+              0.957
+            ],
+            [
+              1.05,
+              1.259
+            ],
+            [
+              1.317,
+              1.665
+            ],
+            [
+              1.723,
+              1.84
+            ],
+            [
+              1.909,
+              2.141
+            ],
+            [
+              2.165,
+              2.281
+            ],
+            [
+              2.327,
+              2.641
+            ]
+          ]
+        },
+        "entrada_q": 179,
+        "saida_q": 276,
+        "alinhado_a_fala": true
+      }
+    },
+    {
+      "id": "s02",
+      "intencao": "contexto",
+      "inicio_q": 472,
+      "fim_q": 764,
+      "cortes": [
+        {
+          "tipo": "imagem",
+          "arquivo": "canais/cofre-de-leonida/assets/mapa/mapa-oficial-leonida-rgb.png",
+          "quadros": 292,
+          "entrada_q": 472,
+          "saida_q": 764
+        }
+      ],
+      "narracao": {
+        "arquivo": "canais/_amostras/assets/narracao/51ce99cb9699e45d.mp3",
+        "entrada_q": 472,
+        "duracao_s": 9.381
+      },
+      "texto_tela": {
+        "template": "lista_item",
+        "campos": {
+          "numero": 3,
+          "selo": "LOCAL",
+          "titulo": "VICE CITY",
+          "subtitulo": "CADA MORADOR TEM ROTINA",
+          "inicio_s": 0.5
+        },
+        "entrada_q": 487,
+        "saida_q": 764,
+        "alinhado_a_fala": false
+      }
+    },
+    {
+      "id": "s03",
+      "intencao": "revelacao",
+      "inicio_q": 764,
+      "fim_q": 1101,
+      "cortes": [
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 9,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 372,
+          "quadros": 45,
+          "entrada_q": 764,
+          "saida_q": 809
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 10,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 417,
+          "quadros": 47,
+          "entrada_q": 809,
+          "saida_q": 856
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 11,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 464,
+          "quadros": 32,
+          "entrada_q": 856,
+          "saida_q": 888
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 12,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 496,
+          "quadros": 30,
+          "entrada_q": 888,
+          "saida_q": 918
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 13,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 526,
+          "quadros": 32,
+          "entrada_q": 918,
+          "saida_q": 950
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 14,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 558,
+          "quadros": 39,
+          "entrada_q": 950,
+          "saida_q": 989
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 15,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 597,
+          "quadros": 37,
+          "entrada_q": 989,
+          "saida_q": 1026
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 16,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 634,
+          "quadros": 31,
+          "entrada_q": 1026,
+          "saida_q": 1057
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 17,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 665,
+          "quadros": 22,
+          "entrada_q": 1057,
+          "saida_q": 1079
+        },
+        {
+          "clipe": "QdBZY2fkU-0_00030-00060",
+          "cena": 18,
+          "arquivo": "canais/cofre-de-leonida/catalogo/QdBZY2fkU-0_00030-00060/video.mp4",
+          "origem_inicio_q": 687,
+          "quadros": 22,
+          "entrada_q": 1079,
+          "saida_q": 1101
+        }
+      ],
+      "narracao": {
+        "arquivo": "canais/_amostras/assets/narracao/d72ef6d0cfa612e7.mp3",
+        "entrada_q": 764,
+        "duracao_s": 10.867
+      },
+      "texto_tela": {
+        "template": "citacao",
+        "campos": {
+          "frase": "quase nenhuma cena se repete.",
+          "autor": "amostra do motor",
+          "trecho_marcado": "nenhuma cena",
+          "_palavras": [
+            [
+              0.1,
+              0.32
+            ],
+            [
+              0.343,
+              0.587
+            ],
+            [
+              0.622,
+              0.796
+            ],
+            [
+              0.843,
+              0.924
+            ],
+            [
+              0.959,
+              1.562
+            ]
+          ]
+        },
+        "entrada_q": 815,
+        "saida_q": 880,
+        "alinhado_a_fala": true
+      }
+    }
+  ]
+}

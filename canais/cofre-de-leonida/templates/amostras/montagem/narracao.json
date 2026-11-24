@@ -1,0 +1,28 @@
+{
+  "canal": "cofre-de-leonida",
+  "formato": "longo",
+  "nota": "narrações reaproveitadas da amostra C5 (_amostras), 0 créditos",
+  "segmentos": [
+    {
+      "id": "s01",
+      "chave": "f95529502af71dd1",
+      "audio": "canais/_amostras/assets/narracao/f95529502af71dd1.mp3",
+      "duracao_s": 12.399,
+      "palavras": 39
+    },
+    {
+      "id": "s02",
+      "chave": "51ce99cb9699e45d",
+      "audio": "canais/_amostras/assets/narracao/51ce99cb9699e45d.mp3",
+      "duracao_s": 9.381,
+      "palavras": 29
+    },
+    {
+      "id": "s03",
+      "chave": "d72ef6d0cfa612e7",
+      "audio": "canais/_amostras/assets/narracao/d72ef6d0cfa612e7.mp3",
+      "duracao_s": 10.867,
+      "palavras": 32
+    }
+  ]
+}

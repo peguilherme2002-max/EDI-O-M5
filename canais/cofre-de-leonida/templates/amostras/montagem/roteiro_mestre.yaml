@@ -1,0 +1,50 @@
+# Amostra da montagem com templates (F09) — não é vídeo de canal.
+# Mostra: visual gerado (logo_flutuante), texto_tela-template seguindo a fala (legenda_karaoke, citacao),
+# texto_tela-template fixo (lista_item) e uma imagem web (mapa oficial, do manifest de assets).
+# Narrações reaproveitadas da amostra C5 (_amostras), 0 créditos.
+titulo: Amostra — montagem com templates
+versao: 1
+segmentos:
+  - id: s00
+    intencao: gancho
+    narracao: ''
+    visual:
+      fonte: gerado
+      busca: logo_flutuante
+      etiquetas: [modo=abertura]
+    texto_tela: null
+    sfx: []
+    duracao_alvo_s: 3
+
+  - id: s01
+    intencao: gancho
+    narracao: 'Vice City voltou. E, desta vez, ela está maior, mais viva e muito mais perigosa do que qualquer coisa que a Rockstar já fez. Neste vídeo, a gente vai olhar com calma para o que o primeiro trailer mostrou.'
+    visual:
+      fonte: catalogo
+      busca: trailer 1 GTA VI Vice City
+      etiquetas: [trailer, vice city]
+    texto_tela: {template: legenda_karaoke, texto: 'ela está maior, mais viva e muito mais perigosa', palavra_chave: [perigosa]}
+    sfx: []
+    duracao_alvo_s: 12
+
+  - id: s02
+    intencao: contexto
+    narracao: 'Repare nas pessoas. Cada morador parece ter uma rotina própria: festas na piscina, passeios de barco, vídeos para as redes sociais. Ninguém está ali só para encher a tela.'
+    visual:
+      fonte: web
+      busca: mapa oficial de Leonida
+      etiquetas: [mapa, leonida]
+    texto_tela: {template: lista_item, numero: 3, selo: LOCAL, titulo: VICE CITY, subtitulo: CADA MORADOR TEM ROTINA, inicio_s: 0.5}
+    sfx: []
+    duracao_alvo_s: 10
+
+  - id: s03
+    intencao: revelacao
+    narracao: 'O detalhe que pouca gente notou: quase nenhuma cena se repete. A Rockstar mostrou dezenas de lugares diferentes em poucos segundos, da ponte sobre o mar até os pântanos fora da cidade.'
+    visual:
+      fonte: catalogo
+      busca: trailer 1 montagem rápida
+      etiquetas: [gta vi]
+    texto_tela: {template: citacao, frase: 'quase nenhuma cena se repete.', autor: amostra do motor, trecho_marcado: nenhuma cena}
+    sfx: []
+    duracao_alvo_s: 10

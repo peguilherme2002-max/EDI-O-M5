@@ -28,3 +28,7 @@ referencias:
   - {arquivo: referencias/listas-vice-city-dispatch/, origem: "ficha + quadros do R2 (YouTube v8z3imeVPCk, Vice City Dispatch)", data: 2026-11-23}
   - {arquivo: referencias/curiosidades-grand-gabe/,   origem: "ficha + quadros do R1 (YouTube DetBeN7COWQ, Grand Gabe)", data: 2026-11-23}
   - {arquivo: referencias/ensaio-iambeanz/,           origem: "ficha + quadros do R3 (YouTube JslbBOm80hY, IAmBeanz)", data: 2026-11-23}
+
+# mídia web (visual.fonte=web): o motor usa a 1ª entrada com todas as etiquetas do visual (motor/m5/midia_web.py)
+web:
+  - {arquivo: mapa/mapa-oficial-leonida-rgb.png, origem: "Rockstar Games, 'Leonida Map Poster · Printable' (rockstargames.com/VI/media)", data: 2026-11-24, etiquetas: [mapa, leonida]}
