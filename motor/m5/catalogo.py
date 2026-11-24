@@ -14,6 +14,7 @@ import json
 import re
 import shutil
 import subprocess
+import unicodedata
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -97,14 +98,14 @@ def _gravar_json(arq: Path, dados) -> None:
 
 # ---------- indexação ----------
 
-def indexar(video: Path, pasta_clipe: Path, idioma: str = "auto") -> tuple[list[Cena], list]:
+def indexar(video: Path, pasta_clipe: Path, idioma: str = "auto", transcrever: bool = True) -> tuple[list[Cena], list]:
     from scenedetect import ContentDetector, detect
 
     duracao, _ = _ffprobe(video)
     cortes = detect(str(video), ContentDetector())
     faixas = [(a.get_seconds(), b.get_seconds()) for a, b in cortes] or [(0.0, duracao)]
 
-    palavras = transcrever_palavras(video, idioma)
+    palavras = transcrever_palavras(video, idioma) if transcrever else []
     mini = pasta_clipe / "miniaturas"
     mini.mkdir(exist_ok=True)
     cenas = []
@@ -184,3 +185,79 @@ def clipes_com_etiquetas(canal: str, etiquetas: list[str]) -> list[dict]:
         return []
     indice = _ler_indice(pasta_canal(canal) / "catalogo")
     return [c for c in indice["clipes"] if pedidas <= set(c.get("etiquetas", []))]
+
+
+# ---------- importação de gameplay local (ficha .md do acervo) ----------
+
+LINHA_MD = re.compile(r"^\|\s*([\d.]+)\s*(?:[–-]\s*([\d.]+))?\s*\|(.+?)\|\s*[\d.]+\s*\|(.+?)\|\s*$")
+
+
+def _sem_acento(e: str) -> str:
+    """Etiquetas do catálogo sem acento (convenção do índice: 'perseguicao')."""
+    return unicodedata.normalize("NFKD", e.strip().lower()).encode("ascii", "ignore").decode()
+
+
+def ler_ficha_md(md: Path) -> tuple[Path, list[str], list[dict]]:
+    """Ficha de gameplay (- Arquivo:, - Palavras-chave gerais:, tabelas 'inicio | Cena | foco_x | palavras-chave')."""
+    texto = md.read_text(encoding="utf-8")
+    arq = re.search(r"^- Arquivo:\s*(.+?)\s*$", texto, re.M)
+    if not arq:
+        raise ErroM5(f"ficha sem '- Arquivo:': {md} (F07)")
+    video = (md.parent / arq.group(1)).resolve()
+    if not video.is_file():
+        raise ErroM5(f"vídeo da ficha não encontrado: {video} (F07)")
+    pers = re.search(r"^- Personagem:\s*(.+)$", texto, re.M)
+    base = ["gta vi", video.stem] + (["jason"] if pers and pers.group(1).lower().startswith("jason") else [])
+    trechos = []
+    for linha in texto.splitlines():
+        m = LINHA_MD.match(linha)
+        if not m:
+            continue
+        ini = float(m.group(1))
+        fim = float(m.group(2)) if m.group(2) else ini + 2      # shortcut: linha com um só tempo vira 2 s; pedir o fim na ficha se ficar curto
+        if fim <= ini:
+            continue
+        etq = [_sem_acento(e) for e in m.group(4).split(",") if e.strip()]
+        trechos.append({"inicio": ini, "fim": fim, "titulo": m.group(3).replace("**", "").strip(), "etiquetas": etq})
+    if not trechos:
+        raise ErroM5(f"ficha sem linhas de cena: {md} (F07)")
+    return video, base, trechos
+
+
+def importar_ficha(canal: str, md: Path) -> tuple[int, int]:
+    """Cada linha da ficha vira um clipe do catálogo: trecho recodificado, cortes de cena e miniaturas.
+    Sem transcrição (o áudio dos clipes não entra na montagem: kit volume_clipe 0). Retoma de onde parou."""
+    video, base, trechos = ler_ficha_md(md)
+    pasta = pasta_canal(canal) / "catalogo"
+    pasta.mkdir(exist_ok=True)
+    novos = ja = 0
+    for t in trechos:
+        clipe_id = f"{video.stem}_{int(t['inicio']):05d}-{int(t['fim']):05d}"
+        indice = _ler_indice(pasta)
+        pasta_clipe = pasta / clipe_id
+        if any(c["id"] == clipe_id for c in indice["clipes"]) and (pasta_clipe / "clipe.json").is_file():
+            ja += 1
+            continue
+        pasta_clipe.mkdir(exist_ok=True)
+        saida = pasta_clipe / "video.mp4"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{t['inicio']:.3f}", "-to", f"{t['fim']:.3f}",
+                        "-i", str(video), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+                        "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", str(saida)], check=True)
+        duracao, resolucao = _ffprobe(saida)
+        cenas, _ = indexar(saida, pasta_clipe, transcrever=False)
+        _gravar_json(pasta_clipe / "palavras.json", [])
+        etiquetas = list(dict.fromkeys(base + t["etiquetas"]))
+        # vídeo fora do canal (ex.: A:\pacotes_peqgameplay) guarda o caminho completo
+        arquivo = video.relative_to(pasta_canal(canal)).as_posix() if video.is_relative_to(pasta_canal(canal)) else video.as_posix()
+        origem = {"arquivo": arquivo, "ficha": md.name,
+                  "titulo": t["titulo"], "trecho": [t["inicio"], t["fim"]],
+                  "data": datetime.now().strftime("%Y-%m-%d %H:%M")}
+        dados = asdict(Clipe(clipe_id, origem, etiquetas, duracao, resolucao, cenas))
+        dados.pop("reaproveitado")
+        _gravar_json(pasta_clipe / "clipe.json", dados)
+        indice["clipes"] = [c for c in indice["clipes"] if c["id"] != clipe_id] + [{
+            "id": clipe_id, "titulo": t["titulo"][:120], "etiquetas": etiquetas,
+            "duracao_s": duracao, "cenas": len(cenas), "arquivo": f"{clipe_id}/video.mp4"}]
+        _gravar_json(pasta / "indice.json", indice)
+        novos += 1
+    return novos, ja

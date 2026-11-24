@@ -26,7 +26,7 @@ from pathlib import Path
 
 from .canal import FORMATOS, REGISTRO_PADRAO, ErroM5, pasta_canal, resolver_roteiro
 from .backup import fazer_backup
-from .catalogo import captar
+from .catalogo import captar, importar_ficha
 from .templates.amostra import gerar_amostra
 from .saude import checar
 from .custos import etapa_do_canal, registrar
@@ -94,6 +94,8 @@ def main(argv=None) -> int:
     p.add_argument("--fim", help="fim do trecho")
     p.add_argument("--etiquetas", help="etiquetas separadas por vírgula, usadas para casar com o roteiro")
     p.add_argument("--idioma", default="auto", help="idioma da fala para a transcrição (padrão: auto)")
+    p = _args(sub, "importar", "importa gameplay local para o catálogo: 1 clipe por linha da ficha .md", roteiro=False)
+    p.add_argument("--ficha", required=True, action="append", help="ficha .md (repita para várias)")
     _args(sub, "travar", "registra o P2: grava p2.yaml com o sha1 do roteiro (exige validação sem pendências)")
     _args(sub, "previa", "gera o EDL e a prévia 480p para o P3")
     p = _args(sub, "recorte", "short de recorte: segmentos de um longo aprovado, em 9:16 (7.6)")
@@ -169,6 +171,11 @@ def main(argv=None) -> int:
             print(f"clipe: {c.id}{'  (já estava no catálogo; nada baixado)' if c.reaproveitado else ''}")
             print(f"  {c.origem['titulo']} — {c.origem['canal_origem']}")
             print(f"  {c.duracao_s:.1f} s · {c.resolucao[0]}x{c.resolucao[1]} · {len(c.cenas)} cenas · etiquetas: {', '.join(c.etiquetas) or '-'}")
+            return 0
+        if a.comando == "importar":
+            for f in a.ficha:
+                novos, ja = importar_ficha(a.canal, Path(f))
+                print(f"{Path(f).name}: {novos} clipes novos · {ja} já no catálogo", flush=True)
             return 0
         caminho = resolver_roteiro(a.canal, a.roteiro)
         if a.comando == "narrar":
