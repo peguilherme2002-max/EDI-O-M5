@@ -102,3 +102,10 @@ geradores:
     formatos: [longo]
     teto: ""
     status: aprovado
+
+  # F0.5 do cofre-de-leonida: amostras aprovadas por Pedro em 2026-11-23 (abertura e marca d'água)
+  - tipo: logo_flutuante
+    gerador: m5.templates.logo_flutuante
+    formatos: [longo]
+    teto: ""
+    status: aprovado
