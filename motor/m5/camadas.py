@@ -15,7 +15,7 @@ import unicodedata
 from .canal import ErroM5
 from .kit import Kit
 from .roteiro import Segmento
-from .templates import FALA, RENDERERS, conferir_campos
+from .templates import CONFERIR, FALA, RENDERERS, conferir_campos
 from .templates.amostra import converter_campos
 
 TEMPO = ("inicio_s", "duracao_s")
@@ -61,6 +61,8 @@ def problemas(kit: Kit, nome: str, campos: dict, narracao: str, segue_fala_ok: b
     except ErroM5 as e:
         return [str(e)]
     erros = conferir_campos(spec, campos)
+    if nome in CONFERIR and not erros:
+        erros += CONFERIR[nome](kit, campos)
     for c in TEMPO:
         v = campos.get(c)
         if v is not None and (isinstance(v, bool) or not isinstance(v, (int, float)) or v < 0

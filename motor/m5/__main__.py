@@ -106,6 +106,11 @@ def main(argv=None) -> int:
     p.add_argument("--detalhes", action="store_true", help="mostra também o que passou")
     p = _args(sub, "backup", "copia entregas e narrações do canal para o backup externo (6.6, F21)", roteiro=False)
     p.add_argument("--teste", action="store_true", help="inclui um arquivo de teste")
+    p = _args(sub, "recortar", "busca a foto de maior resolução na web, tira o fundo e registra no manifest", roteiro=False)
+    p.add_argument("--busca", required=True, help='ex.: "Trevor Philips GTA 5"')
+    p.add_argument("--nome", required=True, help="nome do arquivo (ex.: trevor)")
+    p.add_argument("--etiquetas", required=True, help="etiquetas separadas por vírgula, usadas pelo roteiro")
+    p.add_argument("--url", help="usa esta imagem em vez da busca")
     p = _args(sub, "template", "amostra de um template do kit do canal (F0.4/F0.5)", roteiro=False)
     p.add_argument("--template", required=True)
     p.add_argument("--campo", action="append", default=[], help="nome=valor (repita para cada campo)")
@@ -115,6 +120,11 @@ def main(argv=None) -> int:
     p.add_argument("--saida", help="arquivo de saída (padrão: canais/<c>/templates/amostras/<template>.mp4)")
     a = ap.parse_args(argv)
     try:
+        if a.comando == "recortar":
+            from .recorte_imagem import recortar
+            arq = recortar(a.canal, a.busca, a.nome, [e.strip() for e in a.etiquetas.split(",") if e.strip()], a.url)
+            print(f"recorte: {arq}")
+            return 0
         if a.comando == "template":
             destino = Path(a.saida) if a.saida else pasta_canal(a.canal) / "templates" / "amostras" / f"{a.template}.mp4"
             arq = gerar_amostra(a.canal, a.formato, a.template, a.campo, destino,

@@ -20,3 +20,8 @@ whisper.cpp       v1.9.5, commit d1be6fd, compilado com -DGGML_VULKAN=ON
 modelo whisper    ggml-large-v3-turbo.bin
                   sha1 4af2b29d7ec73d781377bfd1758ca957a807e941
                   A:\ferramentas\whisper.cpp\models\ggml-large-v3-turbo.bin
+
+# recorte de imagem (decisão de Pedro: rembg + BiRefNet; rembg travado no requirements.txt)
+modelo rembg      birefnet-general.onnx (972666916 bytes)
+                  sha1 e199e023c0c0dcbb43623ca8c7058cadbef3dfb1
+                  C:\Users\pegui\.u2net\birefnet-general.onnx

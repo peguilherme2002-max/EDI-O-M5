@@ -16,6 +16,7 @@ from ..canal import ErroM5
 from ..kit import Kit
 
 RENDERERS: dict[str, Callable] = {}
+CONFERIR: dict[str, Callable] = {}  # template → (kit, campos) -> [problemas] além dos campos (ex.: asset existe)
 FALA: dict[str, str] = {}   # template → campo de texto que segue a fala (recebe _palavras: [[inicio_s, fim_s], ...])
 
 
@@ -87,4 +88,4 @@ def renderizar(kit: Kit, nome: str, campos: dict, dur_s: float, W: int, H: int, 
 
 
 # registra os templates construídos
-from . import barra_progresso_lista, citacao, cta_botao, contador_flip, legenda_karaoke, lista_item, logo_flutuante, numero_gigante, transicao_bloco  # noqa: E402,F401
+from . import barra_progresso_lista, citacao, cta_botao, contador_flip, legenda_karaoke, lista_item, logo_flutuante, numero_gigante, recorte_surpresa, transicao_bloco  # noqa: E402,F401

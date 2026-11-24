@@ -125,3 +125,12 @@ geradores:
     formatos: [longo]
     teto: "imagem fora de 16:9 fica com faixas pretas (sem zoom nem recorte)"
     status: aprovado
+
+  # A4 do cofre-de-leonida: amostra aprovada por Pedro em 2026-11-24 (Trevor recortado sobre o gameplay).
+  # Imagem: m5 recortar (Bing por scraping + rembg BiRefNet), registrada em assets/manifest.yaml (grupo recortes).
+  # Entrada: clarão, zoom e contorno nas cores e tempos do kit; raios só com raios: true.
+  - tipo: recorte_surpresa
+    gerador: m5.templates.recorte_surpresa
+    formatos: [longo]
+    teto: "busca por scraping é frágil: se o Bing mudar, o comando para com erro; usar --url"
+    status: aprovado
